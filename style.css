@@ -407,30 +407,70 @@ h3 {
     color: var(--accent-color);
 }
 
-/* Horizontal Scroll Gallery */
-.gallery-scroll {
+/* Infinite Marquee Gallery */
+.gallery-marquee {
     width: 100%;
-    overflow-x: auto;
+    overflow: hidden;
     padding: 20px 0 60px;
-    -webkit-overflow-scrolling: touch;
-    /* Hide scrollbar for clean look */
-    scrollbar-width: none;
-    /* Firefox */
-    -ms-overflow-style: none;
-    /* IE 10+ */
-}
-
-.gallery-scroll::-webkit-scrollbar {
-    display: none;
-    /* Chrome/Safari */
+    display: flex;
+    gap: 30px;
 }
 
 .gallery-track {
     display: flex;
     gap: 30px;
-    padding: 0 max(20px, calc(50% - 500px));
-    /* Center align start but allow scroll */
     width: max-content;
+    animation: marquee 60s linear infinite;
+}
+
+.gallery-card {
+    width: 300px;
+    height: 400px;
+    flex-shrink: 0;
+    transition: transform 0.4s ease;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+
+    /* Note: Since we have 2 duplicates in .gallery-marquee flex container, 
+       we actually need to animate each .gallery-track? 
+       No, usually we wrap them in a mover or animate the track itself.
+       Wait, if I have:
+       <div marquee>
+          <div track>...</div>
+          <div track>...</div>
+       </div>
+       I should probably animate the tracks?
+       No, easier:
+       .gallery-track { animation: marquee ... } 
+       Both tracks move?
+       Yes, if they are siblings, they will both move left. BUT the second one will follow the first.
+       
+       Better approach:
+       .gallery-marquee { display: flex; }
+       .gallery-track { flex-shrink: 0; animation: marquee 60s linear infinite; }
+       
+       If transform: translateX(-100%) moves the track entirely to the left, 
+       and we have 2 tracks, 
+       Track 1 moves from 0 to -100% (disappears).
+       Track 2 moves from 0 to -100% (moves into Track 1's spot, then disappears).
+       
+       Wait, they need to stick together.
+       If both have `animation`, they move in sync relative to their initial position.
+       So Track 1 starts at 0, moves to -width.
+       Track 2 starts at width, moves to 0. (If strict sync).
+       
+       Yes, `transform: translateX(-100%)` on the element moves it so its right edge touches where its left edge was.
+       So both tracks moving -100% works perfectly if they are identical width.
+    */
 }
 
 .gallery-card {
