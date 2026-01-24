@@ -11,6 +11,10 @@
     --transition: all 0.4s ease;
 }
 
+.nowrap {
+    white-space: nowrap;
+}
+
 /* Reset & Global */
 * {
     margin: 0;
@@ -376,9 +380,8 @@ h3 {
 }
 
 /* Special */
-.special-menu {
-    /* Optional background or different feel */
-}
+/* Special */
+/* .special-menu { } */
 
 .special-layout {
     display: flex;
@@ -557,5 +560,15 @@ h3 {
     .about-image,
     .special-image {
         order: 2;
+    }
+
+    .sp-only {
+        display: block;
+    }
+}
+
+@media (min-width: 769px) {
+    .sp-only {
+        display: none;
     }
 }
