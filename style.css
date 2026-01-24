@@ -413,14 +413,17 @@ h3 {
     overflow: hidden;
     padding: 20px 0 60px;
     display: flex;
-    gap: 30px;
+    /* gap removed to handle spacing via track padding */
 }
 
 .gallery-track {
     display: flex;
     gap: 30px;
     width: max-content;
-    animation: marquee 60s linear infinite;
+    flex-shrink: 0;
+    padding-right: 30px;
+    /* seamless loop spacing */
+    animation: marquee 40s linear infinite;
 }
 
 .gallery-card {
