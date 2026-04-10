@@ -1,13 +1,15 @@
 import { createClient } from 'microcms-js-sdk';
 
-if (!process.env.MICROCMS_SERVICE_DOMAIN) {
-  // We'll log a warning but not throw an error yet to allow dev without keys
-  console.warn('MICROCMS_SERVICE_DOMAIN is not defined');
+const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN || 'dummy';
+const apiKey = process.env.MICROCMS_API_KEY || 'dummy';
+
+if (!process.env.MICROCMS_SERVICE_DOMAIN || !process.env.MICROCMS_API_KEY) {
+  console.warn('MICROCMS_SERVICE_DOMAIN or MICROCMS_API_KEY is not defined. Using dummy values for build.');
 }
 
 export const client = createClient({
-  serviceDomain: process.env.MICROCMS_SERVICE_DOMAIN || '',
-  apiKey: process.env.MICROCMS_API_KEY || '',
+  serviceDomain,
+  apiKey,
 });
 
 export type NewsContent = {
