@@ -7,7 +7,24 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Hero from "@/components/Hero";
 import Marquee from "@/components/Marquee";
-import { client, NewsContent } from "@/lib/microcms";
+import { client, NewsContent, ProfileContent } from "@/lib/microcms";
+
+const mockProfile: ProfileContent = {
+  id: "1",
+  name: "新田 豊",
+  englishName: "Yutaka Nitta",
+  role: "2nd Generation Master",
+  bio: `1978年に父が創業した Bar Sally。\n私はその二代目として、この場所を守り続けています。\n\n「ただいまと、言いたくなる場所を目指して」\n今宵も最高の一杯と空間をご用意しております。`,
+  image: {
+    url: "/images/1703_sally_sub-thumb-155xauto-13893.jpg",
+    width: 800,
+    height: 1000
+  },
+  createdAt: "",
+  updatedAt: "",
+  publishedAt: "",
+  revisedAt: ""
+};
 
 const InstagramIcon = ({ className = "", size = 24 }: { className?: string; size?: number }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -41,6 +58,7 @@ export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   const textRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [news, setNews] = useState<any[]>(mockNews);
+  const [profile, setProfile] = useState<ProfileContent>(mockProfile);
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -57,7 +75,22 @@ export default function Home() {
         console.log("microCMS fetch failed or keys missing, using mock data.");
       }
     };
+
+    const fetchProfile = async () => {
+      try {
+        const res = await client.get({ endpoint: 'profile' });
+        if (res.contents && res.contents.length > 0) {
+          setProfile(res.contents[0]);
+        } else if (res.name) {
+          setProfile(res);
+        }
+      } catch (e) {
+        console.log("microCMS profile fetch failed, using mock data.");
+      }
+    };
+
     fetchNews();
+    fetchProfile();
   }, []);
 
   useEffect(() => {
@@ -173,8 +206,8 @@ export default function Home() {
           <div className="relative h-[70vh] md:h-[100vh] w-full overflow-hidden rounded-sm order-1" ref={addToRefs}>
              <div className="absolute inset-0 w-full h-[120%] -top-[10%]">
                 <Image 
-                  src="/images/1703_sally_sub-thumb-155xauto-13893.jpg" 
-                  alt="Master Yutaka Nitta" 
+                  src={profile.image?.url || "/images/1703_sally_sub-thumb-155xauto-13893.jpg"} 
+                  alt={profile.name} 
                   fill 
                   className="object-cover grayscale hover:grayscale-0 transition-all duration-2000 parallax-img"
                   sizes="(max-width: 768px) 100vw, 50vw"
@@ -187,19 +220,16 @@ export default function Home() {
             <span className="block font-cinzel text-xs tracking-[0.5em] text-[var(--color-accent-main)] uppercase mb-8">The Custodian</span>
             <h2 className="font-cinzel text-4xl md:text-6xl tracking-[0.2em] mb-16 leading-tight">
                Master<br />
-               <span className="text-[var(--color-accent-main)]">Yutaka Nitta</span>
+               <span className="text-[var(--color-accent-main)]">{profile.name}</span>
             </h2>
             
-            <div className="font-shippori text-base md:text-lg text-gray-300 leading-[2.5] tracking-widest space-y-10">
+            <div className="font-shippori text-base md:text-lg text-gray-300 leading-[2.5] tracking-widest space-y-10 whitespace-pre-wrap">
               <p className="border-l-2 border-[var(--color-accent-main)]/40 pl-8 py-2">
-                ならしか 代表 / Bar Sally 2代目Master<br />
-                株式会社a-３なら創楽 実行委員長<br />
-                なら３９project 事務局長
+                {profile.role}
               </p>
-              <p className="italic text-white/90">
-                「ただいまと、言いたくなる場所を目指して」<br />
-                今宵も最高の一杯と空間をご用意しております。
-              </p>
+              <div className="italic text-white/90">
+                {profile.bio.length > 150 ? `${profile.bio.substring(0, 150)}...` : profile.bio}
+              </div>
             </div>
 
             <div className="mt-20">
