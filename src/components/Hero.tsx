@@ -135,7 +135,7 @@ export default function Hero() {
             className="font-shippori text-sm md:text-base text-gray-300 tracking-[0.25em] leading-relaxed max-w-[600px] space-y-4"
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 2, ease: "power2.out", delay: 2 }}
+            transition={{ duration: 2, ease: "easeOut", delay: 2 }}
           >
             <p className="overflow-hidden">
                <span className="block italic">大和郡山で紡ぐ、大人の隠れ家。</span>
