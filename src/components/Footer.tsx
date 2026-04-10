@@ -11,6 +11,12 @@ const InstagramIcon = ({ className = "", size = 24 }: { className?: string; size
   </svg>
 );
 
+const FacebookIcon = ({ className = "", size = 24 }: { className?: string; size?: number }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+  </svg>
+);
+
 export default function Footer() {
   return (
     <footer className="relative bg-[#080808] border-t border-[var(--color-accent-main)]/20 pt-16 pb-8 overflow-hidden">
@@ -69,12 +75,20 @@ export default function Footer() {
                 href="https://www.instagram.com/sally_master/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center text-gray-400 hover:text-[#d4af37] hover:border-[#d4af37] hover:bg-[#d4af37]/10 transition-all duration-300"
+                className="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center text-gray-400 hover:text-[var(--color-accent-main)] hover:border-[var(--color-accent-main)] hover:bg-[var(--color-accent-main)]/10 transition-all duration-300"
                 aria-label="Instagram"
               >
                 <InstagramIcon size={18} />
               </a>
-              {/* Optional X / FB icons could go here */}
+              <a 
+                href="https://www.facebook.com/narasally" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center text-gray-400 hover:text-[var(--color-accent-main)] hover:border-[var(--color-accent-main)] hover:bg-[var(--color-accent-main)]/10 transition-all duration-300"
+                aria-label="Facebook"
+              >
+                <FacebookIcon size={18} />
+              </a>
             </div>
           </div>
         </div>

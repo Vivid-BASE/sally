@@ -43,3 +43,38 @@ export type ActivityContent = {
   };
   link?: string;
 };
+
+export type MenuContent = {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  revisedAt: string;
+  category: string;
+  name: string;
+  price: string;
+  description?: string;
+  image?: {
+    url: string;
+    height: number;
+    width: number;
+  };
+};
+
+export type ProfileContent = {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  revisedAt: string;
+  name: string;
+  englishName: string;
+  role: string;
+  bio: string;
+  image: {
+    url: string;
+    height: number;
+    width: number;
+  };
+};
+

@@ -1,11 +1,47 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import { client, ProfileContent } from "@/lib/microcms";
+
+const mockProfile: ProfileContent = {
+  id: "1",
+  name: "新田 豊",
+  englishName: "Yutaka Nitta",
+  role: "2nd Generation Master",
+  bio: `1978年に父が創業した Bar Sally。\n私はその二代目として、この場所を守り続けています。\n\n大和郡山という歴史ある街で、「人」と「人」が交差する瞬間を見守ってきました。\n「ただいまと、言いたくなる場所を目指して」\n\nお酒の知識はもちろんのこと、お客様が何を求めてこの扉を開けたのか。その気持ちに寄り添う最高の一杯を提供することを信条としています。`,
+  image: {
+    url: "/images/1703_sally_sub-thumb-155xauto-13893.jpg",
+    width: 800,
+    height: 1000
+  },
+  createdAt: "",
+  updatedAt: "",
+  publishedAt: "",
+  revisedAt: ""
+};
 
 export default function MasterPage() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [profile, setProfile] = useState<ProfileContent>(mockProfile);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const res = await client.get({ endpoint: 'profile' });
+        // Since profile is likely a single object (singleton), microCMS might return it directly or in an array
+        if (res.contents && res.contents.length > 0) {
+          setProfile(res.contents[0]);
+        } else if (res.name) {
+          setProfile(res);
+        }
+      } catch (e) {
+        console.log("microCMS profile fetch failed, using mock data.");
+      }
+    };
+    fetchProfile();
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -18,7 +54,7 @@ export default function MasterPage() {
       });
     }, containerRef);
     return () => ctx.revert();
-  }, []);
+  }, [profile]);
 
   return (
     <div ref={containerRef} className="pt-32 pb-24 px-6 md:px-12 bg-[#050505] min-h-screen">
@@ -32,32 +68,23 @@ export default function MasterPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start mb-32 fade-up">
            <div className="relative aspect-[3/4] overflow-hidden rounded-sm grayscale hover:grayscale-0 transition-all duration-1000 shadow-2xl">
               <Image 
-                src="/images/1703_sally_sub-thumb-155xauto-13893.jpg" 
-                alt="Master Yutaka Nitta" 
+                src={profile.image.url} 
+                alt={profile.name} 
                 fill 
                 className="object-cover"
               />
            </div>
            <div className="font-shippori text-gray-300 leading-loose space-y-8 tracking-widest">
-              <h2 className="text-3xl text-white font-cinzel tracking-widest mb-4">新田 豊 <span className="text-[var(--color-accent-main)]">Yutaka Nitta Sally</span></h2>
-              <p className="text-sm font-cinzel text-[var(--color-accent-main)] uppercase tracking-[0.3em] mb-8">2nd Generation Master</p>
+              <h2 className="text-3xl text-white font-cinzel tracking-widest mb-4">
+                {profile.name} <span className="text-[var(--color-accent-main)]">{profile.englishName}</span>
+              </h2>
+              <p className="text-sm font-cinzel text-[var(--color-accent-main)] uppercase tracking-[0.3em] mb-8">{profile.role}</p>
               
-              <p>
-                1978年に父が創業した Bar Sally。
-                私はその二代目として、この場所を守り続けています。
-              </p>
-              <p>
-                大和郡山という歴史ある街で、
-                「人」と「人」が交差する瞬間を見守ってきました。
-              </p>
-              <p className="text-white italic">
-                「ただいまと、言いたくなる場所を目指して」
-              </p>
-              <p>
-                お酒の知識はもちろんのこと、
-                お客様が何を求めてこの扉を開けたのか。
-                その気持ちに寄り添う最高の一杯を提供することを信条としています。
-              </p>
+              <div className="whitespace-pre-wrap space-y-6">
+                {profile.bio.split('\n').map((line, i) => (
+                  <p key={i}>{line}</p>
+                ))}
+              </div>
               
               <div className="pt-8 border-t border-white/5 space-y-2 text-xs text-gray-500">
                 <p>ならしか 代表</p>
@@ -71,3 +98,4 @@ export default function MasterPage() {
     </div>
   );
 }
+

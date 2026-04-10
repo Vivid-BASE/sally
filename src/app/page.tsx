@@ -43,7 +43,6 @@ export default function Home() {
   const [news, setNews] = useState<any[]>(mockNews);
 
   useEffect(() => {
-    // Attempt to fetch from microCMS
     const fetchNews = async () => {
       try {
         const res = await client.get({ endpoint: 'news', queries: { limit: 4 } });
@@ -70,34 +69,34 @@ export default function Home() {
         if (!ref) return;
         gsap.fromTo(
           ref,
-          { y: 60, opacity: 0, filter: "blur(5px)" },
+          { y: 80, opacity: 0, filter: "blur(10px)" },
           {
             scrollTrigger: {
               trigger: ref,
-              start: "top 85%",
+              start: "top 90%",
               toggleActions: "play none none reverse",
             },
             y: 0,
             opacity: 1,
             filter: "blur(0px)",
-            duration: 1.2,
-            ease: "expo.out",
+            duration: 1.5,
+            ease: "power4.out",
           }
         );
       });
 
-      // Image parallax effect
+      // Image parallax effect for all sections
       gsap.utils.toArray<HTMLElement>('.parallax-img').forEach(img => {
         gsap.fromTo(img, 
-          { y: -30, scale: 1.05 },
+          { y: -50, scale: 1.1 },
           {
             scrollTrigger: {
               trigger: img.parentElement,
               start: "top bottom",
               end: "bottom top",
-              scrub: true,
+              scrub: 1,
             },
-            y: 30,
+            y: 50,
             scale: 1,
             ease: "none"
           }
@@ -106,7 +105,7 @@ export default function Home() {
     }, containerRef);
 
     return () => ctx.revert();
-  }, [news]); // Re-run animations if news items change
+  }, [news]);
 
   const addToRefs = (el: HTMLDivElement | null) => {
     if (el && !textRefs.current.includes(el)) {
@@ -119,15 +118,14 @@ export default function Home() {
       <Hero />
 
       {/* --- Concept Section --- */}
-      <section className="relative w-full py-32 md:py-48 px-6 overflow-hidden border-b border-white/5">
-        <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center">
+      <section className="relative w-full py-40 md:py-64 px-6 overflow-hidden border-b border-white/5">
+        <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-32 items-center">
           
-          {/* Text */}
           <div className="order-2 md:order-1 relative z-10" ref={addToRefs}>
-            <span className="block font-cinzel text-xs tracking-[0.3em] text-[var(--color-accent-main)] uppercase mb-6">Since 1978</span>
-            <h2 className="font-cinzel text-3xl md:text-5xl tracking-[0.15em] mb-12">Concept</h2>
+            <span className="block font-cinzel text-xs tracking-[0.5em] text-[var(--color-accent-main)] uppercase mb-8">Since 1978</span>
+            <h2 className="font-cinzel text-4xl md:text-6xl tracking-[0.2em] mb-16 leading-tight">Authentic<br/>Philosophy</h2>
             
-            <div className="font-shippori text-sm md:text-base text-gray-300 leading-[2.5] tracking-widest space-y-8 text-justify mix-blend-difference break-keep">
+            <div className="font-shippori text-base md:text-lg text-gray-300 leading-[2.8] tracking-widest space-y-10 text-justify break-keep">
               <p>
                 1978年の創業以来、大和郡山の人々に愛され続けてきた Bar Sally。
               </p>
@@ -141,81 +139,77 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="mt-16">
-               <Link href="/concept" className="group inline-flex items-center gap-4 font-cinzel text-sm tracking-[0.2em] uppercase text-[var(--color-accent-main)] overflow-hidden">
-                 <span className="relative">
+            <div className="mt-20">
+               <Link href="/concept" className="group inline-flex items-center gap-6 font-cinzel text-sm tracking-[0.3em] uppercase text-[var(--color-accent-main)] overflow-hidden">
+                 <span className="relative pb-2">
                    Discover More
-                   <span className="absolute bottom-0 left-0 w-full h-[1px] bg-current transform translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out" />
+                   <span className="absolute bottom-0 left-0 w-full h-[1px] bg-current transform translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-700 ease-out" />
                  </span>
-                 <svg className="w-4 h-4 transform group-hover:translate-x-2 transition-transform duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                 <svg width="20" height="20" className="w-5 h-5 transform group-hover:translate-x-3 transition-transform duration-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                  </svg>
                </Link>
             </div>
           </div>
 
-          {/* Image */}
-          <div className="order-1 md:order-2 relative h-[50vh] md:h-[80vh] w-full overflow-hidden rounded-sm" ref={addToRefs}>
-             <div className="absolute inset-0 w-full h-[120%] -top-[10%]">
+          <div className="order-1 md:order-2 relative h-[60vh] md:h-[90vh] w-full overflow-hidden rounded-sm group" ref={addToRefs}>
+             <div className="absolute inset-0 w-full h-[130%] -top-[15%]">
                 <Image 
                   src="/images/photo_image2_l.jpg" 
                   alt="Bar Sally Interior" 
                   fill 
-                  className="object-cover image-sepia parallax-img"
+                  className="object-cover image-sepia parallax-img transition-all duration-1000"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
              </div>
-             <div className="absolute inset-0 border border-[var(--color-accent-main)]/20 shadow-[inset_0_0_50px_rgba(0,0,0,0.8)] pointer-events-none" />
+             <div className="absolute inset-0 border border-[var(--color-accent-main)]/10 group-hover:border-[var(--color-accent-main)]/30 transition-colors duration-1000 pointer-events-none" />
           </div>
         </div>
       </section>
 
       {/* --- Master Section --- */}
-      <section className="relative w-full py-32 md:py-48 px-6 bg-[#080808]">
-        <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center">
-          {/* Image */}
-          <div className="relative h-[60vh] md:h-[90vh] w-full overflow-hidden rounded-sm order-1" ref={addToRefs}>
-             <div className="absolute inset-0 w-full h-[110%] -top-[5%]">
+      <section className="relative w-full py-40 md:py-64 px-6 bg-[#080808]">
+        <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-32 items-center">
+          <div className="relative h-[70vh] md:h-[100vh] w-full overflow-hidden rounded-sm order-1" ref={addToRefs}>
+             <div className="absolute inset-0 w-full h-[120%] -top-[10%]">
                 <Image 
                   src="/images/1703_sally_sub-thumb-155xauto-13893.jpg" 
                   alt="Master Yutaka Nitta" 
                   fill 
-                  className="object-cover grayscale hover:grayscale-0 transition-all duration-1000 parallax-img"
+                  className="object-cover grayscale hover:grayscale-0 transition-all duration-2000 parallax-img"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
              </div>
-             <div className="absolute inset-0 border border-[var(--color-accent-main)]/30 mix-blend-overlay pointer-events-none" />
+             <div className="absolute inset-0 border border-[var(--color-accent-main)]/20 mix-blend-overlay pointer-events-none" />
           </div>
 
-          {/* Text */}
           <div className="relative z-10 order-2" ref={addToRefs}>
-            <span className="block font-cinzel text-xs tracking-[0.3em] text-[var(--color-accent-main)] uppercase mb-6">Profile</span>
-            <h2 className="font-cinzel text-3xl md:text-5xl tracking-[0.15em] mb-12">
-               Master <br />
+            <span className="block font-cinzel text-xs tracking-[0.5em] text-[var(--color-accent-main)] uppercase mb-8">The Custodian</span>
+            <h2 className="font-cinzel text-4xl md:text-6xl tracking-[0.2em] mb-16 leading-tight">
+               Master<br />
                <span className="text-[var(--color-accent-main)]">Yutaka Nitta</span>
             </h2>
             
-            <div className="font-shippori text-sm md:text-base text-gray-300 leading-[2.2] tracking-widest space-y-8">
-              <p className="border-l-2 border-[var(--color-accent-main)]/50 pl-6">
+            <div className="font-shippori text-base md:text-lg text-gray-300 leading-[2.5] tracking-widest space-y-10">
+              <p className="border-l-2 border-[var(--color-accent-main)]/40 pl-8 py-2">
                 ならしか 代表 / Bar Sally 2代目Master<br />
                 株式会社a-３なら創楽 実行委員長<br />
-                なら３９project 事務局長<br />
-                盛経塾大和 世話人
+                なら３９project 事務局長
               </p>
-              <p className="italic text-white">
-                「人とのつながり」と「出会い」を大切に。<br />
-                今宵も最高の一杯と空間をご用意して、皆様のお越しをお待ちしております。
+              <p className="italic text-white/90">
+                「ただいまと、言いたくなる場所を目指して」<br />
+                今宵も最高の一杯と空間をご用意しております。
               </p>
             </div>
 
-            <div className="mt-16">
-               <Link href="/master" className="group inline-flex items-center gap-4 font-cinzel text-sm tracking-[0.2em] uppercase text-[var(--color-accent-main)] overflow-hidden">
-                 <span className="relative">
+            <div className="mt-20">
+               <Link href="/master" className="group inline-flex items-center gap-6 font-cinzel text-sm tracking-[0.3em] uppercase text-[var(--color-accent-main)] overflow-hidden">
+                 <span className="relative pb-2">
                    Master&apos;s Story
-                   <span className="absolute bottom-0 left-0 w-full h-[1px] bg-current transform translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out" />
+                   <span className="absolute bottom-0 left-0 w-full h-[1px] bg-current transform translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-700 ease-out" />
                  </span>
-                 <svg className="w-4 h-4 transform group-hover:translate-x-2 transition-transform duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                 <svg width="20" height="20" className="w-5 h-5 transform group-hover:translate-x-3 transition-transform duration-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                  </svg>
                </Link>
             </div>
@@ -224,27 +218,27 @@ export default function Home() {
       </section>
 
       {/* --- Special Menu Section --- */}
-      <section className="relative w-full py-32 md:py-48 px-6 overflow-hidden">
-        <div className="max-w-[1200px] mx-auto text-center mb-24" ref={addToRefs}>
-            <span className="block font-cinzel text-xs tracking-[0.3em] text-[var(--color-accent-main)] uppercase mb-6">Signature Dish</span>
-            <h2 className="font-cinzel text-3xl md:text-5xl tracking-[0.15em]">Special Menu</h2>
+      <section className="relative w-full py-40 md:py-64 px-6 overflow-hidden">
+        <div className="max-w-[1200px] mx-auto text-center mb-32" ref={addToRefs}>
+            <span className="block font-cinzel text-xs tracking-[0.5em] text-[var(--color-accent-main)] uppercase mb-8">Signature Selection</span>
+            <h2 className="font-cinzel text-4xl md:text-6xl tracking-[0.2em]">Special Menu</h2>
         </div>
 
-        <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center">
+        <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-32 items-center">
           <div className="order-2 md:order-1" ref={addToRefs}>
-             <h3 className="font-shippori text-2xl md:text-3xl tracking-[0.1em] text-[var(--color-accent-main)] mb-8">Nara Shikanai Curry</h3>
-             <p className="font-shippori text-sm md:text-base text-gray-300 leading-[2.5] tracking-widest text-justify">
+             <h3 className="font-shippori text-3xl md:text-4xl tracking-[0.15em] text-[var(--color-accent-main)] mb-10">Nara Shikanai Curry</h3>
+             <p className="font-shippori text-base md:text-lg text-gray-300 leading-[2.8] tracking-widest text-justify">
                 奈良のカレーグランプリでチャンピオンに輝いた逸品。<br />
                 バーならではのこだわりが詰まった、お酒の締めにも最適な味わいです。<br />
                 スパイスの香りと深いコクが、夜の余韻をさらに深めます。
              </p>
-             <div className="mt-12">
-                <Link href="/menu" className="inline-block border border-[var(--color-accent-main)]/30 hover:border-[var(--color-accent-main)] px-10 py-4 font-cinzel text-sm tracking-[0.2em] text-[var(--color-accent-main)] transition-all duration-500 uppercase">
-                  View Full Menu
+             <div className="mt-16">
+                <Link href="/menu" className="inline-block border border-[var(--color-accent-main)]/40 hover:border-[var(--color-accent-main)] px-12 py-5 font-cinzel text-sm tracking-[0.3em] text-[var(--color-accent-main)] hover:bg-[var(--color-accent-main)] hover:text-black transition-all duration-700 uppercase">
+                  Explore Full Menu
                 </Link>
              </div>
           </div>
-          <div className="order-1 md:order-2 relative aspect-[4/3] w-full overflow-hidden rounded-sm" ref={addToRefs}>
+          <div className="order-1 md:order-2 relative aspect-[4/3] w-full overflow-hidden rounded-sm group" ref={addToRefs}>
               <Image 
                 src="/images/curry/curry.jpg" 
                 alt="Nara Shikanai Curry" 
@@ -252,31 +246,31 @@ export default function Home() {
                 className="object-cover parallax-img"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
-              <div className="absolute inset-0 bg-black/20" />
+              <div className="absolute inset-0 bg-black/30 group-hover:bg-transparent transition-colors duration-1000" />
           </div>
         </div>
       </section>
 
       {/* --- Gallery Marquee --- */}
-      <section className="relative w-full py-20 bg-[#050505] overflow-hidden">
-        <div className="max-w-[1200px] mx-auto text-center mb-16 px-6" ref={addToRefs}>
-            <span className="block font-cinzel text-xs tracking-[0.3em] text-[var(--color-accent-main)] uppercase mb-4">Atmosphere</span>
-            <h2 className="font-cinzel text-2xl md:text-3xl tracking-[0.2em]">Gallery</h2>
+      <section className="relative w-full py-24 bg-[#030303] overflow-hidden border-y border-white/5">
+        <div className="max-w-[1200px] mx-auto text-center mb-20 px-6" ref={addToRefs}>
+            <span className="block font-cinzel text-xs tracking-[0.5em] text-[var(--color-accent-main)] uppercase mb-6">Archive</span>
+            <h2 className="font-cinzel text-3xl md:text-4xl tracking-[0.3em]">Gallery</h2>
         </div>
-        <Marquee images={galleryImages} speed={50} />
+        <Marquee images={galleryImages} speed={40} />
       </section>
 
-      {/* --- Latest Activities & Instagram --- */}
-      <section className="relative w-full py-32 px-6">
-        <div className="max-w-[1200px] mx-auto text-center" ref={addToRefs}>
-          <span className="block font-cinzel text-xs tracking-[0.3em] text-[var(--color-accent-main)] uppercase mb-6">Latest Updates</span>
-          <h2 className="font-cinzel text-3xl md:text-4xl tracking-[0.15em] mb-20 flex items-center justify-center gap-4">
-            <InstagramIcon className="text-[var(--color-accent-main)]" size={32} />
-            Instagram & News
+      {/* --- Latest Updates & Instagram --- */}
+      <section className="relative w-full py-40 px-6">
+        <div className="max-w-[1200px] mx-auto text-center mb-24" ref={addToRefs}>
+          <span className="block font-cinzel text-xs tracking-[0.5em] text-[var(--color-accent-main)] uppercase mb-8">Latest Updates</span>
+          <h2 className="font-cinzel text-3xl md:text-5xl tracking-[0.2em] flex items-center justify-center gap-6">
+            <InstagramIcon className="text-[var(--color-accent-main)]" size={40} />
+            Connect
           </h2>
         </div>
 
-        <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-4 px-4">
+        <div className="max-w-[1600px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 px-4 overflow-hidden">
           {news.map((item, index) => (
             <div 
               key={index} 
@@ -287,82 +281,83 @@ export default function Home() {
                 src={item.img} 
                 alt={item.title} 
                 fill 
-                className="object-cover filter grayscale-[30%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out" 
-                sizes="(max-width: 768px) 100vw, 25vw"
+                className="object-cover filter grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000 ease-out" 
+                sizes="(max-width: 768px) 50vw, 25vw"
               />
-              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center pointer-events-none">
-                <InstagramIcon className="text-[var(--color-accent-main)] mb-3" size={24} />
-                <span className="font-cinzel tracking-widest text-sm text-white uppercase text-center px-4">{item.title}</span>
+              <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex flex-col items-center justify-center pointer-events-none p-6">
+                <InstagramIcon className="text-[var(--color-accent-main)] mb-4" size={28} />
+                <span className="font-cinzel tracking-[0.2em] text-xs text-[var(--color-accent-main)] uppercase mb-2">Instagram</span>
+                <span className="font-shippori tracking-widest text-sm text-white text-center line-clamp-2">{item.title}</span>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="mt-20 text-center" ref={addToRefs}>
+        <div className="mt-24 text-center" ref={addToRefs}>
           <a 
             href="https://www.instagram.com/sally_master/" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="inline-block border border-[var(--color-accent-main)] px-10 py-4 font-cinzel text-sm tracking-[0.2em] text-[var(--color-accent-main)] hover:bg-[var(--color-accent-main)] hover:text-black transition-colors duration-500 uppercase"
+            className="inline-block border border-[var(--color-accent-main)] px-14 py-5 font-cinzel text-sm tracking-[0.4em] text-[var(--color-accent-main)] hover:bg-[var(--color-accent-main)] hover:text-black transition-all duration-700 uppercase"
           >
-            Follow on Instagram
+            Visit Instagram
           </a>
         </div>
       </section>
 
       {/* --- Access Section --- */}
-      <section className="relative w-full py-32 md:py-48 px-6 bg-[#080808]">
-        <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
-           <div ref={addToRefs}>
-              <span className="block font-cinzel text-xs tracking-[0.3em] text-[var(--color-accent-main)] uppercase mb-6">Information</span>
-              <h2 className="font-cinzel text-3xl md:text-5xl tracking-[0.15em] mb-12 text-[var(--color-accent-main)]">Access</h2>
+      <section className="relative w-full py-40 md:py-64 px-6 bg-[#080808]">
+        <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-24 items-start">
+           <div className="md:sticky md:top-40" ref={addToRefs}>
+              <span className="block font-cinzel text-xs tracking-[0.5em] text-[var(--color-accent-main)] uppercase mb-8">Location</span>
+              <h2 className="font-cinzel text-4xl md:text-6xl tracking-[0.2em] mb-20 text-[var(--color-accent-main)]">Access</h2>
               
-              <div className="font-shippori space-y-10">
-                <div className="flex flex-col gap-2">
-                   <span className="text-[var(--color-accent-main)] text-xs font-cinzel tracking-widest uppercase">Address</span>
-                   <p className="text-lg md:text-xl text-gray-200 tracking-wider">
-                      〒639-1160 奈良県大和郡山市北郡山町137-1
+              <div className="font-shippori space-y-12">
+                <div className="flex flex-col gap-4">
+                   <span className="text-[var(--color-accent-main)] text-[10px] font-cinzel tracking-[0.4em] uppercase opacity-60">Address</span>
+                   <p className="text-xl md:text-2xl text-gray-200 tracking-[0.15em] leading-relaxed">
+                      〒639-1160<br/>奈良県大和郡山市北郡山町137-1
                    </p>
                 </div>
-                <div className="flex flex-col gap-2">
-                   <span className="text-[var(--color-accent-main)] text-xs font-cinzel tracking-widest uppercase">Opening Hours</span>
-                   <p className="text-lg md:text-xl text-gray-200 tracking-wider">
+                <div className="flex flex-col gap-4">
+                   <span className="text-[var(--color-accent-main)] text-[10px] font-cinzel tracking-[0.4em] uppercase opacity-60">Opening Hours</span>
+                   <p className="text-xl md:text-2xl text-gray-200 tracking-[0.15em]">
                       19:00 - Last (月曜定休)
                    </p>
                 </div>
-                <div className="flex flex-col gap-2">
-                   <span className="text-[var(--color-accent-main)] text-xs font-cinzel tracking-widest uppercase">Contact</span>
-                   <p className="text-lg md:text-xl text-[var(--color-accent-main)] tracking-wider">
+                <div className="flex flex-col gap-4">
+                   <span className="text-[var(--color-accent-main)] text-[10px] font-cinzel tracking-[0.4em] uppercase opacity-60">Contact</span>
+                   <p className="text-2xl md:text-3xl text-[var(--color-accent-main)] tracking-[0.1em] font-cinzel">
                       0743-55-3001
                    </p>
                 </div>
-                <div className="mt-12">
+                <div className="mt-16 pt-12 border-t border-white/5">
                    <a 
                      href="https://maps.google.com/?q=Bar+Sally+大和郡山" 
                      target="_blank" 
                      rel="noopener noreferrer"
-                     className="inline-flex items-center gap-4 text-[var(--color-accent-main)] hover:text-white transition-colors group"
+                     className="inline-flex items-center gap-8 text-[var(--color-accent-main)] hover:text-white transition-all group"
                    >
-                     <span className="font-cinzel tracking-[0.2em] uppercase">View on Google Maps</span>
-                     <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                     </svg>
+                     <span className="font-cinzel tracking-[0.4em] text-sm uppercase">Open in Google Maps</span>
+                     <div className="relative">
+                        <svg width="24" height="24" className="w-6 h-6 transform group-hover:translate-x-2 transition-transform duration-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                     </div>
                    </a>
                 </div>
               </div>
            </div>
 
-           {/* Access Image / Simple Map Placeholder */}
-           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-sm" ref={addToRefs}>
+           <div className="relative aspect-[3/4] w-full overflow-hidden rounded-sm group shadow-2xl" ref={addToRefs}>
                <Image 
                  src="/images/photo_image1_l.jpg" 
                  alt="Bar Sally Entrance" 
                  fill 
-                 className="object-cover opacity-60 grayscale hover:grayscale-0 transition-all duration-1000"
+                 className="object-cover opacity-40 grayscale group-hover:scale-110 transition-all duration-2000"
                  sizes="(max-width: 768px) 100vw, 50vw"
                />
-               <div className="absolute inset-0 border border-[var(--color-accent-main)]/20 shadow-[inset_0_0_100px_rgba(0,0,0,0.8)]" />
+               <div className="absolute inset-0 border border-[var(--color-accent-main)]/10 group-hover:border-[var(--color-accent-main)]/30 transition-colors duration-1000 shadow-[inset_0_0_150px_rgba(0,0,0,0.9)]" />
            </div>
         </div>
       </section>
@@ -370,3 +365,4 @@ export default function Home() {
     </div>
   );
 }
+
