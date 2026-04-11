@@ -1,10 +1,12 @@
 import { createClient } from 'microcms-js-sdk';
 
-const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN || 'dummy';
-const apiKey = process.env.MICROCMS_API_KEY || 'dummy';
+const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN || process.env.NEXT_PUBLIC_MICROCMS_SERVICE_DOMAIN || 'dummy';
+const apiKey = process.env.MICROCMS_API_KEY || process.env.NEXT_PUBLIC_MICROCMS_API_KEY || 'dummy';
 
-if (!process.env.MICROCMS_SERVICE_DOMAIN || !process.env.MICROCMS_API_KEY) {
-  console.warn('MICROCMS_SERVICE_DOMAIN or MICROCMS_API_KEY is not defined. Using dummy values for build.');
+if (serviceDomain === 'dummy' || apiKey === 'dummy') {
+  console.warn(`[DEBUG] MICROCMS_SERVICE_DOMAIN or MICROCMS_API_KEY is not defined. Using dummy values for build. (Domain: ${serviceDomain === 'dummy' ? 'MISSING' : 'OK'}, Key: ${apiKey === 'dummy' ? 'MISSING' : 'OK'})`);
+} else {
+  console.log(`[DEBUG] microCMS client initialized with serviceDomain: ${serviceDomain}`);
 }
 
 export const client = createClient({
