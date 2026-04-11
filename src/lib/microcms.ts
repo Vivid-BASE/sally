@@ -5,6 +5,10 @@ const apiKey = process.env.MICROCMS_API_KEY || process.env.NEXT_PUBLIC_MICROCMS_
 
 if (!serviceDomain || !apiKey || serviceDomain === 'dummy' || apiKey === 'dummy') {
   console.error(`[CRITICAL] microCMS configuration missing! Domain: ${serviceDomain ? 'OK' : 'MISSING'}, Key: ${apiKey ? 'OK' : 'MISSING'}. Build will likely fail or show empty data.`);
+} else {
+  // Debug log to verify the key format while keeping it secure
+  const maskedKey = `${apiKey.substring(0, 4)}****${apiKey.substring(apiKey.length - 4)}`;
+  console.log(`[DEBUG] Attempting fetch with Domain: [${serviceDomain}], Key: [${maskedKey}]`);
 }
 
 export const client = createClient({
