@@ -7,7 +7,7 @@ if (!serviceDomain || !apiKey || serviceDomain === 'dummy' || apiKey === 'dummy'
   console.error(`[CRITICAL] microCMS configuration missing! Domain: ${serviceDomain ? 'OK' : 'MISSING'}, Key: ${apiKey ? 'OK' : 'MISSING'}. Build will likely fail or show empty data.`);
 } else {
   const maskedKey = `${apiKey.substring(0, 4)}****${apiKey.substring(apiKey.length - 4)}`;
-  console.log(`[DEBUG] Attempting fetch with Domain: [${serviceDomain}], Key: [${maskedKey}]`);
+  console.log(`[DEBUG] Attempting fetch with Domain: [${serviceDomain}], Key: [${maskedKey}] (Length: ${apiKey.length})`);
   
   // RAW FETCH TEST (to diagnose 401 errors)
   if (typeof fetch !== 'undefined') {
