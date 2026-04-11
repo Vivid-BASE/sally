@@ -45,7 +45,7 @@ export default function MasterView({ profile }: MasterViewProps) {
            </div>
            <div className="font-shippori text-gray-300 leading-loose space-y-8 tracking-widest">
               <h2 className="text-3xl text-white font-cinzel tracking-widest mb-4">
-                {profile.name} <span className="text-[var(--color-accent-main)]">{profile.englishName}</span>
+                {profile.name} {profile.englishName && <span className="text-[var(--color-accent-main)]">{profile.englishName}</span>}
               </h2>
               <p className="text-sm font-cinzel text-[var(--color-accent-main)] uppercase tracking-[0.3em] mb-8">{profile.role}</p>
               
