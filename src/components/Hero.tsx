@@ -103,10 +103,10 @@ export default function Hero() {
           className="relative w-[70vw] max-w-[420px] h-[120px] mb-12"
         >
           <Image 
-            src="/LOGO/png/Bar%20Sally.png" 
+            src="/LOGO/png/SALLY.png" 
             alt="Bar Sally Logo" 
             fill 
-            className="object-contain" 
+            className="object-contain brightness-0 invert" 
             priority
           />
           <motion.div 

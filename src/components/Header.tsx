@@ -57,10 +57,10 @@ export default function Header() {
             {/* Logo Image */}
             <div className="relative w-[180px] h-[50px] transition-transform duration-500 group-hover:scale-105">
               <Image 
-                src="/LOGO/png/Bar%20Sally.png" 
+                src="/LOGO/png/SALLY.png" 
                 alt="Bar Sally Logo" 
                 fill 
-                className="object-contain" 
+                className="object-contain brightness-0 invert" 
                 priority
               />
             </div>
