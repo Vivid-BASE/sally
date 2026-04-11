@@ -100,13 +100,13 @@ export default function Hero() {
         {/* Logo with slight shine/sweep effect */}
         <div 
           ref={logoRef}
-          className="relative w-[70vw] max-w-[420px] h-[120px] mb-12"
+          className="relative w-[85vw] max-w-[560px] h-[160px] mb-12"
         >
           <Image 
             src="/LOGO/png/SALLY.png" 
             alt="Bar Sally Logo" 
             fill 
-            className="object-contain brightness-0 invert" 
+            className="object-contain brightness-0 invert drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]" 
             priority
           />
           <motion.div 
@@ -123,7 +123,7 @@ export default function Hero() {
           transition={{ delay: 1.5, duration: 2 }}
         >
           <motion.h1 
-            className="font-cinzel text-lg md:text-2xl tracking-[0.6em] text-[var(--color-accent-main)] uppercase mb-8"
+            className="font-cinzel text-xl md:text-3xl tracking-[0.6em] text-[var(--color-accent-main)] uppercase mb-10 text-shadow-md"
             initial={{ opacity: 0, letterSpacing: "0.2em" }}
             animate={{ opacity: 1, letterSpacing: "0.6em" }}
             transition={{ duration: 3, ease: "circOut", delay: 1.2 }}
@@ -132,15 +132,15 @@ export default function Hero() {
           </motion.h1>
 
           <motion.div 
-            className="font-shippori text-sm md:text-base text-gray-300 tracking-[0.25em] leading-relaxed max-w-[600px] space-y-4"
+            className="font-noto-serif font-bold text-lg md:text-xl text-white tracking-[0.2em] leading-relaxed max-w-[800px] mx-auto space-y-6 text-shadow-md"
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 2, ease: "easeOut", delay: 2 }}
           >
             <p className="overflow-hidden">
-               <span className="block italic">大和郡山で紡ぐ、大人の隠れ家。</span>
+               <span className="block drop-shadow-lg">大和郡山で紡ぐ、大人の隠れ家。</span>
             </p>
-            <p>
+            <p className="drop-shadow-lg">
                静寂のなかで、極上の一杯を。
             </p>
           </motion.div>
