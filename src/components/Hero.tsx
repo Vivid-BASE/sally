@@ -86,16 +86,16 @@ export default function Hero() {
             src={heroImages[currentIndex]}
             alt="Bar Sally Ambiance"
             fill
-            className="object-cover object-center filter brightness-[0.3]"
+            className="object-cover object-center filter brightness-[0.6] transition-opacity duration-1000"
             priority
             quality={100}
           />
         </motion.div>
       </AnimatePresence>
 
-      {/* Luxury Overlay - Deep Contrast */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black pointer-events-none" />
-      <div className="absolute inset-0 bg-black/40 pointer-events-none" />
+      {/* Luxury Overlay - Optimized for Visibility */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80 pointer-events-none" />
+      <div className="absolute inset-0 bg-black/25 pointer-events-none" />
 
       {/* Hero Content */}
       <div className="relative z-10 w-full flex flex-col items-center text-center px-6">
