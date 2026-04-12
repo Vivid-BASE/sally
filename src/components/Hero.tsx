@@ -120,9 +120,9 @@ export default function Hero() {
               initial={{ x: "-150%" }}
               animate={{ x: "250%" }}
               transition={{ 
-                duration: 2.5, 
-                delay: 0.5, 
-                ease: [0.4, 0, 0.2, 1] 
+                duration: 4.0, 
+                delay: 0.2, 
+                ease: "linear" 
               }}
             >
               <div className="w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[-25deg]" />
@@ -134,18 +134,18 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.0, duration: 2 }}
-          className="mt-8"
+          className="mt-8 px-4"
         >
           <motion.div 
-            className="font-noto-serif font-bold text-xl md:text-2xl text-white tracking-[0.2em] leading-relaxed max-w-[900px] mx-auto space-y-6 text-shadow-md"
+            className="font-noto-serif font-bold text-base md:text-xl lg:text-2xl text-white tracking-[0.1em] md:tracking-[0.2em] leading-loose md:leading-relaxed max-w-[1000px] mx-auto space-y-4 md:space-y-6 text-shadow-md"
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 2, ease: "easeOut", delay: 1.2 }}
           >
             <p className="overflow-hidden">
-               <span className="block drop-shadow-xl">大和郡山から、奈良の「ええもん」を全国へ。</span>
+               <span className="block drop-shadow-xl break-keep">大和郡山から、奈良の「ええもん」を全国へ。</span>
             </p>
-            <p className="drop-shadow-xl">
+            <p className="drop-shadow-xl break-keep">
                人と未来を繋ぐ、情熱が宿る隠れ家。
             </p>
           </motion.div>
