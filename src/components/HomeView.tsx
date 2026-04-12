@@ -143,7 +143,7 @@ export default function HomeView({ news, profile }: HomeViewProps) {
           <div className="flex justify-center md:justify-start" ref={addToRefs}>
              <div className="relative w-full max-w-[450px] aspect-square overflow-hidden rounded-sm group shadow-2xl border border-white/10">
                 <Image 
-                  src="/images/master.jpg" 
+                  src="/images/master2.png" 
                   alt="Bar Sally Master" 
                   fill 
                   className="object-cover transition-transform duration-1000 group-hover:scale-105"
@@ -163,7 +163,7 @@ export default function HomeView({ news, profile }: HomeViewProps) {
                   奈良繋ぎ人.ブランドプロデューサー
                 </p>
                 <p className="pl-6">
-                  ご縁ジニア/奈良のヒト.モノ.コトおまかせください！
+                  ご縁ジニア/奈良のヒト.モノ.コト<br className="md:hidden" />おまかせください！
                 </p>
               </div>
             </div>
