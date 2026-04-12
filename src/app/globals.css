@@ -27,18 +27,29 @@
   }
 
   body {
-    background-color: var(--bg-color);
+    background-color: transparent; /* AestheticBackground provides the base */
     color: var(--text-color);
     line-height: 1.8;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     word-break: keep-all; 
     overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-cinzel), var(--font-noto-serif), serif;
     font-weight: 400;
+    letter-spacing: 0.15em;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  }
+
+  /* Glassmorphism utility */
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
   }
 
   .nowrap {

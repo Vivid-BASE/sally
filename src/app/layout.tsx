@@ -6,6 +6,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
+import AestheticBackground from "@/components/AestheticBackground";
 
 const cinzel = Cinzel({ 
   subsets: ["latin"], 
@@ -38,6 +39,7 @@ export default function RootLayout({
   return (
     <html lang="ja" className="scroll-smooth">
       <body className={`${cinzel.variable} ${notoSerif.variable} ${shippori.variable} font-shippori bg-black text-white antialiased`}>
+        <AestheticBackground />
         <SmoothScroll>
           <Header />
             <main className="min-h-screen">

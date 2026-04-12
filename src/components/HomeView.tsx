@@ -101,7 +101,7 @@ export default function HomeView({ news, profile }: HomeViewProps) {
       <Hero />
 
       {/* --- Concept Section --- */}
-      <section className="relative w-full py-40 md:py-64 px-6 overflow-hidden border-b border-white/5">
+      <section className="relative w-full py-40 md:py-64 px-6 overflow-hidden border-b border-white/5 bg-transparent">
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-32 items-center">
           
           <div className="order-2 md:order-1 relative z-10" ref={addToRefs}>
@@ -138,7 +138,7 @@ export default function HomeView({ news, profile }: HomeViewProps) {
       </section>
 
       {/* --- Master Section --- */}
-      <section className="relative w-full py-40 md:py-64 px-6 bg-[#080808]">
+      <section className="relative w-full py-40 md:py-64 px-6 bg-black/20 backdrop-blur-sm">
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-32 items-center">
           <div className="flex justify-center md:justify-start" ref={addToRefs}>
              <div className="relative w-full max-w-[450px] aspect-square overflow-hidden rounded-sm group shadow-2xl border border-white/10">
@@ -184,13 +184,13 @@ export default function HomeView({ news, profile }: HomeViewProps) {
       </section>
 
       {/* --- Special Menu Section --- */}
-      <section className="relative w-full py-40 md:py-64 px-6 overflow-hidden">
+      <section className="relative w-full py-40 md:py-64 px-6 overflow-hidden bg-transparent">
         <div className="max-w-[1200px] mx-auto text-center mb-32" ref={addToRefs}>
             <span className="block font-cinzel text-xs tracking-[0.5em] text-[var(--color-accent-main)] uppercase mb-8">Signature Selection</span>
-            <h2 className="font-cinzel text-4xl md:text-6xl tracking-[0.2em]">Special Menu</h2>
+            <h2 className="font-cinzel text-4xl md:text-6xl tracking-[0.2em] text-shadow-sm">Special Menu</h2>
         </div>
 
-        <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-32 items-center">
+        <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-32 items-center text-shadow-sm">
           <div className="order-2 md:order-1" ref={addToRefs}>
              <h3 className="font-shippori text-3xl md:text-4xl tracking-[0.15em] text-[var(--color-accent-main)] mb-10">Nara Shikanai Curry</h3>
              <p className="font-shippori text-base md:text-lg text-gray-300 leading-[2.8] tracking-widest text-justify">
@@ -199,12 +199,12 @@ export default function HomeView({ news, profile }: HomeViewProps) {
                 スパイスの香りと深いコクが、夜の余韻をさらに深めます。
              </p>
              <div className="mt-16">
-                <Link href="/menu" className="inline-block border border-[var(--color-accent-main)]/40 hover:border-[var(--color-accent-main)] px-12 py-5 font-cinzel text-sm tracking-[0.3em] text-[var(--color-accent-main)] hover:bg-[var(--color-accent-main)] hover:text-black transition-all duration-700 uppercase">
+                <Link href="/menu" className="inline-block border border-[var(--color-accent-main)]/40 hover:border-[var(--color-accent-main)] px-12 py-5 font-cinzel text-sm tracking-[0.3em] text-[var(--color-accent-main)] hover:bg-[var(--color-accent-main)] hover:text-black transition-all duration-700 uppercase glass-panel">
                   Explore Full Menu
                 </Link>
              </div>
           </div>
-          <div className="order-1 md:order-2 relative aspect-[4/3] w-full overflow-hidden rounded-sm group" ref={addToRefs}>
+          <div className="order-1 md:order-2 relative aspect-[4/3] w-full overflow-hidden rounded-sm group shadow-2xl border border-white/5" ref={addToRefs}>
               <Image 
                 src="/images/curry/curry.jpg" 
                 alt="Nara Shikanai Curry" 
@@ -218,10 +218,10 @@ export default function HomeView({ news, profile }: HomeViewProps) {
       </section>
 
       {/* --- Gallery Marquee --- */}
-      <section className="relative w-full py-24 bg-[#030303] overflow-hidden border-y border-white/5">
+      <section className="relative w-full py-24 bg-transparent overflow-hidden border-y border-white/5">
         <div className="max-w-[1200px] mx-auto text-center mb-20 px-6" ref={addToRefs}>
             <span className="block font-cinzel text-xs tracking-[0.5em] text-[var(--color-accent-main)] uppercase mb-6">Archive</span>
-            <h2 className="font-cinzel text-3xl md:text-4xl tracking-[0.3em]">Gallery</h2>
+            <h2 className="font-cinzel text-3xl md:text-4xl tracking-[0.3em] text-shadow-sm">Gallery</h2>
         </div>
         <Marquee images={galleryImages} speed={40} />
       </section>

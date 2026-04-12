@@ -46,8 +46,8 @@ export default function Header() {
   return (
     <>
       <header 
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
-          isScrolled ? 'bg-[#0f0f0f]/90 py-4 backdrop-blur-md border-b border-[var(--color-accent-main)]/20' : 'bg-transparent py-6'
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-700 ${
+          isScrolled ? 'bg-black/40 backdrop-blur-xl py-4 border-b border-white/10' : 'bg-transparent py-6'
         }`}
       >
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12 flex justify-between items-center">
