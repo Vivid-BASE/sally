@@ -1,15 +1,14 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function AestheticBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { scrollYProgress } = useScroll();
 
-  // Scroll-based parallax for gradients
-  const y1 = useTransform(scrollYProgress, [0, 1], [0, -200]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [0, -400]);
+  // Scroll-based vertical drift
+  const yDrift = useTransform(scrollYProgress, [0, 1], [0, -300]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -34,19 +33,18 @@ export default function AestheticBackground() {
         this.x = Math.random() * w;
         this.y = Math.random() * h;
         this.size = Math.random() * 1.5 + 0.5;
-        this.speedY = -(Math.random() * 0.3 + 0.1); // float up
-        this.speedX = Math.random() * 0.2 - 0.1;
-        this.opacity = Math.random() * 0.5 + 0.1;
-        this.pulse = Math.random() * 0.02;
+        this.speedY = -(Math.random() * 0.2 + 0.05);
+        this.speedX = Math.random() * 0.1 - 0.05;
+        this.opacity = Math.random() * 0.3 + 0.1;
+        this.pulse = Math.random() * 0.01;
       }
 
       update(w: number, h: number) {
         this.y += this.speedY;
         this.x += this.speedX;
         this.opacity += this.pulse;
-        if (this.opacity > 0.6 || this.opacity < 0.1) this.pulse = -this.pulse;
+        if (this.opacity > 0.4 || this.opacity < 0.1) this.pulse = -this.pulse;
 
-        // Reset if off window
         if (this.y < 0) this.y = h;
         if (this.x < 0) this.x = w;
         if (this.x > w) this.x = 0;
@@ -54,14 +52,10 @@ export default function AestheticBackground() {
 
       draw() {
         if (!ctx) return;
-        ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`; // #d4af37 Gold
+        ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
-        
-        // Optional glow
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = "rgba(212, 175, 55, 0.2)";
       }
     }
 
@@ -69,7 +63,7 @@ export default function AestheticBackground() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       particles = [];
-      const particleCount = Math.floor((canvas.width * canvas.height) / 15000);
+      const particleCount = Math.floor((canvas.width * canvas.height) / 20000);
       for (let i = 0; i < particleCount; i++) {
         particles.push(new Particle(canvas.width, canvas.height));
       }
@@ -97,54 +91,75 @@ export default function AestheticBackground() {
   }, []);
 
   return (
-    <div className="fixed inset-0 w-full h-full -z-50 pointer-events-none overflow-hidden bg-[#050505]">
-      {/* 1. Mesh Gradient Layers */}
+    <div className="fixed inset-0 w-full h-full -z-50 pointer-events-none overflow-hidden bg-[#020202]">
+      {/* 1. Cinematic Aurora Bands */}
       <motion.div 
-        style={{ y: y1 }}
-        className="absolute -top-[20%] -left-[10%] w-[120%] h-[120%] opacity-80 mix-blend-screen"
+        style={{ y: yDrift }}
+        className="absolute inset-0 w-full h-full opacity-60 mix-blend-screen"
       >
-        <div 
-          className="absolute top-[20%] left-[20%] w-[80%] h-[80%] blur-[100px] animate-pulse opacity-90" 
-          style={{ 
-            background: 'radial-gradient(circle, rgba(80, 50, 15, 0.9) 0%, transparent 60%)',
-            animationDuration: '6s' 
-          }} 
+        {/* Deep Gold Aurora */}
+        <motion.div 
+          animate={{ 
+            x: ["-10%", "10%", "-10%"],
+            y: ["0%", "5%", "0%"],
+            scale: [1, 1.2, 1],
+            rotate: [0, 5, 0]
+          }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-[20%] -left-[20%] w-[120%] h-[80%] blur-[160px] opacity-80"
+          style={{ background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.5) 0%, rgba(139, 101, 8, 0) 70%)' }}
         />
-        <div 
-          className="absolute top-[40%] left-[50%] w-[70%] h-[70%] blur-[120px] animate-pulse opacity-70" 
-          style={{ 
-            background: 'radial-gradient(circle, rgba(30, 30, 60, 0.8) 0%, transparent 60%)',
-            animationDuration: '10s' 
-          }} 
+
+        {/* Midnight Indigo Aurora */}
+        <motion.div 
+          animate={{ 
+            x: ["10%", "-5%", "10%"],
+            y: ["10%", "0%", "10%"],
+            scale: [1, 1.1, 1],
+            rotate: [0, -3, 0]
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -bottom-[10%] -right-[10%] w-[100%] h-[70%] blur-[180px] opacity-40"
+          style={{ background: 'linear-gradient(225deg, rgba(20, 20, 60, 0.6) 0%, rgba(0, 0, 0, 0) 80%)' }}
+        />
+
+        {/* Shifting Amber Light */}
+        <motion.div 
+          animate={{ 
+            opacity: [0.3, 0.6, 0.3],
+            x: ["-5%", "5%", "-5%"],
+            scale: [1.1, 0.9, 1.1]
+          }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[20%] left-[10%] w-[80%] h-[60%] blur-[140px] opacity-50"
+          style={{ background: 'radial-gradient(circle, rgba(101, 67, 33, 0.7) 0%, transparent 60%)' }}
+        />
+
+        {/* High Light Flare */}
+        <motion.div 
+          animate={{ 
+            x: ["-20%", "20%", "-20%"],
+            rotate: [0, 10, 0]
+          }}
+          transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-0 w-full h-[40%] blur-[120px] opacity-30"
+          style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(255, 230, 150, 0.2) 50%, transparent 100%)' }}
         />
       </motion.div>
 
-      <motion.div 
-        style={{ y: y2 }}
-        className="absolute top-[10%] right-[0%] w-[100%] h-[100%] opacity-70 mix-blend-screen"
-      >
-        <div 
-          className="absolute top-[15%] right-[15%] w-[70%] h-[70%] blur-[140px] animate-pulse opacity-80" 
-          style={{ 
-            background: 'radial-gradient(circle, rgba(90, 60, 20, 0.9) 0%, transparent 60%)',
-            animationDuration: '12s' 
-          }} 
-        />
-      </motion.div>
-
-      {/* 2. Floating Particles Canvas */}
+      {/* 2. Floating Embers (Canvas) */}
       <canvas 
         ref={canvasRef} 
-        className="absolute inset-0 w-full h-full opacity-60"
+        className="absolute inset-0 w-full h-full opacity-40"
       />
 
-      {/* 3. Noise Texture Overlay */}
-      <div className="absolute inset-0 opacity-[0.03] contrast-150 brightness-150 pointer-events-none" 
-           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} 
+      {/* 3. Global Perspective Texture */}
+      <div className="absolute inset-0 opacity-[0.04] pointer-events-none mix-blend-soft-light" 
+           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} 
       />
       
-      {/* 4. Vignette for depth */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.6)_100%)]" />
+      {/* 4. Deep Vignette */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.8)_100%)]" />
     </div>
   );
 }
