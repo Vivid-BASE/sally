@@ -95,55 +95,55 @@ export default function AestheticBackground() {
       {/* 1. Cinematic Aurora Bands */}
       <motion.div 
         style={{ y: yDrift }}
-        className="absolute inset-0 w-full h-full opacity-60 mix-blend-screen"
+        className="absolute inset-0 w-full h-full opacity-70 mix-blend-screen"
       >
-        {/* Deep Gold Aurora */}
+        {/* Deep Radiant Gold Aurora */}
         <motion.div 
           animate={{ 
             x: ["-10%", "10%", "-10%"],
-            y: ["0%", "5%", "0%"],
+            y: ["-2%", "8%", "-2%"],
+            scale: [1, 1.3, 1],
+            rotate: [0, 8, 0]
+          }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-[25%] -left-[20%] w-[130%] h-[90%] blur-[140px] opacity-90"
+          style={{ background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.7) 0%, rgba(255, 215, 0, 0.1) 60%, transparent 100%)' }}
+        />
+
+        {/* Midnight Violet/Indigo Aurora */}
+        <motion.div 
+          animate={{ 
+            x: ["15%", "-10%", "15%"],
+            y: ["5%", "-5%", "5%"],
             scale: [1, 1.2, 1],
-            rotate: [0, 5, 0]
-          }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-[20%] -left-[20%] w-[120%] h-[80%] blur-[160px] opacity-80"
-          style={{ background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.5) 0%, rgba(139, 101, 8, 0) 70%)' }}
-        />
-
-        {/* Midnight Indigo Aurora */}
-        <motion.div 
-          animate={{ 
-            x: ["10%", "-5%", "10%"],
-            y: ["10%", "0%", "10%"],
-            scale: [1, 1.1, 1],
-            rotate: [0, -3, 0]
-          }}
-          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -bottom-[10%] -right-[10%] w-[100%] h-[70%] blur-[180px] opacity-40"
-          style={{ background: 'linear-gradient(225deg, rgba(20, 20, 60, 0.6) 0%, rgba(0, 0, 0, 0) 80%)' }}
-        />
-
-        {/* Shifting Amber Light */}
-        <motion.div 
-          animate={{ 
-            opacity: [0.3, 0.6, 0.3],
-            x: ["-5%", "5%", "-5%"],
-            scale: [1.1, 0.9, 1.1]
-          }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[20%] left-[10%] w-[80%] h-[60%] blur-[140px] opacity-50"
-          style={{ background: 'radial-gradient(circle, rgba(101, 67, 33, 0.7) 0%, transparent 60%)' }}
-        />
-
-        {/* High Light Flare */}
-        <motion.div 
-          animate={{ 
-            x: ["-20%", "20%", "-20%"],
-            rotate: [0, 10, 0]
+            rotate: [0, -5, 0]
           }}
           transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-0 w-full h-[40%] blur-[120px] opacity-30"
-          style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(255, 230, 150, 0.2) 50%, transparent 100%)' }}
+          className="absolute -bottom-[20%] -right-[15%] w-[110%] h-[80%] blur-[160px] opacity-60"
+          style={{ background: 'linear-gradient(225deg, rgba(40, 20, 80, 0.7) 0%, rgba(20, 20, 40, 0.2) 50%, transparent 100%)' }}
+        />
+
+        {/* Pulsating Amber Flare */}
+        <motion.div 
+          animate={{ 
+            opacity: [0.4, 0.8, 0.4],
+            x: ["-8%", "8%", "-8%"],
+            scale: [1.2, 1, 1.2]
+          }}
+          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[15%] left-[5%] w-[90%] h-[70%] blur-[120px] opacity-70"
+          style={{ background: 'radial-gradient(circle, rgba(139, 101, 8, 0.8) 0%, transparent 70%)' }}
+        />
+
+        {/* High Light Ethereal Sweep */}
+        <motion.div 
+          animate={{ 
+            x: ["-25%", "25%", "-25%"],
+            rotate: [0, 15, 0]
+          }}
+          transition={{ duration: 30, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-[10%] w-full h-[50%] blur-[130px] opacity-40"
+          style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(255, 240, 180, 0.3) 50%, transparent 100%)' }}
         />
       </motion.div>
 

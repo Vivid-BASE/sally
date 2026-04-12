@@ -272,7 +272,7 @@ export default function HomeView({ news, profile }: HomeViewProps) {
       </section>
 
       {/* --- Access Section --- */}
-      <section className="relative w-full py-40 md:py-64 px-6 bg-[#080808]">
+      <section className="relative w-full py-40 md:py-64 px-6 bg-black/10">
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-24 items-start">
            <div className="md:sticky md:top-40" ref={addToRefs}>
               <span className="block font-cinzel text-xs tracking-[0.5em] text-[var(--color-accent-main)] uppercase mb-8">Location</span>
