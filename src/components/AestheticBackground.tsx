@@ -30,9 +30,9 @@ export default function AestheticBackground() {
       opacity: number;
       pulse: number;
 
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
+      constructor(w: number, h: number) {
+        this.x = Math.random() * w;
+        this.y = Math.random() * h;
         this.size = Math.random() * 1.5 + 0.5;
         this.speedY = -(Math.random() * 0.3 + 0.1); // float up
         this.speedX = Math.random() * 0.2 - 0.1;
@@ -40,16 +40,16 @@ export default function AestheticBackground() {
         this.pulse = Math.random() * 0.02;
       }
 
-      update() {
+      update(w: number, h: number) {
         this.y += this.speedY;
         this.x += this.speedX;
         this.opacity += this.pulse;
         if (this.opacity > 0.6 || this.opacity < 0.1) this.pulse = -this.pulse;
 
         // Reset if off window
-        if (this.y < 0) this.y = canvas.height;
-        if (this.x < 0) this.x = canvas.width;
-        if (this.x > canvas.width) this.x = 0;
+        if (this.y < 0) this.y = h;
+        if (this.x < 0) this.x = w;
+        if (this.x > w) this.x = 0;
       }
 
       draw() {
@@ -71,14 +71,16 @@ export default function AestheticBackground() {
       particles = [];
       const particleCount = Math.floor((canvas.width * canvas.height) / 15000);
       for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle());
+        particles.push(new Particle(canvas.width, canvas.height));
       }
     };
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const w = canvas.width;
+      const h = canvas.height;
       particles.forEach((p) => {
-        p.update();
+        p.update(w, h);
         p.draw();
       });
       animationFrameId = requestAnimationFrame(animate);
