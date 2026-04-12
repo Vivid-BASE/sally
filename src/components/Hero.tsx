@@ -36,7 +36,6 @@ export default function Hero() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Scale down and fade out hero on scroll
-      const isMobile = window.innerWidth < 768;
       gsap.to(containerRef.current, {
         scrollTrigger: {
           trigger: containerRef.current,
@@ -44,24 +43,23 @@ export default function Hero() {
           end: "bottom top",
           scrub: true,
         },
-        y: 150,
+        y: 100,
         opacity: 0,
-        // Disable expensive blur on mobile for smooth scrolling
-        filter: isMobile ? "none" : "blur(20px)",
+        // Removed expensive blur filter for 'Light & Luxury' performance
       });
 
-      // Logo Sweep Effect (Entrance)
+      // Logo Entrance Refinement
       if (logoRef.current) {
         gsap.fromTo(
           logoRef.current,
-          { opacity: 0, y: 30, scale: 0.95 },
+          { opacity: 0, y: 20, scale: 0.98 },
           {
             opacity: 1,
             y: 0,
             scale: 1,
-            duration: 2.5,
-            ease: "expo.out",
-            delay: 0.5,
+            duration: 2,
+            ease: "power2.out",
+            delay: 0.3,
           }
         );
       }
@@ -78,56 +76,56 @@ export default function Hero() {
       <AnimatePresence mode="popLayout">
         <motion.div
           key={currentIndex}
-          initial={{ opacity: 0, scale: 1.15 }}
+          initial={{ opacity: 0, scale: 1.05 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 3, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 2.5, ease: "easeInOut" }}
           className="absolute inset-0 w-full h-full"
         >
           <Image
             src={heroImages[currentIndex]}
             alt="Bar Sally Ambiance"
             fill
-            className="object-cover object-center filter brightness-[0.35]"
+            className="object-cover object-center filter brightness-[0.3]"
             priority
             quality={100}
           />
         </motion.div>
       </AnimatePresence>
 
-      {/* Luxury Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black pointer-events-none" />
-      <div className="absolute inset-0 bg-black/20 pointer-events-none" />
+      {/* Luxury Overlay - Deep Contrast */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black pointer-events-none" />
+      <div className="absolute inset-0 bg-black/40 pointer-events-none" />
 
       {/* Hero Content */}
       <div className="relative z-10 w-full flex flex-col items-center text-center px-6">
         
-        {/* Logo with slight shine/sweep effect */}
+        {/* Logo - Sharp and Prestigious */}
         <div 
           ref={logoRef}
-          className="relative w-[85vw] max-w-[560px] h-[160px] mb-12 overflow-hidden"
+          className="relative w-[85vw] max-w-[500px] h-[140px] mb-12 overflow-hidden"
         >
           <Image 
             src="/LOGO/png/SALLY.png" 
             alt="Bar Sally Logo" 
             fill 
-            className="object-contain brightness-0 invert drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]" 
+            className="object-contain brightness-0 invert drop-shadow-[0_0_20px_rgba(255,215,0,0.15)]" 
             priority
           />
-          {/* Shine Sweep animation - resets on each image change */}
+          {/* Subtle Shine Sweep */}
           <AnimatePresence>
             <motion.div 
               key={`shine-${currentIndex}`}
-              className="absolute inset-0 w-full h-full pointer-events-none"
+              className="absolute inset-0 w-full h-full pointer-events-none opacity-40"
               initial={{ x: "-150%" }}
               animate={{ x: "250%" }}
               transition={{ 
-                duration: 4.0, 
-                delay: 0.2, 
+                duration: 3.5, 
+                delay: 0.5, 
                 ease: "linear" 
               }}
             >
-              <div className="w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[-25deg]" />
+              <div className="w-1/2 h-full bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-[-25deg]" />
             </motion.div>
           </AnimatePresence>
         </div>
@@ -135,20 +133,20 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.0, duration: 2 }}
+          transition={{ delay: 0.8, duration: 1.5 }}
           className="mt-8 px-4"
         >
           <motion.div 
-            className="font-noto-serif font-bold text-base md:text-xl lg:text-2xl text-white tracking-[0.1em] md:tracking-[0.2em] leading-loose md:leading-relaxed max-w-[1000px] mx-auto space-y-4 md:space-y-6 text-shadow-md"
-            initial={{ opacity: 0, y: 15 }}
+            className="font-noto-serif font-bold text-base md:text-xl lg:text-2xl text-white tracking-[0.25em] md:tracking-[0.35em] leading-loose md:leading-relaxed max-w-[1000px] mx-auto space-y-4 md:space-y-6 text-shadow-lg"
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 2, ease: "easeOut", delay: 1.2 }}
+            transition={{ duration: 1.5, ease: "easeOut", delay: 1.0 }}
           >
-            <p className="overflow-hidden">
-               <span className="block drop-shadow-xl break-keep">大和郡山から、奈良の「ええもん」を全国へ。</span>
+            <p>
+              大和郡山から、奈良の「ええもん」を全国へ。
             </p>
-            <p className="drop-shadow-xl break-keep">
-               人と未来を繋ぐ、情熱が宿る隠れ家。
+            <p>
+              人と未来を繋ぐ、情熱が宿る隠れ家。
             </p>
           </motion.div>
         </motion.div>
