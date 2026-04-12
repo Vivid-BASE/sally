@@ -15,7 +15,7 @@ const heroImages = [
   "/images/top/LINE_ALBUM_sally宣材_260410_8.jpg",
   "/images/top/LINE_ALBUM_sally宣材_260410_9.jpg",
   "/images/top/LINE_ALBUM_sally宣材_260410_11.jpg",
-  "/images/top/LINE_ALBUM_sally宣材_260410_12.jpg",
+  "/images/top/photo_image4_l.jpg",
   "/images/top/LINE_ALBUM_sally宣材_260410_15.jpg",
 ];
 
