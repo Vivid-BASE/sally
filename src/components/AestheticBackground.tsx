@@ -1,16 +1,24 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function AestheticBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
   const { scrollYProgress } = useScroll();
 
   // Scroll-based parallax
-  const yDrift = useTransform(scrollYProgress, [0, 1], [0, -400]);
+  const yDrift = useTransform(scrollYProgress, [0, 1], [0, -300]);
 
   useEffect(() => {
+    // Check for mobile on mount and resize
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -32,18 +40,18 @@ export default function AestheticBackground() {
       constructor(w: number, h: number) {
         this.x = Math.random() * w;
         this.y = Math.random() * h;
-        this.size = Math.random() * 2 + 0.5;
-        this.speedY = -(Math.random() * 0.4 + 0.1);
-        this.speedX = Math.random() * 0.2 - 0.1;
-        this.opacity = Math.random() * 0.5 + 0.1;
-        this.pulse = Math.random() * 0.02;
+        this.size = Math.random() * 1.5 + 0.5;
+        this.speedY = -(Math.random() * 0.2 + 0.05);
+        this.speedX = Math.random() * 0.1 - 0.05;
+        this.opacity = Math.random() * 0.4 + 0.1;
+        this.pulse = Math.random() * 0.01;
       }
 
       update(w: number, h: number) {
         this.y += this.speedY;
         this.x += this.speedX;
         this.opacity += this.pulse;
-        if (this.opacity > 0.6 || this.opacity < 0.1) this.pulse = -this.pulse;
+        if (this.opacity > 0.5 || this.opacity < 0.1) this.pulse = -this.pulse;
 
         if (this.y < 0) this.y = h;
         if (this.x < 0) this.x = w;
@@ -63,7 +71,9 @@ export default function AestheticBackground() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       particles = [];
-      const particleCount = Math.floor((canvas.width * canvas.height) / 15000);
+      // Reduce particle count on mobile
+      const density = window.innerWidth < 768 ? 40000 : 15000;
+      const particleCount = Math.floor((canvas.width * canvas.height) / density);
       for (let i = 0; i < particleCount; i++) {
         particles.push(new Particle(canvas.width, canvas.height));
       }
@@ -82,84 +92,80 @@ export default function AestheticBackground() {
 
     init();
     animate();
-    window.addEventListener("resize", init);
 
     return () => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener("resize", init);
+      window.removeEventListener("resize", checkMobile);
     };
   }, []);
 
   return (
-    <div className="fixed inset-0 w-full h-full -z-50 pointer-events-none overflow-hidden bg-[#010101]">
-      {/* 1. Vivid Aurora Layers - Sharper and More Diverse Colors */}
+    <div className="fixed inset-0 w-full h-full -z-50 pointer-events-none overflow-hidden bg-[#010101] [transform:translateZ(0)]">
+      {/* 1. Optimized Aurora Layers */}
       <motion.div 
         style={{ y: yDrift }}
-        className="absolute inset-0 w-full h-full opacity-80 mix-blend-screen"
+        className="absolute inset-0 w-full h-full opacity-70 mix-blend-screen will-change-transform"
       >
-        {/* Emerald Flare (Main Aurora Color) */}
+        {/* Emerald Flare - Main Aurora */}
         <motion.div 
           animate={{ 
-            x: ["-15%", "15%", "-15%"],
-            y: ["0%", "10%", "0%"],
-            scale: [1, 1.4, 1],
-            rotate: [-5, 5, -5]
+            x: ["-10%", "10%", "-10%"],
+            y: ["0%", "8%", "0%"],
+            scale: [1, 1.3, 1],
           }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-[10%] -left-[10%] w-full h-full blur-[90px] opacity-70"
-          style={{ background: 'radial-gradient(ellipse at center, rgba(0, 255, 127, 0.5) 0%, rgba(0, 100, 50, 0) 70%)' }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+          className={`absolute -top-[10%] -left-[10%] w-[120%] h-[90%] opacity-80 ${isMobile ? 'blur-[60px]' : 'blur-[120px]'} [transform:translate3d(0,0,0)]`}
+          style={{ background: 'linear-gradient(135deg, rgba(0, 255, 127, 0.45) 0%, rgba(0, 100, 50, 0) 70%)' }}
         />
 
-        {/* Vivid Violet Cascade */}
+        {/* Violet Cascade - Only Full on Desktop, lighter on Mobile */}
         <motion.div 
           animate={{ 
-            x: ["20%", "-10%", "20%"],
-            y: ["5%", "15%", "5%"],
+            x: ["10%", "-10%", "10%"],
+            y: ["15%", "5%", "15%"],
             scale: [1.2, 0.9, 1.2],
-            rotate: [5, -10, 5]
           }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-[0%] -right-[10%] w-full h-full blur-[100px] opacity-60"
-          style={{ background: 'linear-gradient(225deg, rgba(138, 43, 226, 0.6) 0%, rgba(40, 20, 80, 0) 70%)' }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+          className={`absolute bottom-[0%] -right-[10%] w-full h-full opacity-60 ${isMobile ? 'blur-[70px] opacity-40' : 'blur-[140px]'} [transform:translate3d(0,0,0)]`}
+          style={{ background: 'linear-gradient(225deg, rgba(40, 20, 80, 0.55) 0%, rgba(138, 43, 226, 0) 70%)' }}
         />
 
-        {/* Intense Gold Ribbon */}
+        {/* Intense Gold Ribbon - Sharpest Element */}
         <motion.div 
           animate={{ 
             opacity: [0.5, 0.9, 0.5],
-            x: ["-25%", "25%", "-25%"],
-            y: ["20%", "30%", "20%"],
+            x: ["-20%", "20%", "-20%"],
           }}
-          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[10%] left-0 w-[120%] h-[50%] blur-[80px] opacity-80"
-          style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(255, 215, 0, 0.6) 50%, transparent 100%)' }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className={`absolute top-[15%] left-0 w-[120%] h-[40%] opacity-80 ${isMobile ? 'blur-[50px]' : 'blur-[90px]'} [transform:translate3d(0,0,0)]`}
+          style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(255, 215, 0, 0.5) 50%, transparent 100%)' }}
         />
 
-        {/* Deep Ruby/Magenta Mystery Accent */}
-        <motion.div 
-          animate={{ 
-            scale: [1, 1.5, 1],
-            opacity: [0.2, 0.5, 0.2]
-          }}
-          transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] blur-[150px] opacity-30"
-          style={{ background: 'radial-gradient(circle, rgba(199, 21, 133, 0.4) 0%, transparent 60%)' }}
-        />
+        {/* Note: Removed Magenta Mystery Accent on mobile for performance */}
+        {!isMobile && (
+          <motion.div 
+            animate={{ scale: [1, 1.4, 1], opacity: [0.1, 0.4, 0.1] }}
+            transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] blur-[160px] opacity-20 [transform:translate3d(0,0,0)]"
+            style={{ background: 'radial-gradient(circle, rgba(199, 21, 133, 0.3) 0%, transparent 60%)' }}
+          />
+        )}
       </motion.div>
 
-      {/* 2. Enhanced Floating Embers (Canvas) */}
+      {/* 2. Optimized Floating Embers (Canvas) */}
       <canvas 
         ref={canvasRef} 
-        className="absolute inset-0 w-full h-full opacity-60"
+        className="absolute inset-0 w-full h-full opacity-50 will-change-transform"
       />
 
-      {/* 3. Global Texture Overlay */}
-      <div className="absolute inset-0 opacity-[0.06] pointer-events-none mix-blend-overlay" 
-           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} 
+      {/* 3. Texture Overlay - Lighter on Mobile */}
+      <div className={`absolute inset-0 ${isMobile ? 'opacity-[0.03]' : 'opacity-[0.05]'} pointer-events-none mix-blend-overlay`} 
+           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} 
       />
       
       {/* 4. Contrast Vignette */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(0,0,0,0.8)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_40%,rgba(0,0,0,0.85)_100%)]" />
     </div>
   );
 }
