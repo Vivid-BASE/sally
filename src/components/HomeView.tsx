@@ -59,13 +59,13 @@ export default function HomeView({ news, profile }: HomeViewProps) {
         const text = section.querySelector(".reveal-text");
         const isReverse = section.classList.contains("reverse");
 
-        // 1. OUTER MASK REVEAL (The "Box" Opening)
+        // 1. Cinematic Shutter Reveal (Images) - Unified Direction & Extreme Expo
         if (imageOuter) {
           gsap.fromTo(imageOuter, 
             { 
               opacity: 0,
-              clipPath: isReverse ? "inset(0 0 0 100%)" : "inset(0 100% 0 0)",
-              x: isReverse ? 80 : -80,
+              clipPath: "inset(0 100% 0 0)",
+              x: -80,
               scale: 1.1,
             },
             {
@@ -73,7 +73,7 @@ export default function HomeView({ news, profile }: HomeViewProps) {
               clipPath: "inset(0 0% 0 0)",
               x: 0,
               scale: 1,
-              duration: 2.2,
+              duration: 2.5,
               ease: "expo.out",
               scrollTrigger: {
                 trigger: section,
