@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import gsap from "gsap";
@@ -47,7 +47,7 @@ const galleryImages = [
 export default function HomeView({ news, profile }: HomeViewProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   
-  useEffect(() => {
+  useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const sections = gsap.utils.toArray<HTMLElement>(".reveal-section");
       
@@ -62,12 +62,14 @@ export default function HomeView({ news, profile }: HomeViewProps) {
         if (image) {
           gsap.fromTo(image, 
             { 
+              opacity: 0,
               clipPath: isReverse ? "inset(0 0 0 100%)" : "inset(0 100% 0 0)",
               x: isReverse ? 100 : -100,
               scale: 1.2,
               filter: "brightness(0.5) contrast(1.2)"
             },
             {
+              opacity: 1,
               clipPath: "inset(0 0% 0 0)",
               x: 0,
               scale: 1,
