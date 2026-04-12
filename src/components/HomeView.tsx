@@ -107,7 +107,7 @@ export default function HomeView({ news, profile }: HomeViewProps) {
           <div className="order-2 md:order-1 relative z-10" ref={addToRefs}>
             <h2 className="font-cinzel text-4xl md:text-6xl tracking-[0.3em] mb-12 text-[var(--color-accent-main)] uppercase shadow-sm">Concept</h2>
             
-            <div className="font-noto-serif font-bold text-base md:text-lg text-white leading-loose md:leading-[2.2] tracking-widest space-y-8 text-justify break-keep text-shadow-sm">
+            <div className="font-noto-serif font-bold text-base md:text-lg text-white leading-loose md:leading-[2.2] tracking-wider space-y-8 text-justify break-keep text-shadow-sm">
               <p>
                 1978年の創業以来、大和郡山の人々に愛され続けてきた Bar Sally。
               </p>
