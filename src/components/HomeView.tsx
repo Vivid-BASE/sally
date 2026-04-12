@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ProfileContent } from "@/lib/microcms";
 import Hero from "./Hero";
 import AestheticBackground from "./AestheticBackground";
 
@@ -13,7 +14,16 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-export default function HomeView() {
+interface HomeViewProps {
+  news: {
+    img: string;
+    title: string;
+    delay: number;
+  }[];
+  profile: ProfileContent;
+}
+
+export default function HomeView({ news, profile }: HomeViewProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
@@ -79,19 +89,32 @@ export default function HomeView() {
           }
 
           if (text) {
-            const paragraphs = text.querySelectorAll("p");
-            tl.fromTo(paragraphs, 
+            const children = text.children;
+            tl.fromTo(children, 
               { opacity: 0, y: 20 },
               { 
                 opacity: 1, 
                 y: 0, 
                 duration: 1.2, 
-                stagger: 0.3, 
+                stagger: 0.2, 
                 ease: "power2.out" 
               },
               "-=1.0"
             );
           }
+        }
+      });
+
+      // Staggered News Cards
+      gsap.from(".news-card", {
+        opacity: 0,
+        y: 40,
+        duration: 1.5,
+        stagger: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".news-grid",
+          start: "top 80%"
         }
       });
 
@@ -135,28 +158,52 @@ export default function HomeView() {
         </div>
       </section>
 
+      {/* --- News Section (Restored) --- */}
+      <section className="relative w-full py-40 md:py-64 px-6 bg-black/5 overflow-hidden">
+        <div className="max-w-[1200px] mx-auto">
+          <div className="flex justify-between items-end mb-16 px-4">
+            <h2 className="font-cinzel text-4xl md:text-6xl tracking-[0.3em] text-[var(--color-accent-main)] uppercase">News</h2>
+            <Link href="/archives" className="font-cinzel text-xs tracking-[0.4em] opacity-40 hover:opacity-100 transition-opacity pb-2">View All</Link>
+          </div>
+          
+          <div className="news-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {news.map((item, index) => (
+              <div key={index} className="news-card group relative">
+                <div className="relative aspect-[4/5] overflow-hidden rounded-sm mb-6 border border-white/5 group-hover:border-[var(--color-accent-main)]/30 transition-colors duration-700">
+                  <Image src={item.img} alt={item.title} fill className="object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-110" />
+                  <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-all duration-1000" />
+                </div>
+                <h3 className="font-noto-serif text-sm md:text-base font-bold tracking-widest text-center group-hover:text-[var(--color-accent-main)] transition-colors duration-500">{item.title}</h3>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* --- Master Section --- */}
-      <section className="reveal-section reverse relative w-full py-40 md:py-64 px-6 bg-black/5 backdrop-blur-sm">
+      <section className="reveal-section reverse relative w-full py-40 md:py-64 px-6 bg-transparent border-t border-white/5">
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-32 items-center">
           <div className="flex justify-center md:justify-start">
              <div className="reveal-image relative w-full max-w-[450px] aspect-square overflow-hidden rounded-sm group shadow-2xl border border-white/10">
-                <Image src="/images/master2.png" alt="Bar Sally Master" fill className="object-cover" sizes="(max-width: 768px) 100vw, 450px" />
+                <Image src={profile.image?.url || "/images/master2.png"} alt={profile.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 450px" />
                 <div className="absolute inset-0 border border-[var(--color-accent-main)]/10 group-hover:border-[var(--color-accent-main)]/30 transition-colors duration-1000 pointer-events-none" />
              </div>
           </div>
           <div className="reveal-content relative z-10">
             <h2 className="reveal-title font-cinzel text-4xl md:text-6xl tracking-[0.3em] mb-12 text-[var(--color-accent-main)] uppercase shadow-sm">Master</h2>
             <div className="reveal-text font-noto-serif font-bold text-base md:text-lg text-white leading-loose md:leading-[2.2] tracking-wide space-y-6 break-keep text-shadow-sm">
-              <p className="text-xl md:text-2xl mb-4 text-[var(--color-accent-main)]">新田 豊 サリー</p>
-              <p>奈良繋ぎ人.ブランドプロデューサー</p>
-              <p>ご縁ジニア / 奈良のヒト.モノ.コト<br />おまかせください！</p>
+              <p className="text-xl md:text-2xl mb-4 text-[var(--color-accent-main)]">{profile.name} {profile.englishName}</p>
+              <p>{profile.role}</p>
+              <div className="whitespace-pre-wrap opacity-90 font-medium">
+                {profile.bio}
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* --- Service/Philosophy Section (Business) --- */}
-      <section className="reveal-section relative w-full py-40 md:py-64 px-6 overflow-hidden bg-transparent">
+      <section className="reveal-section relative w-full py-40 md:py-64 px-6 overflow-hidden bg-black/10">
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-32 items-center">
           <div className="reveal-content order-2 md:order-1 relative z-10">
             <h2 className="reveal-title font-cinzel text-4xl md:text-6xl tracking-[0.3em] mb-12 text-[var(--color-accent-main)] uppercase shadow-sm">Creation</h2>
