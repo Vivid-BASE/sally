@@ -125,7 +125,7 @@ export default function Hero() {
                 ease: [0.4, 0, 0.2, 1] 
               }}
             >
-              <div className="w-1/3 h-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-[-25deg]" />
+              <div className="w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[-25deg]" />
             </motion.div>
           </AnimatePresence>
         </div>
@@ -133,28 +133,20 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 2 }}
+          transition={{ delay: 1.0, duration: 2 }}
+          className="mt-8"
         >
-          <motion.h1 
-            className="font-cinzel text-xl md:text-3xl tracking-[0.6em] text-[var(--color-accent-main)] uppercase mb-10 text-shadow-md"
-            initial={{ opacity: 0, letterSpacing: "0.2em" }}
-            animate={{ opacity: 1, letterSpacing: "0.6em" }}
-            transition={{ duration: 3, ease: "circOut", delay: 0.8 }}
-          >
-            Timeless Elegance
-          </motion.h1>
-
           <motion.div 
-            className="font-noto-serif font-bold text-lg md:text-xl text-white tracking-[0.2em] leading-relaxed max-w-[800px] mx-auto space-y-6 text-shadow-md"
+            className="font-noto-serif font-bold text-xl md:text-2xl text-white tracking-[0.2em] leading-relaxed max-w-[900px] mx-auto space-y-6 text-shadow-md"
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 2, ease: "easeOut", delay: 1.2 }}
           >
             <p className="overflow-hidden">
-               <span className="block drop-shadow-lg">大和郡山で紡ぐ、大人の隠れ家。</span>
+               <span className="block drop-shadow-xl">大和郡山から、奈良の「ええもん」を全国へ。</span>
             </p>
-            <p className="drop-shadow-lg">
-               静寂のなかで、極上の一杯を。
+            <p className="drop-shadow-xl">
+               人と未来を繋ぐ、情熱が宿る隠れ家。
             </p>
           </motion.div>
         </motion.div>
