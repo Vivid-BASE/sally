@@ -101,17 +101,35 @@ export default function AestheticBackground() {
       {/* 1. Mesh Gradient Layers */}
       <motion.div 
         style={{ y: y1 }}
-        className="absolute -top-[20%] -left-[10%] w-[120%] h-[120%] opacity-40 mix-blend-screen"
+        className="absolute -top-[20%] -left-[10%] w-[120%] h-[120%] opacity-60 mix-blend-screen"
       >
-        <div className="absolute top-[20%] left-[20%] w-[60%] h-[60%] bg-radial-gradient from-[#1a1100] to-transparent blur-[160px] animate-pulse" style={{ animationDuration: '8s' }} />
-        <div className="absolute top-[60%] left-[60%] w-[50%] h-[50%] bg-radial-gradient from-[#0c0c14] to-transparent blur-[140px] animate-pulse" style={{ animationDuration: '12s' }} />
+        <div 
+          className="absolute top-[20%] left-[20%] w-[70%] h-[70%] blur-[120px] animate-pulse opacity-80" 
+          style={{ 
+            background: 'radial-gradient(circle, rgba(50, 35, 10, 0.8) 0%, transparent 70%)',
+            animationDuration: '8s' 
+          }} 
+        />
+        <div 
+          className="absolute top-[50%] left-[50%] w-[60%] h-[60%] blur-[100px] animate-pulse opacity-60" 
+          style={{ 
+            background: 'radial-gradient(circle, rgba(20, 20, 40, 0.8) 0%, transparent 70%)',
+            animationDuration: '12s' 
+          }} 
+        />
       </motion.div>
 
       <motion.div 
         style={{ y: y2 }}
-        className="absolute top-[10%] right-[0%] w-[100%] h-[100%] opacity-30 mix-blend-screen"
+        className="absolute top-[10%] right-[0%] w-[100%] h-[100%] opacity-50 mix-blend-screen"
       >
-        <div className="absolute top-[10%] right-[10%] w-[50%] h-[50%] bg-radial-gradient from-[#221a0a] to-transparent blur-[180px] animate-pulse" style={{ animationDuration: '15s' }} />
+        <div 
+          className="absolute top-[15%] right-[15%] w-[60%] h-[60%] blur-[140px] animate-pulse opacity-70" 
+          style={{ 
+            background: 'radial-gradient(circle, rgba(60, 45, 15, 0.8) 0%, transparent 70%)',
+            animationDuration: '15s' 
+          }} 
+        />
       </motion.div>
 
       {/* 2. Floating Particles Canvas */}
