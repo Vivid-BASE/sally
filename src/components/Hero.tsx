@@ -12,6 +12,9 @@ if (typeof window !== "undefined") {
 
 const heroImages = [
   "/images/top/LINE_ALBUM_sally宣材_260410_5.jpg",
+  "/images/top/LINE_ALBUM_sally宣材_260410_8.jpg",
+  "/images/top/LINE_ALBUM_sally宣材_260410_9.jpg",
+  "/images/top/LINE_ALBUM_sally宣材_260410_11.jpg",
   "/images/top/LINE_ALBUM_sally宣材_260410_12.jpg",
   "/images/top/LINE_ALBUM_sally宣材_260410_15.jpg",
 ];
@@ -25,7 +28,7 @@ export default function Hero() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % heroImages.length);
-    }, 8000); // Slower interval for more elegance
+    }, 5000); // 5 seconds interval
     return () => clearInterval(timer);
   }, []);
 
@@ -45,7 +48,7 @@ export default function Hero() {
         filter: "blur(20px)",
       });
 
-      // Logo Sweep Effect
+      // Logo Sweep Effect (Entrance)
       if (logoRef.current) {
         gsap.fromTo(
           logoRef.current,
@@ -56,7 +59,7 @@ export default function Hero() {
             scale: 1,
             duration: 2.5,
             ease: "expo.out",
-            delay: 0.8,
+            delay: 0.5,
           }
         );
       }
@@ -100,7 +103,7 @@ export default function Hero() {
         {/* Logo with slight shine/sweep effect */}
         <div 
           ref={logoRef}
-          className="relative w-[85vw] max-w-[560px] h-[160px] mb-12"
+          className="relative w-[85vw] max-w-[560px] h-[160px] mb-12 overflow-hidden"
         >
           <Image 
             src="/LOGO/png/SALLY.png" 
@@ -109,24 +112,34 @@ export default function Hero() {
             className="object-contain brightness-0 invert drop-shadow-[0_0_15px_rgba(255,255,255,0.2)]" 
             priority
           />
-          <motion.div 
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-[-20deg] w-1/2 h-full"
-            initial={{ left: "-100%" }}
-            animate={{ left: "200%" }}
-            transition={{ duration: 3, delay: 2.5, ease: "easeInOut", repeat: Infinity, repeatDelay: 10 }}
-          />
+          {/* Shine Sweep animation - resets on each image change */}
+          <AnimatePresence>
+            <motion.div 
+              key={`shine-${currentIndex}`}
+              className="absolute inset-0 w-full h-full pointer-events-none"
+              initial={{ x: "-150%" }}
+              animate={{ x: "250%" }}
+              transition={{ 
+                duration: 1.5, 
+                delay: 0.5, 
+                ease: [0.4, 0, 0.2, 1] 
+              }}
+            >
+              <div className="w-1/3 h-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-[-25deg]" />
+            </motion.div>
+          </AnimatePresence>
         </div>
 
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 2 }}
+          transition={{ delay: 1.2, duration: 2 }}
         >
           <motion.h1 
             className="font-cinzel text-xl md:text-3xl tracking-[0.6em] text-[var(--color-accent-main)] uppercase mb-10 text-shadow-md"
             initial={{ opacity: 0, letterSpacing: "0.2em" }}
             animate={{ opacity: 1, letterSpacing: "0.6em" }}
-            transition={{ duration: 3, ease: "circOut", delay: 1.2 }}
+            transition={{ duration: 3, ease: "circOut", delay: 0.8 }}
           >
             Timeless Elegance
           </motion.h1>
@@ -135,7 +148,7 @@ export default function Hero() {
             className="font-noto-serif font-bold text-lg md:text-xl text-white tracking-[0.2em] leading-relaxed max-w-[800px] mx-auto space-y-6 text-shadow-md"
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 2, ease: "easeOut", delay: 2 }}
+            transition={{ duration: 2, ease: "easeOut", delay: 1.2 }}
           >
             <p className="overflow-hidden">
                <span className="block drop-shadow-lg">大和郡山で紡ぐ、大人の隠れ家。</span>
