@@ -197,8 +197,9 @@ export default function HomeView({ news, profile }: HomeViewProps) {
                  <p className="border-l-2 border-[var(--color-accent-main)] pl-6">
                    {profile.role}
                  </p>
-                 <div className="pl-6 whitespace-pre-wrap opacity-90 font-medium">
-                   {profile.bio}
+                 <div className="pl-6 opacity-90 font-medium">
+                    <p>奈良繋ぎ人.ブランドプロデューサー</p>
+                    <p>ご縁ジニア / 奈良のヒト.モノ.コト<br />おまかせください！</p>
                  </div>
                </div>
                
