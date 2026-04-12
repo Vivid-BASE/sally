@@ -120,7 +120,7 @@ export default function Hero() {
               initial={{ x: "-150%" }}
               animate={{ x: "250%" }}
               transition={{ 
-                duration: 1.5, 
+                duration: 2.5, 
                 delay: 0.5, 
                 ease: [0.4, 0, 0.2, 1] 
               }}
