@@ -97,7 +97,7 @@ export default function HomeView({ news, profile }: HomeViewProps) {
   };
 
   return (
-    <div ref={containerRef} className="bg-black text-white selection:bg-[var(--color-accent-main)] selection:text-black">
+    <div ref={containerRef} className="bg-transparent text-white selection:bg-[var(--color-accent-main)] selection:text-black">
       <Hero />
 
       {/* --- Concept Section --- */}

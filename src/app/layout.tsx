@@ -38,7 +38,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja" className="scroll-smooth">
-      <body className={`${cinzel.variable} ${notoSerif.variable} ${shippori.variable} font-shippori bg-black text-white antialiased`}>
+      <body className={`${cinzel.variable} ${notoSerif.variable} ${shippori.variable} font-shippori text-white antialiased`}>
         <AestheticBackground />
         <SmoothScroll>
           <Header />

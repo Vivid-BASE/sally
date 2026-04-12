@@ -71,7 +71,7 @@ export default function Hero() {
   return (
     <section 
       ref={containerRef} 
-      className="relative w-full h-screen overflow-hidden bg-black flex items-center justify-center"
+      className="relative w-full h-screen overflow-hidden bg-transparent flex items-center justify-center"
     >
       <AnimatePresence mode="popLayout">
         <motion.div

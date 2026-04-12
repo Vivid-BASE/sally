@@ -101,33 +101,33 @@ export default function AestheticBackground() {
       {/* 1. Mesh Gradient Layers */}
       <motion.div 
         style={{ y: y1 }}
-        className="absolute -top-[20%] -left-[10%] w-[120%] h-[120%] opacity-60 mix-blend-screen"
+        className="absolute -top-[20%] -left-[10%] w-[120%] h-[120%] opacity-80 mix-blend-screen"
       >
         <div 
-          className="absolute top-[20%] left-[20%] w-[70%] h-[70%] blur-[120px] animate-pulse opacity-80" 
+          className="absolute top-[20%] left-[20%] w-[80%] h-[80%] blur-[100px] animate-pulse opacity-90" 
           style={{ 
-            background: 'radial-gradient(circle, rgba(50, 35, 10, 0.8) 0%, transparent 70%)',
-            animationDuration: '8s' 
+            background: 'radial-gradient(circle, rgba(80, 50, 15, 0.9) 0%, transparent 60%)',
+            animationDuration: '6s' 
           }} 
         />
         <div 
-          className="absolute top-[50%] left-[50%] w-[60%] h-[60%] blur-[100px] animate-pulse opacity-60" 
+          className="absolute top-[40%] left-[50%] w-[70%] h-[70%] blur-[120px] animate-pulse opacity-70" 
           style={{ 
-            background: 'radial-gradient(circle, rgba(20, 20, 40, 0.8) 0%, transparent 70%)',
-            animationDuration: '12s' 
+            background: 'radial-gradient(circle, rgba(30, 30, 60, 0.8) 0%, transparent 60%)',
+            animationDuration: '10s' 
           }} 
         />
       </motion.div>
 
       <motion.div 
         style={{ y: y2 }}
-        className="absolute top-[10%] right-[0%] w-[100%] h-[100%] opacity-50 mix-blend-screen"
+        className="absolute top-[10%] right-[0%] w-[100%] h-[100%] opacity-70 mix-blend-screen"
       >
         <div 
-          className="absolute top-[15%] right-[15%] w-[60%] h-[60%] blur-[140px] animate-pulse opacity-70" 
+          className="absolute top-[15%] right-[15%] w-[70%] h-[70%] blur-[140px] animate-pulse opacity-80" 
           style={{ 
-            background: 'radial-gradient(circle, rgba(60, 45, 15, 0.8) 0%, transparent 70%)',
-            animationDuration: '15s' 
+            background: 'radial-gradient(circle, rgba(90, 60, 20, 0.9) 0%, transparent 60%)',
+            animationDuration: '12s' 
           }} 
         />
       </motion.div>
