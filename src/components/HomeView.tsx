@@ -122,17 +122,17 @@ export default function HomeView({ news, profile }: HomeViewProps) {
             </div>
           </div>
 
-          <div className="order-1 md:order-2 relative h-[50vh] md:h-[70vh] w-full max-w-[500px] mx-auto overflow-hidden rounded-sm group shadow-2xl" ref={addToRefs}>
-             <div className="absolute inset-0 w-full h-[120%] -top-[10%]">
+          <div className="order-1 md:order-2 flex justify-center md:justify-end" ref={addToRefs}>
+            <div className="relative w-full max-w-[450px] aspect-square overflow-hidden rounded-sm group shadow-2xl border border-white/10">
                 <Image 
                   src="/images/bar/CONCEPT.jpg" 
                   alt="Bar Sally Concept" 
                   fill 
-                  className="object-cover parallax-img transition-all duration-1000"
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, 450px"
                 />
-             </div>
              <div className="absolute inset-0 border border-[var(--color-accent-main)]/10 group-hover:border-[var(--color-accent-main)]/30 transition-colors duration-1000 pointer-events-none" />
+            </div>
           </div>
         </div>
       </section>
