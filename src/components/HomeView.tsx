@@ -105,43 +105,30 @@ export default function HomeView({ news, profile }: HomeViewProps) {
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-32 items-center">
           
           <div className="order-2 md:order-1 relative z-10" ref={addToRefs}>
-            <span className="block font-cinzel text-xs tracking-[0.5em] text-[var(--color-accent-main)] uppercase mb-8">Since 1978</span>
-            <h2 className="font-cinzel text-4xl md:text-6xl tracking-[0.2em] mb-16 leading-tight">Authentic<br/>Philosophy</h2>
+            <h2 className="font-cinzel text-4xl md:text-6xl tracking-[0.3em] mb-12 text-[var(--color-accent-main)] uppercase shadow-sm">Concept</h2>
             
-            <div className="font-shippori text-base md:text-lg text-gray-300 leading-[2.8] tracking-widest space-y-10 text-justify break-keep">
+            <div className="font-noto-serif font-bold text-base md:text-lg text-white leading-loose md:leading-[2.2] tracking-widest space-y-8 text-justify break-keep text-shadow-sm">
               <p>
                 1978年の創業以来、大和郡山の人々に愛され続けてきた Bar Sally。
               </p>
               <p>
-                奈良の木材をふんだんに使用した、温かく重厚な空間。
+                奈良の木材をふんだんに使用した、温かく重厚な空間。<br className="hidden md:block" />
                 そこはまるで、古き良き時代から時が止まったかのような、大人のためのサンクチュアリ。
               </p>
               <p>
-                「人とのつながり」と「出会い」を大切に。
+                「人とのつながり」と「出会い」を大切に。<br className="hidden md:block" />
                 今宵も最高の一杯をご用意して、皆様のお越しをお待ちしております。
               </p>
             </div>
-
-            <div className="mt-20">
-               <Link href="/concept" className="group inline-flex items-center gap-6 font-cinzel text-sm tracking-[0.3em] uppercase text-[var(--color-accent-main)] overflow-hidden">
-                 <span className="relative pb-2">
-                   Discover More
-                   <span className="absolute bottom-0 left-0 w-full h-[1px] bg-current transform translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-700 ease-out" />
-                 </span>
-                 <svg width="20" height="20" className="w-5 h-5 transform group-hover:translate-x-3 transition-transform duration-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                 </svg>
-               </Link>
-            </div>
           </div>
 
-          <div className="order-1 md:order-2 relative h-[60vh] md:h-[90vh] w-full overflow-hidden rounded-sm group" ref={addToRefs}>
-             <div className="absolute inset-0 w-full h-[130%] -top-[15%]">
+          <div className="order-1 md:order-2 relative h-[50vh] md:h-[70vh] w-full max-w-[500px] mx-auto overflow-hidden rounded-sm group shadow-2xl" ref={addToRefs}>
+             <div className="absolute inset-0 w-full h-[120%] -top-[10%]">
                 <Image 
-                  src="/images/photo_image2_l.jpg" 
-                  alt="Bar Sally Interior" 
+                  src="/images/bar/CONCEPT.jpg" 
+                  alt="Bar Sally Concept" 
                   fill 
-                  className="object-cover image-sepia parallax-img transition-all duration-1000"
+                  className="object-cover parallax-img transition-all duration-1000"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
              </div>

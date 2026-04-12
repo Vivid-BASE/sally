@@ -29,10 +29,10 @@ export default function Footer() {
             <Link href="/" className="mb-6 block">
                <div className="relative w-[200px] h-[55px]">
                   <Image 
-                    src="/LOGO/png/Bar%20Sally.png" 
+                    src="/LOGO/png/SALLY.png" 
                     alt="Bar Sally Logo" 
                     fill 
-                    className="object-contain" 
+                    className="object-contain brightness-0 invert" 
                   />
                </div>
             </Link>
@@ -46,9 +46,6 @@ export default function Footer() {
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
             <h4 className="font-cinzel tracking-[0.2em] text-[var(--color-accent-main)] mb-6 text-sm">Navigation</h4>
             <ul className="space-y-4">
-              <li>
-                <Link href="/concept" className="font-shippori text-sm tracking-widest text-gray-400 hover:text-[var(--color-accent-main)] transition-colors">コンセプト</Link>
-              </li>
               <li>
                 <Link href="/menu" className="font-shippori text-sm tracking-widest text-gray-400 hover:text-[var(--color-accent-main)] transition-colors">メニュー・料金</Link>
               </li>
