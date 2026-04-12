@@ -52,29 +52,28 @@ export default function HomeView({ news, profile }: HomeViewProps) {
       const sections = gsap.utils.toArray<HTMLElement>(".reveal-section");
       
       sections.forEach((section) => {
-        const image = section.querySelector(".reveal-image");
+        const imageOuter = section.querySelector(".reveal-image");
+        const imageInner = section.querySelector(".reveal-image-inner");
         const content = section.querySelector(".reveal-content");
         const title = section.querySelector(".reveal-title");
         const text = section.querySelector(".reveal-text");
         const isReverse = section.classList.contains("reverse");
 
-        // 1. Cinematic Shutter Reveal (Images) - Extreme Expo Easing
-        if (image) {
-          gsap.fromTo(image, 
+        // 1. OUTER MASK REVEAL (The "Box" Opening)
+        if (imageOuter) {
+          gsap.fromTo(imageOuter, 
             { 
               opacity: 0,
               clipPath: isReverse ? "inset(0 0 0 100%)" : "inset(0 100% 0 0)",
-              x: isReverse ? 100 : -100,
-              scale: 1.2,
-              filter: "brightness(0.5) contrast(1.2)"
+              x: isReverse ? 80 : -80,
+              scale: 1.1,
             },
             {
               opacity: 1,
               clipPath: "inset(0 0% 0 0)",
               x: 0,
               scale: 1,
-              filter: "brightness(1) contrast(1)",
-              duration: 2.5,
+              duration: 2.2,
               ease: "expo.out",
               scrollTrigger: {
                 trigger: section,
@@ -83,10 +82,12 @@ export default function HomeView({ news, profile }: HomeViewProps) {
               }
             }
           );
+        }
 
-          // Subtle Dynamic Parallax
-          gsap.to(image, {
-            y: -60,
+        // 2. INNER PARALLAX REVEAL (Independent Image Movement)
+        if (imageInner) {
+          gsap.to(imageInner, {
+            y: -40,
             ease: "none",
             scrollTrigger: {
               trigger: section,
@@ -97,7 +98,7 @@ export default function HomeView({ news, profile }: HomeViewProps) {
           });
         }
 
-        // 2. High-Precision Staggered Reveal (Content)
+        // 3. Staggered Content Reveal
         if (content) {
           const tl = gsap.timeline({
             scrollTrigger: {
@@ -109,40 +110,35 @@ export default function HomeView({ news, profile }: HomeViewProps) {
 
           if (title) {
             tl.fromTo(title, 
-              { opacity: 0, x: isReverse ? -60 : 60, skewX: isReverse ? 10 : -10 },
-              { opacity: 1, x: 0, skewX: 0, duration: 1.8, ease: "expo.out" }
+              { opacity: 0, x: isReverse ? -40 : 40, skewX: isReverse ? 5 : -5 },
+              { opacity: 1, x: 0, skewX: 0, duration: 1.6, ease: "expo.out" }
             );
           }
 
           if (text) {
-            // Animate each child with a tight, prestigious stagger
             const children = Array.from(text.children);
             tl.fromTo(children, 
-              { opacity: 0, y: 30, filter: "blur(5px)" },
+              { opacity: 0, y: 20, filter: "blur(4px)" },
               { 
                 opacity: 1, 
                 y: 0, 
                 filter: "blur(0px)",
-                duration: 1.4, 
-                stagger: 0.15, 
-                ease: "power4.out" 
+                duration: 1.2, 
+                stagger: 0.12, 
+                ease: "power3.out" 
               },
-              "-=1.4"
+              "-=1.2"
             );
           }
         }
       });
 
-      // Staggered Instagram Grid with Lift effect
+      // Unified Reveal for Access & News (Cards)
       gsap.from(".news-card", {
         opacity: 0,
-        y: 60,
-        scale: 0.95,
-        duration: 1.8,
-        stagger: {
-          each: 0.1,
-          from: "start"
-        },
+        y: 40,
+        duration: 1.5,
+        stagger: 0.1,
         ease: "expo.out",
         scrollTrigger: {
           trigger: ".news-grid",
@@ -150,11 +146,10 @@ export default function HomeView({ news, profile }: HomeViewProps) {
         }
       });
 
-      // Access section: Synchronized Heavy Reveal
       gsap.from(".access-reveal", {
         opacity: 0,
-        y: 80,
-        duration: 2.2,
+        y: 60,
+        duration: 2,
         ease: "expo.out",
         scrollTrigger: {
           trigger: ".access-reveal",
@@ -171,7 +166,7 @@ export default function HomeView({ news, profile }: HomeViewProps) {
       <Hero />
 
       {/* --- 1. Concept Section --- */}
-      <section className="reveal-section relative w-full py-40 md:py-80 px-6 overflow-hidden border-b border-white/5 bg-transparent">
+      <section className="reveal-section relative w-full py-40 md:py-72 px-6 overflow-hidden border-b border-white/5 bg-transparent">
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-32 items-center">
           <div className="reveal-content order-2 md:order-1 relative z-10">
             <h2 className="reveal-title font-cinzel text-5xl md:text-7xl tracking-[0.35em] mb-16 text-[var(--color-accent-main)] uppercase text-shadow-lg">Concept</h2>
@@ -183,25 +178,28 @@ export default function HomeView({ news, profile }: HomeViewProps) {
           </div>
           <div className="order-1 md:order-2 flex justify-center md:justify-end">
             <div className="reveal-image relative w-full max-w-[500px] aspect-square overflow-hidden rounded-sm group shadow-[0_0_80px_rgba(0,0,0,0.8)] border border-white/10">
-                <Image src="/images/bar/CONCEPT.jpg" alt="Bar Sally Concept" fill className="object-cover" sizes="(max-width: 768px) 100vw, 500px" />
-                <div className="absolute inset-0 border border-[var(--color-accent-main)]/10 group-hover:border-[var(--color-accent-main)]/30 transition-colors duration-1000 pointer-events-none" />
+               <div className="reveal-image-inner relative w-full h-full scale-110">
+                  <Image src="/images/bar/CONCEPT.jpg" alt="Bar Sally Concept" fill className="object-cover" sizes="(max-width: 768px) 100vw, 500px" />
+               </div>
+               <div className="absolute inset-0 border border-[var(--color-accent-main)]/10 group-hover:border-[var(--color-accent-main)]/30 transition-colors duration-1000 pointer-events-none" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* --- 2. Master Section (Extreme Sync Reveal) --- */}
-      <section className="reveal-section reverse relative w-full py-40 md:py-80 px-6 bg-black/10 backdrop-blur-md border-y border-white/5">
+      {/* --- 2. Master Section (Symmetric Reveal) --- */}
+      <section className="reveal-section reverse relative w-full py-40 md:py-72 px-6 bg-black/10 backdrop-blur-md border-y border-white/5">
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-32 items-center">
           <div className="flex justify-center md:justify-start">
              <div className="reveal-image relative w-full max-w-[500px] aspect-square overflow-hidden rounded-sm group shadow-[0_0_80px_rgba(0,0,0,0.8)] border border-white/10">
-                <Image src={profile.image?.url || "/images/master2.png"} alt={profile.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 500px" />
+                <div className="reveal-image-inner relative w-full h-full scale-110">
+                   <Image src={profile.image?.url || "/images/master2.png"} alt={profile.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 500px" />
+                </div>
                 <div className="absolute inset-0 border border-[var(--color-accent-main)]/10 group-hover:border-[var(--color-accent-main)]/30 transition-colors duration-1000 pointer-events-none" />
              </div>
           </div>
           <div className="reveal-content relative z-10">
             <h2 className="reveal-title font-cinzel text-5xl md:text-7xl tracking-[0.35em] mb-16 text-[var(--color-accent-main)] uppercase text-shadow-lg">Master</h2>
-            
             <div className="reveal-text font-noto-serif font-bold space-y-10 text-shadow-md">
                <h3 className="text-4xl md:text-5xl text-white tracking-[0.1em] mb-6">{profile.name} {profile.englishName}</h3>
                <div className="text-base md:text-lg text-gray-300 leading-loose tracking-widest space-y-8">
@@ -213,13 +211,9 @@ export default function HomeView({ news, profile }: HomeViewProps) {
                     <p>ご縁ジニア / 奈良のヒト.モノ.コト<br />おまかせください！</p>
                  </div>
                </div>
-               
                <div className="pt-12">
                   <Link href="/master" className="group inline-flex items-center gap-8 font-cinzel text-sm tracking-[0.4em] uppercase text-[var(--color-accent-main)] overflow-hidden">
-                    <span className="relative pb-2">
-                      Master&apos;s Story
-                      <span className="absolute bottom-0 left-0 w-full h-[1px] bg-current transform translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-700 ease-out" />
-                    </span>
+                    <span className="relative pb-2">Master&apos;s Story</span>
                     <svg width="24" height="24" className="w-6 h-6 transform group-hover:translate-x-4 transition-transform duration-1000" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
@@ -230,13 +224,12 @@ export default function HomeView({ news, profile }: HomeViewProps) {
         </div>
       </section>
 
-      {/* --- 3. Special Menu Section (Cinematic Curry Reveal) --- */}
-      <section className="reveal-section relative w-full py-40 md:py-80 px-6 overflow-hidden bg-transparent">
+      {/* --- 3. Special Menu Section --- */}
+      <section className="reveal-section relative w-full py-40 md:py-72 px-6 overflow-hidden bg-transparent">
         <div className="max-w-[1200px] mx-auto text-center mb-36">
             <span className="block font-cinzel text-xs tracking-[0.6em] text-[var(--color-accent-main)] uppercase mb-10 opacity-70">Signature Selection</span>
             <h2 className="reveal-title font-cinzel text-5xl md:text-7xl tracking-[0.25em] text-shadow-lg">Special Menu</h2>
         </div>
-
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-32 items-center text-shadow-sm">
           <div className="reveal-content order-2 md:order-1">
              <h3 className="reveal-title font-shippori text-4xl md:text-5xl tracking-[0.2em] text-[var(--color-accent-main)] mb-12">Nara Shikanai Curry</h3>
@@ -247,22 +240,22 @@ export default function HomeView({ news, profile }: HomeViewProps) {
                   スパイスの香りと深いコクが、夜の余韻をさらに深めます。
                 </p>
                 <div className="mt-20">
-                  <Link href="/menu" className="inline-block border border-[var(--color-accent-main)]/50 hover:border-[var(--color-accent-main)] px-16 py-6 font-cinzel text-sm tracking-[0.4em] text-[var(--color-accent-main)] hover:bg-[var(--color-accent-main)] hover:text-black transition-all duration-1000 uppercase glass-panel shadow-xl">
-                    Explore Full Menu
-                  </Link>
+                  <Link href="/menu" className="inline-block border border-[var(--color-accent-main)]/50 hover:border-[var(--color-accent-main)] px-16 py-6 font-cinzel text-sm tracking-[0.4em] text-[var(--color-accent-main)] hover:bg-[var(--color-accent-main)] hover:text-black transition-all duration-1000 uppercase glass-panel shadow-xl">Explore Full Menu</Link>
                 </div>
              </div>
           </div>
           <div className="order-1 md:order-2 flex justify-center md:justify-end">
             <div className="reveal-image relative aspect-[4/3] w-full max-w-[600px] overflow-hidden rounded-sm group shadow-[0_0_100px_rgba(0,0,0,1)] border border-white/10">
-                <Image src="/images/curry/curry.jpg" alt="Nara Shikanai Curry" fill className="object-cover" sizes="(max-width: 768px) 100vw, 600px" />
-                <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-1000" />
+               <div className="reveal-image-inner relative w-full h-full scale-110">
+                  <Image src="/images/curry/curry.jpg" alt="Nara Shikanai Curry" fill className="object-cover" sizes="(max-width: 768px) 100vw, 600px" />
+               </div>
+               <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-1000" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* --- 4. Gallery Marquee (Heavy Shadow) --- */}
+      {/* --- 4. Gallery Marquee --- */}
       <section id="gallery" className="relative w-full py-32 bg-transparent overflow-hidden border-y border-white/5 shadow-[inset_0_0_100px_rgba(0,0,0,0.9)]">
         <div className="max-w-[1200px] mx-auto text-center mb-24 px-6">
             <span className="block font-cinzel text-xs tracking-[0.7em] text-[var(--color-accent-main)] uppercase mb-8 opacity-60">Archive</span>
@@ -271,19 +264,17 @@ export default function HomeView({ news, profile }: HomeViewProps) {
         <Marquee images={galleryImages} speed={35} />
       </section>
 
-      {/* --- 5. Latest Updates & Instagram (Connect Section) --- */}
-      <section className="relative w-full py-48 px-6 bg-black/20">
+      {/* --- 5. Connect Section --- */}
+      <section className="reveal-section relative w-full py-48 px-6 bg-black/20">
         <div className="max-w-[1200px] mx-auto text-center mb-24">
           <span className="block font-cinzel text-xs tracking-[0.6em] text-[var(--color-accent-main)] uppercase mb-10 opacity-60">Latest Updates</span>
-          <h2 className="font-cinzel text-4xl md:text-6xl tracking-[0.25em] flex items-center justify-center gap-8">
-            <InstagramIcon className="text-[var(--color-accent-main)]" size={50} />
-            Connect
+          <h2 className="reveal-title font-cinzel text-4xl md:text-6xl tracking-[0.25em] flex items-center justify-center gap-8">
+            <InstagramIcon className="text-[var(--color-accent-main)]" size={50} />Connect
           </h2>
         </div>
-
         <div className="news-grid max-w-[1600px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 px-4 overflow-hidden">
           {news.map((item, index) => (
-            <div key={index} className="news-card group relative aspect-square overflow-hidden cursor-pointer shadow-xl">
+            <div key={index} className="news-card group relative aspect-square overflow-hidden cursor-pointer shadow-xl rounded-sm border border-white/5">
               <Image src={item.img} alt={item.title} fill className="object-cover filter grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-2000 ease-out" sizes="(max-width: 768px) 50vw, 25vw" />
               <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 flex flex-col items-center justify-center pointer-events-none p-6">
                 <InstagramIcon className="text-[var(--color-accent-main)] mb-6" size={32} />
@@ -293,67 +284,31 @@ export default function HomeView({ news, profile }: HomeViewProps) {
             </div>
           ))}
         </div>
-
         <div className="mt-32 text-center">
-          <a href="https://www.instagram.com/sally_master/" target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-6 border border-[var(--color-accent-main)]/40 px-16 py-6 font-cinzel text-sm tracking-[0.5em] text-[var(--color-accent-main)] hover:bg-[var(--color-accent-main)] hover:text-black transition-all duration-1000 uppercase glass-panel">
-            Visit Instagram
-          </a>
+          <a href="https://www.instagram.com/sally_master/" target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-6 border border-[var(--color-accent-main)]/40 px-16 py-6 font-cinzel text-sm tracking-[0.5em] text-[var(--color-accent-main)] hover:bg-[var(--color-accent-main)] hover:text-black transition-all duration-1000 uppercase glass-panel">Visit Instagram</a>
         </div>
       </section>
 
-      {/* --- 6. Access Section (Restored Correct Info with Heavy Reveal) --- */}
-      <section id="access" className="access-reveal relative w-full py-40 md:py-80 px-6 bg-transparent border-t border-white/5 shadow-[inset_0_50px_150px_rgba(0,0,0,1)]">
+      {/* --- 6. Access Section (Heavy Unified Reveal) --- */}
+      <section id="access" className="reveal-section access-reveal relative w-full py-40 md:py-80 px-6 bg-transparent border-t border-white/5 shadow-[inset_0_50px_150px_rgba(0,0,0,1)]">
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-24 items-start">
-           <div className="md:sticky md:top-40">
+           <div className="reveal-content md:sticky md:top-40">
               <span className="block font-cinzel text-xs tracking-[0.6em] text-[var(--color-accent-main)] uppercase mb-10 opacity-60">Location</span>
-              <h2 className="font-cinzel text-5xl md:text-7xl tracking-[0.25em] mb-24 text-[var(--color-accent-main)] text-shadow-lg">Access</h2>
-              
-              <div className="font-shippori space-y-16">
-                <div className="flex flex-col gap-6">
-                   <span className="text-[var(--color-accent-main)] text-[10px] font-cinzel tracking-[0.5em] uppercase opacity-60">Address</span>
-                   <p className="text-2xl md:text-3xl text-gray-200 tracking-[0.2em] leading-relaxed font-bold">
-                      〒639-1160<br/>奈良県大和郡山市北郡山町137-1
-                   </p>
-                </div>
-                <div className="flex flex-col gap-6 border-y border-white/5 py-10">
-                   <span className="text-[var(--color-accent-main)] text-[10px] font-cinzel tracking-[0.5em] uppercase opacity-60">Opening Hours</span>
-                   <p className="text-2xl md:text-3xl text-gray-200 tracking-[0.2em] font-bold">
-                      19:00 - Last (月曜定休)
-                   </p>
-                </div>
-                <div className="flex flex-col gap-6">
-                   <span className="text-[var(--color-accent-main)] text-[10px] font-cinzel tracking-[0.5em] uppercase opacity-60">Contact</span>
-                   <p className="text-3xl md:text-4xl text-[var(--color-accent-main)] tracking-[0.1em] font-cinzel font-bold">
-                      0743-55-3001
-                   </p>
-                </div>
-                <div className="mt-20 pt-16">
-                   <a 
-                     href="https://maps.google.com/?q=Bar+Sally+大和郡山" 
-                     target="_blank" 
-                     rel="noopener noreferrer"
-                     className="group inline-flex items-center gap-10 text-[var(--color-accent-main)] hover:text-white transition-all"
-                   >
-                     <span className="font-cinzel tracking-[0.5em] text-sm uppercase">Open in Google Maps</span>
-                     <div className="relative">
-                        <svg width="32" height="32" className="w-8 h-8 transform group-hover:translate-x-6 transition-transform duration-1000" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
-                     </div>
-                   </a>
-                </div>
+              <h2 className="reveal-title font-cinzel text-5xl md:text-7xl tracking-[0.25em] mb-24 text-[var(--color-accent-main)] text-shadow-lg">Access</h2>
+              <div className="reveal-text font-shippori space-y-16">
+                <div className="flex flex-col gap-6"><span className="text-[var(--color-accent-main)] text-[10px] font-cinzel tracking-[0.5em] uppercase opacity-60">Address</span><p className="text-2xl md:text-3xl text-gray-200 tracking-[0.2em] leading-relaxed font-bold">〒639-1160<br/>奈良県大和郡山市北郡山町137-1</p></div>
+                <div className="flex flex-col gap-6 border-y border-white/5 py-10"><span className="text-[var(--color-accent-main)] text-[10px] font-cinzel tracking-[0.5em] uppercase opacity-60">Opening Hours</span><p className="text-2xl md:text-3xl text-gray-200 tracking-[0.2em] font-bold">19:00 - Last (月曜定休)</p></div>
+                <div className="flex flex-col gap-6"><span className="text-[var(--color-accent-main)] text-[10px] font-cinzel tracking-[0.5em] uppercase opacity-60">Contact</span><p className="text-3xl md:text-4xl text-[var(--color-accent-main)] tracking-[0.1em] font-cinzel font-bold">0743-55-3001</p></div>
+                <div className="mt-20 pt-16"><a href="https://maps.google.com/?q=Bar+Sally+%E5%A4%A7%E5%92%8C%E9%83%A1%E5%B1%B1" target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-10 text-[var(--color-accent-main)] hover:text-white transition-all"><span className="font-cinzel tracking-[0.5em] text-sm uppercase">Open in Google Maps</span><div className="relative"><svg width="32" height="32" className="w-8 h-8 transform group-hover:translate-x-6 transition-transform duration-1000" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg></div></a></div>
               </div>
            </div>
-
-           <div className="relative aspect-[3/4] w-full overflow-hidden rounded-sm group shadow-[0_0_100px_rgba(0,0,0,1)] border border-white/10">
-               <Image 
-                 src="/images/photo_image1_l.jpg" 
-                 alt="Bar Sally Entrance" 
-                 fill 
-                 className="object-cover opacity-40 grayscale group-hover:scale-110 transition-all duration-2000"
-                 sizes="(max-width: 768px) 100vw, 50vw"
-               />
-               <div className="absolute inset-0 border border-[var(--color-accent-main)]/10 group-hover:border-[var(--color-accent-main)]/30 transition-colors duration-1000 shadow-[inset_0_0_150px_rgba(0,0,0,0.9)]" />
+           <div className="flex justify-center md:justify-end">
+             <div className="reveal-image relative aspect-[3/4] w-full max-w-[500px] overflow-hidden rounded-sm group shadow-[0_0_100px_rgba(0,0,0,1)] border border-white/10">
+                <div className="reveal-image-inner relative w-full h-full scale-110">
+                   <Image src="/images/photo_image1_l.jpg" alt="Bar Sally Entrance" fill className="object-cover opacity-60 grayscale group-hover:scale-110 transition-all duration-2000" sizes="(max-width: 768px) 100vw, 50vw" />
+                </div>
+                <div className="absolute inset-0 border border-[var(--color-accent-main)]/10 group-hover:border-[var(--color-accent-main)]/30 transition-colors duration-1000 shadow-[inset_0_0_150px_rgba(0,0,0,0.9)]" />
+             </div>
            </div>
         </div>
       </section>
