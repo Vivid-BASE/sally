@@ -140,32 +140,31 @@ export default function HomeView({ news, profile }: HomeViewProps) {
       {/* --- Master Section --- */}
       <section className="relative w-full py-40 md:py-64 px-6 bg-[#080808]">
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-32 items-center">
-          <div className="relative h-[70vh] md:h-[100vh] w-full overflow-hidden rounded-sm order-1" ref={addToRefs}>
-             <div className="absolute inset-0 w-full h-[120%] -top-[10%]">
+          <div className="flex justify-center md:justify-start" ref={addToRefs}>
+             <div className="relative w-full max-w-[450px] aspect-square overflow-hidden rounded-sm group shadow-2xl border border-white/10">
                 <Image 
-                  src={profile.image?.url || "/images/1703_sally_sub-thumb-155xauto-13893.jpg"} 
-                  alt={profile.name} 
+                  src="/images/master.jpg" 
+                  alt="Bar Sally Master" 
                   fill 
-                  className="object-cover grayscale hover:grayscale-0 transition-all duration-2000 parallax-img"
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, 450px"
                 />
+             <div className="absolute inset-0 border border-[var(--color-accent-main)]/10 group-hover:border-[var(--color-accent-main)]/30 transition-colors duration-1000 pointer-events-none" />
              </div>
-             <div className="absolute inset-0 border border-[var(--color-accent-main)]/20 mix-blend-overlay pointer-events-none" />
           </div>
 
-          <div className="relative z-10 order-2" ref={addToRefs}>
-            <span className="block font-cinzel text-xs tracking-[0.5em] text-[var(--color-accent-main)] uppercase mb-8">The Custodian</span>
-            <h2 className="font-cinzel text-4xl md:text-6xl tracking-[0.2em] mb-16 leading-tight">
-               Master<br />
-               <span className="text-[var(--color-accent-main)]">{profile.name}</span>
-            </h2>
+          <div className="relative z-10" ref={addToRefs}>
+            <h2 className="font-cinzel text-4xl md:text-6xl tracking-[0.3em] mb-12 text-[var(--color-accent-main)] uppercase shadow-sm">Master</h2>
             
-            <div className="font-shippori text-base md:text-lg text-gray-300 leading-[2.5] tracking-widest space-y-10 whitespace-pre-wrap">
-              <p className="border-l-2 border-[var(--color-accent-main)]/40 pl-8 py-2">
-                {profile.role}
-              </p>
-              <div className="italic text-white/90">
-                {profile.bio.length > 150 ? `${profile.bio.substring(0, 150)}...` : profile.bio}
+            <div className="font-noto-serif font-bold space-y-8 text-shadow-sm">
+              <h3 className="text-3xl md:text-4xl text-white tracking-[0.1em] mb-4">新田 豊 サリー</h3>
+              <div className="text-base md:text-lg text-gray-300 leading-loose tracking-widest space-y-4">
+                <p className="border-l-2 border-[var(--color-accent-main)] pl-6">
+                  奈良繋ぎ人.ブランドプロデューサー
+                </p>
+                <p className="pl-6">
+                  ご縁ジニア/奈良のヒト.モノ.コトおまかせください！
+                </p>
               </div>
             </div>
 
