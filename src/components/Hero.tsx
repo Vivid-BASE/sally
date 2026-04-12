@@ -36,6 +36,7 @@ export default function Hero() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Scale down and fade out hero on scroll
+      const isMobile = window.innerWidth < 768;
       gsap.to(containerRef.current, {
         scrollTrigger: {
           trigger: containerRef.current,
@@ -45,7 +46,8 @@ export default function Hero() {
         },
         y: 150,
         opacity: 0,
-        filter: "blur(20px)",
+        // Disable expensive blur on mobile for smooth scrolling
+        filter: isMobile ? "none" : "blur(20px)",
       });
 
       // Logo Sweep Effect (Entrance)
