@@ -190,32 +190,35 @@ export default function HomeView({ news, profile }: HomeViewProps) {
       </section>
 
       {/* --- 2. Menu Section --- */}
-      <section id="menu" className="reveal-section reverse relative w-full py-40 md:py-72 px-6 overflow-hidden bg-transparent border-b border-white/5">
+      <section id="menu" className="reveal-section relative w-full py-40 md:py-72 px-6 overflow-hidden bg-transparent border-b border-white/5">
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-32 items-center text-shadow-sm">
-          {/* Image Left */}
-          <div className="order-1 flex justify-center md:justify-start">
-            <div className="reveal-image relative aspect-[4/3] w-full max-w-[600px] overflow-hidden rounded-sm group shadow-[0_0_100px_rgba(0,0,0,1)] border border-white/10">
-               <div className="reveal-image-inner relative w-full h-full scale-110">
-                  <Image src="/images/curry/curry.jpg" alt="Nara Shikanai Curry" fill className="object-cover" sizes="(max-width: 768px) 100vw, 600px" />
-               </div>
-               <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-1000" />
-            </div>
-          </div>
-          {/* Text Right */}
-          <div className="reveal-content order-2">
-             <span className="block font-cinzel text-xs tracking-[0.6em] text-[var(--color-accent-main)] uppercase mb-6 opacity-70">Signature Selection</span>
-             <h2 className="reveal-title font-cinzel text-5xl md:text-7xl tracking-[0.25em] mb-12 text-shadow-lg">Menu</h2>
-             <h3 className="reveal-title font-shippori text-3xl md:text-4xl tracking-[0.2em] text-[var(--color-accent-main)] mb-12">Nara Shikanai Curry</h3>
-             <div className="reveal-text font-shippori text-base md:text-lg text-gray-300 leading-[2.5] tracking-widest text-justify">
-                <p>
-                  奈良のカレーグランプリでチャンピオンに輝いた逸品。<br />
-                  バーならではのこだわりが詰まった、お酒の締めにも最適な味わいです。<br />
-                  スパイスの香りと深いコクが、夜の余韻をさらに深めます。
-                </p>
+          {/* Text Left */}
+          <div className="reveal-content order-2 md:order-1">
+             <h2 className="reveal-title font-cinzel text-5xl md:text-7xl tracking-[0.25em] mb-12 text-shadow-lg text-[var(--color-accent-main)]">Menu</h2>
+             <div className="reveal-text font-shippori text-base md:text-2xl text-gray-200 leading-[2.5] tracking-[0.15em]">
+                <div className="space-y-4">
+                  <p className="flex items-center gap-6">
+                    <span className="text-[var(--color-accent-main)] text-sm font-cinzel tracking-widest uppercase opacity-60">Night</span>
+                    <span>1,500円～</span>
+                  </p>
+                  <p className="flex flex-col gap-2 pt-8">
+                    <span className="text-[var(--color-accent-main)] text-sm font-cinzel tracking-widest uppercase opacity-60 mb-2">Table Charge</span>
+                    <span className="text-lg md:text-xl">男性 1,000円 / 女性 500円</span>
+                  </p>
+                </div>
                 <div className="mt-20">
                   <Link href="/menu" className="inline-block border border-[var(--color-accent-main)]/50 hover:border-[var(--color-accent-main)] px-16 py-6 font-cinzel text-sm tracking-[0.4em] text-[var(--color-accent-main)] hover:bg-[var(--color-accent-main)] hover:text-black transition-all duration-1000 uppercase glass-panel shadow-xl">Explore Full Menu</Link>
                 </div>
              </div>
+          </div>
+          {/* Image Right */}
+          <div className="order-1 md:order-2 flex justify-center md:justify-end">
+            <div className="reveal-image relative aspect-[3/4] w-full max-w-[500px] overflow-hidden rounded-sm group shadow-[0_0_100px_rgba(0,0,0,1)] border border-white/10">
+               <div className="reveal-image-inner relative w-full h-full scale-110">
+                  <Image src="/images/menu.jpg" alt="Bar Sally Menu" fill className="object-cover" sizes="(max-width: 768px) 100vw, 500px" />
+               </div>
+               <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-1000" />
+            </div>
           </div>
         </div>
       </section>
