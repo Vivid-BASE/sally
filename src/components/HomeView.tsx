@@ -166,17 +166,10 @@ export default function HomeView({ news, profile }: HomeViewProps) {
       <Hero />
 
       {/* --- 1. Concept Section --- */}
-      <section className="reveal-section relative w-full py-40 md:py-72 px-6 overflow-hidden border-b border-white/5 bg-transparent">
+      <section id="concept" className="reveal-section reverse relative w-full py-40 md:py-72 px-6 overflow-hidden border-b border-white/5 bg-transparent">
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-32 items-center">
-          <div className="reveal-content order-2 md:order-1 relative z-10">
-            <h2 className="reveal-title font-cinzel text-5xl md:text-7xl tracking-[0.35em] mb-16 text-[var(--color-accent-main)] uppercase text-shadow-lg">Concept</h2>
-            <div className="reveal-text font-noto-serif font-bold text-base md:text-lg text-white leading-loose md:leading-[2.5] tracking-wide space-y-10 break-keep text-shadow-md">
-              <p>1978年の創業以来、大和郡山の人々に愛され続けてきた Bar Sally。</p>
-              <p>奈良の木材をふんだんに使用した、温かく重厚な空間。<br className="hidden md:block" />そこはまるで、古き良き時代から時が止まったかのような、大人のためのサンクチュアリ。</p>
-              <p>「人とのつながり」と「出会い」を大切に。<br className="hidden md:block" />今宵も最高の一杯をご用意して、皆様のお越しをお待ちしております。</p>
-            </div>
-          </div>
-          <div className="order-1 md:order-2 flex justify-center md:justify-end">
+          {/* Image Left */}
+          <div className="order-1 flex justify-center md:justify-start">
             <div className="reveal-image relative w-full max-w-[500px] aspect-square overflow-hidden rounded-sm group shadow-[0_0_80px_rgba(0,0,0,0.8)] border border-white/10">
                <div className="reveal-image-inner relative w-full h-full scale-110">
                   <Image src="/images/bar/CONCEPT.jpg" alt="Bar Sally Concept" fill className="object-cover" sizes="(max-width: 768px) 100vw, 500px" />
@@ -184,11 +177,51 @@ export default function HomeView({ news, profile }: HomeViewProps) {
                <div className="absolute inset-0 border border-[var(--color-accent-main)]/10 group-hover:border-[var(--color-accent-main)]/30 transition-colors duration-1000 pointer-events-none" />
             </div>
           </div>
+          {/* Text Right */}
+          <div className="reveal-content order-2 relative z-10">
+            <h2 className="reveal-title font-cinzel text-5xl md:text-7xl tracking-[0.35em] mb-16 text-[var(--color-accent-main)] uppercase text-shadow-lg">Concept</h2>
+            <div className="reveal-text font-noto-serif font-bold text-base md:text-lg text-white leading-loose md:leading-[2.5] tracking-wide space-y-10 break-keep text-shadow-md">
+              <p>1978年の創業以来、大和郡山の人々に愛され続けてきた Bar Sally。</p>
+              <p>奈良の木材をふんだんに使用した、温かく重厚な空間。<br className="hidden md:block" />そこはまるで、古き良き時代から時が止まったかのような、大人のためのサンクチュアリ。</p>
+              <p>「人とのつながり」と「出会い」を大切に。<br className="hidden md:block" />今宵も最高の一杯をご用意して、皆様のお越しをお待ちしております。</p>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* --- 2. Master Section (Symmetric Reveal) --- */}
-      <section className="reveal-section reverse relative w-full py-40 md:py-72 px-6 bg-black/10 backdrop-blur-md border-y border-white/5">
+      {/* --- 2. Menu Section --- */}
+      <section id="menu" className="reveal-section reverse relative w-full py-40 md:py-72 px-6 overflow-hidden bg-transparent border-b border-white/5">
+        <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-32 items-center text-shadow-sm">
+          {/* Image Left */}
+          <div className="order-1 flex justify-center md:justify-start">
+            <div className="reveal-image relative aspect-[4/3] w-full max-w-[600px] overflow-hidden rounded-sm group shadow-[0_0_100px_rgba(0,0,0,1)] border border-white/10">
+               <div className="reveal-image-inner relative w-full h-full scale-110">
+                  <Image src="/images/curry/curry.jpg" alt="Nara Shikanai Curry" fill className="object-cover" sizes="(max-width: 768px) 100vw, 600px" />
+               </div>
+               <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-1000" />
+            </div>
+          </div>
+          {/* Text Right */}
+          <div className="reveal-content order-2">
+             <span className="block font-cinzel text-xs tracking-[0.6em] text-[var(--color-accent-main)] uppercase mb-6 opacity-70">Signature Selection</span>
+             <h2 className="reveal-title font-cinzel text-5xl md:text-7xl tracking-[0.25em] mb-12 text-shadow-lg">Menu</h2>
+             <h3 className="reveal-title font-shippori text-3xl md:text-4xl tracking-[0.2em] text-[var(--color-accent-main)] mb-12">Nara Shikanai Curry</h3>
+             <div className="reveal-text font-shippori text-base md:text-lg text-gray-300 leading-[2.5] tracking-widest text-justify">
+                <p>
+                  奈良のカレーグランプリでチャンピオンに輝いた逸品。<br />
+                  バーならではのこだわりが詰まった、お酒の締めにも最適な味わいです。<br />
+                  スパイスの香りと深いコクが、夜の余韻をさらに深めます。
+                </p>
+                <div className="mt-20">
+                  <Link href="/menu" className="inline-block border border-[var(--color-accent-main)]/50 hover:border-[var(--color-accent-main)] px-16 py-6 font-cinzel text-sm tracking-[0.4em] text-[var(--color-accent-main)] hover:bg-[var(--color-accent-main)] hover:text-black transition-all duration-1000 uppercase glass-panel shadow-xl">Explore Full Menu</Link>
+                </div>
+             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- 3. Master Section --- */}
+      <section id="master" className="reveal-section reverse relative w-full py-40 md:py-72 px-6 bg-black/10 backdrop-blur-md border-y border-white/5">
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-32 items-center">
           <div className="flex justify-center md:justify-start">
              <div className="reveal-image relative w-full max-w-[500px] aspect-square overflow-hidden rounded-sm group shadow-[0_0_80px_rgba(0,0,0,0.8)] border border-white/10">
@@ -219,37 +252,6 @@ export default function HomeView({ news, profile }: HomeViewProps) {
                     </svg>
                   </Link>
                </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* --- 3. Special Menu Section --- */}
-      <section className="reveal-section relative w-full py-40 md:py-72 px-6 overflow-hidden bg-transparent">
-        <div className="max-w-[1200px] mx-auto text-center mb-36">
-            <span className="block font-cinzel text-xs tracking-[0.6em] text-[var(--color-accent-main)] uppercase mb-10 opacity-70">Signature Selection</span>
-            <h2 className="reveal-title font-cinzel text-5xl md:text-7xl tracking-[0.25em] text-shadow-lg">Special Menu</h2>
-        </div>
-        <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-32 items-center text-shadow-sm">
-          <div className="reveal-content order-2 md:order-1">
-             <h3 className="reveal-title font-shippori text-4xl md:text-5xl tracking-[0.2em] text-[var(--color-accent-main)] mb-12">Nara Shikanai Curry</h3>
-             <div className="reveal-text font-shippori text-base md:text-lg text-gray-300 leading-[3] tracking-widest text-justify">
-                <p>
-                  奈良のカレーグランプリでチャンピオンに輝いた逸品。<br />
-                  バーならではのこだわりが詰まった、お酒の締めにも最適な味わいです。<br />
-                  スパイスの香りと深いコクが、夜の余韻をさらに深めます。
-                </p>
-                <div className="mt-20">
-                  <Link href="/menu" className="inline-block border border-[var(--color-accent-main)]/50 hover:border-[var(--color-accent-main)] px-16 py-6 font-cinzel text-sm tracking-[0.4em] text-[var(--color-accent-main)] hover:bg-[var(--color-accent-main)] hover:text-black transition-all duration-1000 uppercase glass-panel shadow-xl">Explore Full Menu</Link>
-                </div>
-             </div>
-          </div>
-          <div className="order-1 md:order-2 flex justify-center md:justify-end">
-            <div className="reveal-image relative aspect-[4/3] w-full max-w-[600px] overflow-hidden rounded-sm group shadow-[0_0_100px_rgba(0,0,0,1)] border border-white/10">
-               <div className="reveal-image-inner relative w-full h-full scale-110">
-                  <Image src="/images/curry/curry.jpg" alt="Nara Shikanai Curry" fill className="object-cover" sizes="(max-width: 768px) 100vw, 600px" />
-               </div>
-               <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-1000" />
             </div>
           </div>
         </div>

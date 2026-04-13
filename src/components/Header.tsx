@@ -8,9 +8,11 @@ import { Menu, X } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 
 const navLinks = [
-  { href: '/menu', label: 'Menu & Info' },
-  { href: '/master', label: 'Master' },
-  { href: '/archives', label: 'Archives' },
+  { href: '/#concept', label: 'Concept' },
+  { href: '/menu', label: 'Menu' },
+  { href: '/#master', label: 'Master' },
+  { href: '/#gallery', label: 'Gallery' },
+  { href: '/#access', label: 'Access' },
 ];
 
 export default function Header() {
