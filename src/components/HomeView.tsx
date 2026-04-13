@@ -216,8 +216,8 @@ export default function HomeView({ news, profile }: HomeViewProps) {
             <div className="reveal-image relative aspect-[3/4] w-full max-w-[500px] overflow-hidden rounded-sm group shadow-[0_0_100px_rgba(0,0,0,1)] border border-white/10">
                <div className="reveal-image-inner relative w-full h-full scale-110">
                   <Image 
-                    src="/images/bar/CONCEPT.jpg" 
-                    alt="Bar Sally Menu Test" 
+                    src="/images/bar/menu.jpg" 
+                    alt="Bar Sally Menu" 
                     fill 
                     className="object-cover" 
                     sizes="(max-width: 768px) 100vw, 500px"
