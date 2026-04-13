@@ -213,8 +213,8 @@ export default function HomeView({ news, profile }: HomeViewProps) {
           </div>
           {/* Image Right */}
           <div className="order-1 md:order-2 flex justify-center md:justify-end">
-            <div className="reveal-image relative aspect-[3/4] w-full max-w-[500px] overflow-hidden rounded-sm group shadow-[0_0_100px_rgba(0,0,0,1)] border border-white/10">
-               <div className="reveal-image-inner relative w-full h-full scale-110">
+            <div className="reveal-image relative aspect-square w-full max-w-[500px] overflow-hidden rounded-sm group shadow-[0_0_100px_rgba(0,0,0,1)] border border-white/10">
+               <div className="reveal-image-inner relative w-full h-full">
                   <Image 
                     src="/images/bar/menu.jpg" 
                     alt="Bar Sally Menu" 
