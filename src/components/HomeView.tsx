@@ -283,7 +283,7 @@ export default function HomeView({ news, profile }: HomeViewProps) {
           {(galleryImages && galleryImages.length > 0 ? galleryImages : news).slice(0, 8).map((item, index) => (
             <div key={index} className="news-card group relative aspect-square overflow-hidden cursor-pointer rounded-sm border border-white/5 bg-white/5">
               <Image 
-                src={item.url || item.img || "/images/photo_image1_l.jpg"} 
+                src={typeof item === 'string' ? item : item.img} 
                 alt="Bar Sally Archive" 
                 fill 
                 className="object-cover filter grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-2000 ease-out" 
