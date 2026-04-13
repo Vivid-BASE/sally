@@ -267,24 +267,31 @@ export default function HomeView({ news, profile }: HomeViewProps) {
         </div>
       </section>
 
-      {/* --- 4. Gallery (Instagram Integrated) --- */}
-      <section id="gallery" className="reveal-section relative w-full py-40 md:py-64 bg-transparent overflow-hidden border-y border-white/5">
+      {/* --- 4. Gallery Marquee (Restored) --- */}
+      <section id="gallery" className="relative w-full py-40 bg-transparent overflow-hidden border-t border-white/5 shadow-[inset_0_0_100px_rgba(0,0,0,0.9)]">
         <div className="max-w-[1200px] mx-auto text-center mb-24 px-6">
-          <span className="block font-cinzel text-xs tracking-[0.7em] text-[var(--color-accent-main)] uppercase mb-8 opacity-60">Archive</span>
-          <h2 className="reveal-title font-cinzel text-4xl md:text-6xl tracking-[0.35em] text-shadow-lg text-[var(--color-accent-main)] uppercase">Gallery</h2>
-          <div className="mt-8 flex items-center justify-center gap-4 opacity-50">
-            <div className="h-[1px] w-12 bg-white/30" />
-            <span className="font-cinzel text-sm tracking-[0.4em]">Instagram</span>
-            <div className="h-[1px] w-12 bg-white/30" />
-          </div>
+            <span className="block font-cinzel text-xs tracking-[0.7em] text-[var(--color-accent-main)] uppercase mb-8 opacity-60">Archive</span>
+            <h2 className="font-cinzel text-4xl md:text-5xl tracking-[0.35em] text-shadow-lg text-[var(--color-accent-main)] uppercase">Gallery</h2>
+        </div>
+        <Marquee images={galleryImages} speed={35} />
+      </section>
+
+      {/* --- 5. Instagram Integrated Grid (New Section) --- */}
+      <section id="instagram" className="reveal-section relative w-full py-40 md:py-64 bg-transparent overflow-hidden border-t border-white/5">
+        <div className="max-w-[1200px] mx-auto text-center mb-24 px-6">
+          <span className="block font-cinzel text-xs tracking-[0.7em] text-[var(--color-accent-main)] uppercase mb-8 opacity-60">Social</span>
+          <h2 className="reveal-title font-cinzel text-4xl md:text-6xl tracking-[0.35em] text-shadow-lg flex items-center justify-center gap-8">
+            <InstagramIcon className="text-[var(--color-accent-main)]" size={50} />Instagram
+          </h2>
+          <p className="mt-8 font-cinzel text-sm tracking-[0.4em] text-white/50 lowercase">@sally_master</p>
         </div>
 
         <div className="max-w-[1400px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 px-4">
           {(galleryImages && galleryImages.length > 0 ? galleryImages : news).slice(0, 8).map((item, index) => (
-            <div key={index} className="news-card group relative aspect-square overflow-hidden cursor-pointer rounded-sm border border-white/5 bg-white/5">
+            <div key={index} className="news-card group relative aspect-square overflow-hidden cursor-pointer rounded-sm border border-white/5 bg-white/5 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)]">
               <Image 
                 src={typeof item === 'string' ? item : item.img} 
-                alt="Bar Sally Archive" 
+                alt="Bar Sally Instagram" 
                 fill 
                 className="object-cover filter grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-2000 ease-out" 
                 sizes="(max-width: 768px) 50vw, 25vw" 
@@ -309,7 +316,7 @@ export default function HomeView({ news, profile }: HomeViewProps) {
             rel="noopener noreferrer" 
             className="group inline-flex items-center gap-6 border border-[var(--color-accent-main)]/40 hover:border-[var(--color-accent-main)] px-16 py-6 font-cinzel text-sm tracking-[0.5em] text-[var(--color-accent-main)] hover:bg-[var(--color-accent-main)] hover:text-black transition-all duration-1000 uppercase glass-panel shadow-2xl"
           >
-            Follow @sally_master
+            Connect on Instagram
           </a>
         </div>
       </section>
