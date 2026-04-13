@@ -190,7 +190,7 @@ export default function HomeView({ news, profile }: HomeViewProps) {
       </section>
 
       {/* --- 2. Menu Section --- */}
-      <section id="menu" className="reveal-section relative w-full py-40 md:py-72 px-6 overflow-hidden bg-transparent border-b border-white/5">
+      <section id="menu" className="reveal-section reverse relative w-full py-40 md:py-72 px-6 overflow-hidden bg-transparent border-b border-white/5">
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-32 items-center text-shadow-sm">
           {/* Text Left */}
           <div className="reveal-content order-2 md:order-1">
@@ -215,7 +215,14 @@ export default function HomeView({ news, profile }: HomeViewProps) {
           <div className="order-1 md:order-2 flex justify-center md:justify-end">
             <div className="reveal-image relative aspect-[3/4] w-full max-w-[500px] overflow-hidden rounded-sm group shadow-[0_0_100px_rgba(0,0,0,1)] border border-white/10">
                <div className="reveal-image-inner relative w-full h-full scale-110">
-                  <Image src="/images/menu.jpg" alt="Bar Sally Menu" fill className="object-cover" sizes="(max-width: 768px) 100vw, 500px" />
+                  <Image 
+                    src="/images/menu.jpg" 
+                    alt="Bar Sally Menu" 
+                    fill 
+                    className="object-cover" 
+                    sizes="(max-width: 768px) 100vw, 500px"
+                    priority
+                  />
                </div>
                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-1000" />
             </div>
