@@ -316,14 +316,14 @@ export default function HomeView({ news, profile }: HomeViewProps) {
            <div className="flex justify-center md:justify-end h-[450px] md:h-[600px] w-full">
              <div className="reveal-image relative w-full h-full overflow-hidden rounded-sm shadow-[0_0_100px_rgba(0,0,0,1)] border border-white/10">
                 <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.1481105307!2d135.78018287635674!3d34.65389658514934!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x600124ad996b5791%3A0xc6cb557e059f0f90!2sBar%20Sally!5e0!3m2!1sja!2sjp!4v1713245468721!5m2!1sja!2sjp" 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3283.475!2d135.7788!3d34.6190!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6001375d315197ed%3A0x633d749437b019b8!2sBar%20Sally!5e0!3m2!1sja!2sjp!4v1713271200000!5m2!1sja!2sjp" 
                   width="100%" 
                   height="100%" 
                   style={{ border: 0 }} 
                   allowFullScreen={true} 
                   loading="lazy" 
                   referrerPolicy="no-referrer-when-downgrade"
-                  className="opacity-90 grayscale-[0.2]"
+                  className="w-full h-full"
                 />
                 {/* Visual frame */}
                 <div className="absolute inset-0 border border-white/10 pointer-events-none" />
