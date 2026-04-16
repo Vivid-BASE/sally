@@ -11,7 +11,7 @@ export interface BeholdResponse {
   posts: InstagramPost[];
 }
 
-const FEED_ID = process.env.NEXT_PUBLIC_BEHOLD_FEED_ID;
+const FEED_ID = process.env.NEXT_PUBLIC_BEHOLD_FEED_ID || "mNKKgiOUXHZ5k4QOJiew";
 
 export async function fetchInstagramFeed(): Promise<InstagramPost[]> {
   if (!FEED_ID) {
