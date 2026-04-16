@@ -60,6 +60,8 @@ export default function InstagramFeed({ posts }: InstagramFeedProps) {
     return () => ctx.revert();
   }, [posts]);
 
+  const feedId = process.env.NEXT_PUBLIC_BEHOLD_FEED_ID;
+
   if (posts.length === 0 && !showFallback) {
     return (
       <div className="flex flex-col items-center justify-center py-20 opacity-50">
@@ -70,7 +72,17 @@ export default function InstagramFeed({ posts }: InstagramFeedProps) {
   }
 
   if (showFallback || posts.length === 0) {
-    const feedId = process.env.NEXT_PUBLIC_BEHOLD_FEED_ID;
+    if (!feedId) {
+      return (
+        <div className="flex flex-col items-center justify-center py-20 px-6 text-center">
+          <InstagramIcon className="mb-6 text-[var(--color-accent-main)] opacity-50" size={48} />
+          <p className="font-cinzel tracking-[0.2em] text-xs text-white/40 mb-2">Connect your Instagram Feed</p>
+          <p className="text-[10px] text-white/30 font-shippori leading-relaxed max-w-xs">
+            NEXT_PUBLIC_BEHOLD_FEED_ID が設定されていません。管理画面で設定後、再デプロイしてください。
+          </p>
+        </div>
+      );
+    }
     return (
       <div className="w-full px-4 min-h-[400px] relative">
         <Script 
