@@ -307,19 +307,28 @@ export default function HomeView({ news, profile }: HomeViewProps) {
            <div className="reveal-content md:sticky md:top-40">
               <span className="block font-cinzel text-xs tracking-[0.6em] text-[var(--color-accent-main)] uppercase mb-10 opacity-60">Location</span>
               <h2 className="reveal-title font-cinzel text-5xl md:text-7xl tracking-[0.25em] mb-24 text-[var(--color-accent-main)] text-shadow-lg">Access</h2>
-              <div className="reveal-text font-shippori space-y-16">
-                <div className="flex flex-col gap-6"><span className="text-[var(--color-accent-main)] text-[10px] font-cinzel tracking-[0.5em] uppercase opacity-60">Address</span><p className="text-2xl md:text-3xl text-gray-200 tracking-[0.2em] leading-relaxed font-bold">〒639-1160<br/>奈良県大和郡山市北郡山町137-1</p></div>
-                <div className="flex flex-col gap-6 border-y border-white/5 py-10"><span className="text-[var(--color-accent-main)] text-[10px] font-cinzel tracking-[0.5em] uppercase opacity-60">Opening Hours</span><p className="text-2xl md:text-3xl text-gray-200 tracking-[0.2em] font-bold">19:00 - Last (月曜定休)</p></div>
-                <div className="flex flex-col gap-6"><span className="text-[var(--color-accent-main)] text-[10px] font-cinzel tracking-[0.5em] uppercase opacity-60">Contact</span><p className="text-3xl md:text-4xl text-[var(--color-accent-main)] tracking-[0.1em] font-cinzel font-bold">0743-55-3001</p></div>
+              <div className="reveal-text font-shippori space-y-10">
+                <div className="flex flex-col gap-4"><span className="text-white text-[10px] font-cinzel tracking-[0.5em] uppercase opacity-60">Address</span><p className="text-xl md:text-2xl text-gray-200 tracking-[0.15em] leading-relaxed font-bold">〒639-1160<br/>奈良県大和郡山市北郡山町137-1</p></div>
+                <div className="flex flex-col gap-4 border-y border-white/5 py-8"><span className="text-white text-[10px] font-cinzel tracking-[0.5em] uppercase opacity-60">Opening Hours</span><p className="text-xl md:text-2xl text-gray-200 tracking-[0.15em] font-bold">19:00 - Last (月曜定休)</p></div>
+                <div className="flex flex-col gap-4"><span className="text-white text-[10px] font-cinzel tracking-[0.5em] uppercase opacity-60">Contact</span><p className="text-2xl md:text-3xl text-[var(--color-accent-main)] tracking-[0.1em] font-cinzel font-bold">0743-55-3001</p></div>
                 <div className="mt-20 pt-16"><a href="https://maps.google.com/?q=Bar+Sally+%E5%A4%A7%E5%92%8C%E9%83%A1%E5%B1%B1" target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-10 text-[var(--color-accent-main)] hover:text-white transition-all"><span className="font-cinzel tracking-[0.5em] text-sm uppercase">Open in Google Maps</span><div className="relative"><svg width="32" height="32" className="w-8 h-8 transform group-hover:translate-x-6 transition-transform duration-1000" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg></div></a></div>
               </div>
            </div>
-           <div className="flex justify-center md:justify-end">
-             <div className="reveal-image relative aspect-[3/4] w-full max-w-[500px] overflow-hidden rounded-sm group shadow-[0_0_100px_rgba(0,0,0,1)] border border-white/10">
-                <div className="reveal-image-inner relative w-full h-full scale-110">
-                   <Image src="/images/photo_image1_l.jpg" alt="Bar Sally Entrance" fill className="object-cover opacity-60 grayscale group-hover:scale-110 transition-all duration-2000" sizes="(max-width: 768px) 100vw, 50vw" />
-                </div>
-                <div className="absolute inset-0 border border-[var(--color-accent-main)]/10 group-hover:border-[var(--color-accent-main)]/30 transition-colors duration-1000 shadow-[inset_0_0_150px_rgba(0,0,0,0.9)]" />
+           <div className="flex justify-center md:justify-end h-[450px] md:h-[600px] w-full">
+             <div className="reveal-image relative w-full h-full overflow-hidden rounded-sm shadow-[0_0_100px_rgba(0,0,0,1)] border border-white/10">
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.1481105307!2d135.78018287635674!3d34.65389658514934!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x600124ad996b5791%3A0xc6cb557e059f0f90!2sBar%20Sally!5e0!3m2!1sja!2sjp!4v1713245468721!5m2!1sja!2sjp" 
+                  width="100%" 
+                  height="100%" 
+                  style={{ border: 0 }} 
+                  allowFullScreen={true} 
+                  loading="lazy" 
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="grayscale invert-[0.9] contrast-[1.2] opacity-80"
+                />
+                {/* Visual frame */}
+                <div className="absolute inset-0 border border-white/10 pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
              </div>
            </div>
         </div>
