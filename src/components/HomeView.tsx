@@ -17,6 +17,20 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+// galleryImages are used as a fallback when the Instagram feed is unavailable or loading
+const staticGalleryImages = [
+  "/images/photo_image3_l.jpg",
+  "/images/photo_image1_l.jpg",
+  "/images/320x320_rect_6e44d35aa2dffcc94b4d7b787e49f124.jpg",
+  "/images/79155427_3106792099350824_8629136699835809792_n.jpg",
+  "/images/117236925_3744322492264445_8705478074068095151_n.jpg",
+  "/images/117335765_3744322478931113_3807033421426319937_n.jpg",
+  "/images/72691422_2987949857901716_5146671822036533248_n.jpg",
+  "/images/101195328_3540812025948827_5725311338234773504_n.jpg",
+  "/images/117040332_3744323535597674_8103100777321416032_n.jpg",
+  "/images/99299332_3540811972615499_7490206605246464000_n.jpg",
+];
+
 type HomeViewProps = {
   news: {
     img: string;
@@ -264,11 +278,7 @@ export default function HomeView({ news, profile }: HomeViewProps) {
             <h2 className="font-cinzel text-4xl md:text-5xl tracking-[0.35em] text-shadow-lg text-[var(--color-accent-main)] uppercase">Gallery</h2>
         </div>
         <Marquee 
-          images={instaPosts.length > 0 ? instaPosts.map(p => p.mediaUrl) : [
-            "/images/photo_image3_l.jpg",
-            "/images/photo_image4_l.jpg",
-            "/images/photo_image2_l.jpg"
-          ]} 
+          images={instaPosts.length > 0 ? instaPosts.map(p => p.mediaUrl) : staticGalleryImages} 
           speed={35} 
         />
       </section>
