@@ -33,7 +33,8 @@ const InstagramIcon = ({ className = "", size = 24 }: { className?: string; size
 
 const galleryImages = [
   "/images/photo_image3_l.jpg",
-  "/images/photo_image4_l.jpg",
+  "/images/top/photo_image4_l.jpg",
+  "/images/bar/LINE_ALBUM_sally宣材_260410_12.jpg",
   "/images/320x320_rect_6e44d35aa2dffcc94b4d7b787e49f124.jpg",
   "/images/79155427_3106792099350824_8629136699835809792_n.jpg",
   "/images/117236925_3744322492264445_8705478074068095151_n.jpg",
