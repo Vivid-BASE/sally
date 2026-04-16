@@ -29,6 +29,7 @@ export default function Marquee({ images, speed = 40, reverse = false }: Marquee
               fill
               className="object-cover transition-transform duration-700 group-hover:scale-110 grayscale-[0.2] group-hover:grayscale-0"
               sizes="(max-width: 768px) 300px, 450px"
+              unoptimized={true}
             />
             <div className="absolute inset-0 border border-white/5 pointer-events-none" />
           </div>
