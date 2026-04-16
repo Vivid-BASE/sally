@@ -9,6 +9,9 @@ import { ProfileContent } from "@/lib/microcms";
 import Hero from "@/components/Hero";
 import Marquee from "@/components/Marquee";
 import AestheticBackground from "./AestheticBackground";
+import InstagramFeed from "./InstagramFeed";
+import { fetchInstagramFeed, InstagramPost } from "@/lib/instagram";
+import { useState, useEffect } from "react";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -47,6 +50,15 @@ const galleryImages = [
 
 export default function HomeView({ news, profile }: HomeViewProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [instaPosts, setInstaPosts] = useState<InstagramPost[]>([]);
+
+  useEffect(() => {
+    const loadInsta = async () => {
+      const posts = await fetchInstagramFeed();
+      setInstaPosts(posts);
+    };
+    loadInsta();
+  }, []);
   
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -277,49 +289,16 @@ export default function HomeView({ news, profile }: HomeViewProps) {
         <Marquee images={galleryImages} speed={35} />
       </section>
 
-      {/* --- 5. Instagram Integrated Grid (New Section) --- */}
       <section id="instagram" className="reveal-section relative w-full py-40 md:py-64 bg-transparent overflow-hidden border-t border-white/5">
         <div className="max-w-[1200px] mx-auto text-center mb-24 px-6">
           <span className="block font-cinzel text-xs tracking-[0.7em] text-[var(--color-accent-main)] uppercase mb-8 opacity-60">Social</span>
           <h2 className="reveal-title font-cinzel text-4xl md:text-6xl tracking-[0.35em] text-shadow-lg flex items-center justify-center gap-8">
-            <InstagramIcon className="text-[var(--color-accent-main)]" size={50} />Instagram
+            Instagram
           </h2>
           <p className="mt-8 font-cinzel text-sm tracking-[0.4em] text-white/50 lowercase">@sally_master</p>
         </div>
 
-        <div className="max-w-[1400px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 px-4">
-          {(galleryImages && galleryImages.length > 0 ? galleryImages : news).slice(0, 8).map((item, index) => (
-            <div key={index} className="news-card group relative aspect-square overflow-hidden cursor-pointer rounded-sm border border-white/5 bg-white/5 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)]">
-              <Image 
-                src={typeof item === 'string' ? item : item.img} 
-                alt="Bar Sally Instagram" 
-                fill 
-                className="object-cover filter grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-2000 ease-out" 
-                sizes="(max-width: 768px) 50vw, 25vw" 
-              />
-              <a 
-                href="https://www.instagram.com/sally_master/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 flex flex-col items-center justify-center p-6 z-20"
-              >
-                <InstagramIcon className="text-[var(--color-accent-main)] mb-6" size={32} />
-                <span className="font-cinzel tracking-[0.3em] text-[10px] text-[var(--color-accent-main)] uppercase mb-3">View on Instagram</span>
-              </a>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-24 text-center">
-          <a 
-            href="https://www.instagram.com/sally_master/" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="group inline-flex items-center gap-6 border border-[var(--color-accent-main)]/40 hover:border-[var(--color-accent-main)] px-16 py-6 font-cinzel text-sm tracking-[0.5em] text-[var(--color-accent-main)] hover:bg-[var(--color-accent-main)] hover:text-black transition-all duration-1000 uppercase glass-panel shadow-2xl"
-          >
-            Connect on Instagram
-          </a>
-        </div>
+        <InstagramFeed posts={instaPosts} />
       </section>
 
       {/* --- 6. Access Section (Heavy Unified Reveal) --- */}
