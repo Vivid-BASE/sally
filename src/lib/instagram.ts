@@ -4,6 +4,7 @@ export interface InstagramPost {
   permalink: string;
   caption?: string;
   mediaType: 'IMAGE' | 'VIDEO' | 'CAROUSEL_ALBUM';
+  thumbnailUrl?: string;
   timestamp: string;
 }
 

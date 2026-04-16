@@ -44,6 +44,11 @@ export default function HomeView({ news, profile }: HomeViewProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [instaPosts, setInstaPosts] = useState<InstagramPost[]>([]);
 
+  // Helper to get reachable image URL (uses thumbnail for videos)
+  const getDisplayUrl = (post: InstagramPost) => {
+    return post.mediaType === 'VIDEO' && post.thumbnailUrl ? post.thumbnailUrl : post.mediaUrl;
+  };
+
   useEffect(() => {
     const loadInsta = async () => {
       const posts = await fetchInstagramFeed();
@@ -278,7 +283,7 @@ export default function HomeView({ news, profile }: HomeViewProps) {
             <h2 className="font-cinzel text-4xl md:text-5xl tracking-[0.35em] text-shadow-lg text-[var(--color-accent-main)] uppercase">Gallery</h2>
         </div>
         <Marquee 
-          images={instaPosts.length > 0 ? instaPosts.map(p => p.mediaUrl) : staticGalleryImages} 
+          images={instaPosts.length > 0 ? instaPosts.map(p => getDisplayUrl(p)) : staticGalleryImages} 
           speed={35} 
         />
       </section>

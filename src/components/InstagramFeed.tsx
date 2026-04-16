@@ -104,30 +104,34 @@ export default function InstagramFeed({ posts }: InstagramFeedProps) {
   return (
     <div ref={containerRef} className="w-full">
       <div className="max-w-[1200px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 px-4">
-        {posts.slice(0, 4).map((post) => (
-          <div 
-            key={post.id} 
-            className="insta-card group relative aspect-square overflow-hidden rounded-sm border border-white/10 bg-white/5"
-          >
-            <Image 
-              src={post.mediaUrl} 
-              alt={post.caption || "Bar Sally Instagram"} 
-              fill 
-              className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out" 
-              sizes="(max-width: 768px) 50vw, 25vw"
-              unoptimized={true}
-            />
-            
-            <a 
-              href={post.permalink} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center z-20"
+        {posts.slice(0, 4).map((post) => {
+          const displayUrl = post.mediaType === 'VIDEO' && post.thumbnailUrl ? post.thumbnailUrl : post.mediaUrl;
+          
+          return (
+            <div 
+              key={post.id} 
+              className="insta-card group relative aspect-square overflow-hidden rounded-sm border border-white/10 bg-[#0a0a0a]"
             >
-              <InstagramIcon className="text-white" size={24} />
-            </a>
-          </div>
-        ))}
+              <Image 
+                src={displayUrl} 
+                alt={post.caption || "Bar Sally Instagram"} 
+                fill 
+                className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out" 
+                sizes="(max-width: 768px) 50vw, 300px"
+                unoptimized={true}
+              />
+              
+              <a 
+                href={post.permalink} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-20"
+              >
+                <InstagramIcon className="text-white" size={24} />
+              </a>
+            </div>
+          );
+        })}
       </div>
 
       <div className="mt-24 text-center">
