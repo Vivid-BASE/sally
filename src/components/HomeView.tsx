@@ -9,27 +9,10 @@ import { ProfileContent } from "@/lib/microcms";
 import Hero from "@/components/Hero";
 import Marquee from "@/components/Marquee";
 import AestheticBackground from "./AestheticBackground";
-import InstagramFeed from "./InstagramFeed";
-import { fetchInstagramFeed, InstagramPost } from "@/lib/instagram";
-import { useState, useEffect } from "react";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
-
-// galleryImages are used as a fallback when the Instagram feed is unavailable or loading
-const staticGalleryImages = [
-  "/images/photo_image3_l.jpg",
-  "/images/photo_image1_l.jpg",
-  "/images/320x320_rect_6e44d35aa2dffcc94b4d7b787e49f124.jpg",
-  "/images/79155427_3106792099350824_8629136699835809792_n.jpg",
-  "/images/117236925_3744322492264445_8705478074068095151_n.jpg",
-  "/images/117335765_3744322478931113_3807033421426319937_n.jpg",
-  "/images/72691422_2987949857901716_5146671822036533248_n.jpg",
-  "/images/101195328_3540812025948827_5725311338234773504_n.jpg",
-  "/images/117040332_3744323535597674_8103100777321416032_n.jpg",
-  "/images/99299332_3540811972615499_7490206605246464000_n.jpg",
-];
 
 type HomeViewProps = {
   news: {
@@ -40,22 +23,29 @@ type HomeViewProps = {
   profile: ProfileContent;
 };
 
+const InstagramIcon = ({ className = "", size = 24 }: { className?: string; size?: number }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+  </svg>
+);
+
+const galleryImages = [
+  "/images/photo_image3_l.jpg",
+  "/images/photo_image4_l.jpg",
+  "/images/320x320_rect_6e44d35aa2dffcc94b4d7b787e49f124.jpg",
+  "/images/79155427_3106792099350824_8629136699835809792_n.jpg",
+  "/images/117236925_3744322492264445_8705478074068095151_n.jpg",
+  "/images/117335765_3744322478931113_3807033421426319937_n.jpg",
+  "/images/72691422_2987949857901716_5146671822036533248_n.jpg",
+  "/images/101195328_3540812025948827_5725311338234773504_n.jpg",
+  "/images/117040332_3744323535597674_8103100777321416032_n.jpg",
+  "/images/99299332_3540811972615499_7490206605246464000_n.jpg",
+];
+
 export default function HomeView({ news, profile }: HomeViewProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [instaPosts, setInstaPosts] = useState<InstagramPost[]>([]);
-
-  // Helper to get reachable image URL (uses thumbnail for videos)
-  const getDisplayUrl = (post: InstagramPost) => {
-    return post.mediaType === 'VIDEO' && post.thumbnailUrl ? post.thumbnailUrl : post.mediaUrl;
-  };
-
-  useEffect(() => {
-    const loadInsta = async () => {
-      const posts = await fetchInstagramFeed();
-      setInstaPosts(posts);
-    };
-    loadInsta();
-  }, []);
   
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -277,15 +267,13 @@ export default function HomeView({ news, profile }: HomeViewProps) {
         </div>
       </section>
 
+      {/* --- 4. Gallery Marquee (Restored) --- */}
       <section id="gallery" className="relative w-full py-40 bg-transparent overflow-hidden border-t border-white/5 shadow-[inset_0_0_100px_rgba(0,0,0,0.9)]">
         <div className="max-w-[1200px] mx-auto text-center mb-24 px-6">
             <span className="block font-cinzel text-xs tracking-[0.7em] text-[var(--color-accent-main)] uppercase mb-8 opacity-60">Archive</span>
             <h2 className="font-cinzel text-4xl md:text-5xl tracking-[0.35em] text-shadow-lg text-[var(--color-accent-main)] uppercase">Gallery</h2>
         </div>
-        <Marquee 
-          images={instaPosts.length > 0 ? instaPosts.map(p => getDisplayUrl(p)) : staticGalleryImages} 
-          speed={35} 
-        />
+        <Marquee images={galleryImages} speed={35} />
       </section>
 
       {/* --- 5. Instagram Integrated Grid (New Section) --- */}
@@ -293,12 +281,44 @@ export default function HomeView({ news, profile }: HomeViewProps) {
         <div className="max-w-[1200px] mx-auto text-center mb-24 px-6">
           <span className="block font-cinzel text-xs tracking-[0.7em] text-[var(--color-accent-main)] uppercase mb-8 opacity-60">Social</span>
           <h2 className="reveal-title font-cinzel text-4xl md:text-6xl tracking-[0.35em] text-shadow-lg flex items-center justify-center gap-8">
-            Instagram
+            <InstagramIcon className="text-[var(--color-accent-main)]" size={50} />Instagram
           </h2>
           <p className="mt-8 font-cinzel text-sm tracking-[0.4em] text-white/50 lowercase">@sally_master</p>
         </div>
 
-        <InstagramFeed posts={instaPosts} />
+        <div className="max-w-[1400px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 px-4">
+          {(galleryImages && galleryImages.length > 0 ? galleryImages : news).slice(0, 8).map((item, index) => (
+            <div key={index} className="news-card group relative aspect-square overflow-hidden cursor-pointer rounded-sm border border-white/5 bg-white/5 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)]">
+              <Image 
+                src={typeof item === 'string' ? item : item.img} 
+                alt="Bar Sally Instagram" 
+                fill 
+                className="object-cover filter grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-2000 ease-out" 
+                sizes="(max-width: 768px) 50vw, 25vw" 
+              />
+              <a 
+                href="https://www.instagram.com/sally_master/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 flex flex-col items-center justify-center p-6 z-20"
+              >
+                <InstagramIcon className="text-[var(--color-accent-main)] mb-6" size={32} />
+                <span className="font-cinzel tracking-[0.3em] text-[10px] text-[var(--color-accent-main)] uppercase mb-3">View on Instagram</span>
+              </a>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-24 text-center">
+          <a 
+            href="https://www.instagram.com/sally_master/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="group inline-flex items-center gap-6 border border-[var(--color-accent-main)]/40 hover:border-[var(--color-accent-main)] px-16 py-6 font-cinzel text-sm tracking-[0.5em] text-[var(--color-accent-main)] hover:bg-[var(--color-accent-main)] hover:text-black transition-all duration-1000 uppercase glass-panel shadow-2xl"
+          >
+            Connect on Instagram
+          </a>
+        </div>
       </section>
 
       {/* --- 6. Access Section (Heavy Unified Reveal) --- */}
