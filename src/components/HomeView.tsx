@@ -305,12 +305,11 @@ export default function HomeView({ news, profile }: HomeViewProps) {
       <section id="access" className="reveal-section access-reveal relative w-full py-40 md:py-80 px-6 bg-transparent border-t border-white/5 shadow-[inset_0_50px_150px_rgba(0,0,0,1)]">
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-24 items-start">
            <div className="reveal-content md:sticky md:top-40">
-              <span className="block font-cinzel text-xs tracking-[0.6em] text-[var(--color-accent-main)] uppercase mb-10 opacity-60">Location</span>
               <h2 className="reveal-title font-cinzel text-5xl md:text-7xl tracking-[0.25em] mb-24 text-[var(--color-accent-main)] text-shadow-lg">Access</h2>
               <div className="reveal-text font-shippori space-y-10">
-                <div className="flex flex-col gap-4"><span className="text-white text-[10px] font-cinzel tracking-[0.5em] uppercase opacity-60">Address</span><p className="text-xl md:text-2xl text-gray-200 tracking-[0.15em] leading-relaxed font-bold">〒639-1160<br/>奈良県大和郡山市北郡山町137-1</p></div>
-                <div className="flex flex-col gap-4 border-y border-white/5 py-8"><span className="text-white text-[10px] font-cinzel tracking-[0.5em] uppercase opacity-60">Opening Hours</span><p className="text-xl md:text-2xl text-gray-200 tracking-[0.15em] font-bold">19:00 - Last (月曜定休)</p></div>
-                <div className="flex flex-col gap-4"><span className="text-white text-[10px] font-cinzel tracking-[0.5em] uppercase opacity-60">Contact</span><p className="text-2xl md:text-3xl text-[var(--color-accent-main)] tracking-[0.1em] font-cinzel font-bold">0743-55-3001</p></div>
+                <div className="flex flex-col gap-4"><span className="text-white text-xs font-cinzel tracking-[0.5em] uppercase font-bold">Address</span><p className="text-xl md:text-2xl text-gray-200 tracking-[0.15em] leading-relaxed font-bold">〒639-1160<br/>奈良県大和郡山市北郡山町137-1</p></div>
+                <div className="flex flex-col gap-4 border-y border-white/5 py-8"><span className="text-white text-xs font-cinzel tracking-[0.5em] uppercase font-bold">Opening Hours</span><p className="text-xl md:text-2xl text-gray-200 tracking-[0.15em] font-bold">19:00 - Last (月曜定休)</p></div>
+                <div className="flex flex-col gap-4"><span className="text-white text-xs font-cinzel tracking-[0.5em] uppercase font-bold">Contact</span><p className="text-2xl md:text-3xl text-[var(--color-accent-main)] tracking-[0.1em] font-cinzel font-bold">0743-55-3001</p></div>
                 <div className="mt-20 pt-16"><a href="https://maps.google.com/?q=Bar+Sally+%E5%A4%A7%E5%92%8C%E9%83%A1%E5%B1%B1" target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-10 text-[var(--color-accent-main)] hover:text-white transition-all"><span className="font-cinzel tracking-[0.5em] text-sm uppercase">Open in Google Maps</span><div className="relative"><svg width="32" height="32" className="w-8 h-8 transform group-hover:translate-x-6 transition-transform duration-1000" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg></div></a></div>
               </div>
            </div>
@@ -324,7 +323,7 @@ export default function HomeView({ news, profile }: HomeViewProps) {
                   allowFullScreen={true} 
                   loading="lazy" 
                   referrerPolicy="no-referrer-when-downgrade"
-                  className="grayscale invert-[0.9] contrast-[1.2] opacity-80"
+                  className="opacity-90 grayscale-[0.2]"
                 />
                 {/* Visual frame */}
                 <div className="absolute inset-0 border border-white/10 pointer-events-none" />
