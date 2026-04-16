@@ -78,6 +78,7 @@ export default function InstagramFeed({ posts }: InstagramFeedProps) {
           type="module" 
           onLoad={() => setWidgetLoaded(true)}
         />
+        {/* @ts-ignore - custom element behold-widget defined in src/types/custom-elements.d.ts */}
         {feedId && <behold-widget feed-id={feedId}></behold-widget>}
         {!widgetLoaded && (
           <div className="absolute inset-0 flex items-center justify-center">
