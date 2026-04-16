@@ -103,17 +103,17 @@ export default function InstagramFeed({ posts }: InstagramFeedProps) {
 
   return (
     <div ref={containerRef} className="w-full">
-      <div className="max-w-[1400px] mx-auto grid grid-cols-2 lg:grid-cols-4 gap-4 px-4 overflow-visible">
-        {posts.slice(0, 8).map((post) => (
+      <div className="max-w-[1200px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 px-4">
+        {posts.slice(0, 4).map((post) => (
           <div 
             key={post.id} 
-            className="insta-card group relative aspect-square overflow-hidden cursor-pointer rounded-sm border border-white/5 bg-white/5 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] transform-gpu perspective-1000"
+            className="insta-card group relative aspect-square overflow-hidden rounded-sm border border-white/10 bg-white/5"
           >
             <Image 
               src={post.mediaUrl} 
               alt={post.caption || "Bar Sally Instagram"} 
               fill 
-              className="object-cover filter grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-2000 ease-out" 
+              className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out" 
               sizes="(max-width: 768px) 50vw, 25vw"
               unoptimized={true}
             />
@@ -122,19 +122,10 @@ export default function InstagramFeed({ posts }: InstagramFeedProps) {
               href={post.permalink} 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 flex flex-col items-center justify-center p-6 z-20"
+              className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center z-20"
             >
-              <InstagramIcon className="text-[var(--color-accent-main)] mb-6" size={32} />
-              <span className="font-cinzel tracking-[0.3em] text-[10px] text-[var(--color-accent-main)] uppercase mb-3 text-center">View on Instagram</span>
-              {post.caption && (
-                <p className="text-[10px] text-white/60 font-noto-serif line-clamp-2 text-center leading-relaxed px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 delay-200">
-                  {post.caption}
-                </p>
-              )}
+              <InstagramIcon className="text-white" size={24} />
             </a>
-
-            {/* Aesthetic overlay border */}
-            <div className="absolute inset-0 border border-white/10 group-hover:border-[var(--color-accent-main)]/30 transition-colors duration-1000 pointer-events-none z-10" />
           </div>
         ))}
       </div>
