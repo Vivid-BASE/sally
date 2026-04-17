@@ -134,10 +134,10 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8, duration: 1.5 }}
-          className="mt-8 px-4"
+          className="mt-6 md:mt-8 px-4"
         >
           <motion.div 
-            className="font-noto-serif font-bold text-base md:text-xl lg:text-2xl text-white tracking-[0.25em] md:tracking-[0.35em] leading-loose md:leading-relaxed max-w-[1000px] mx-auto space-y-4 md:space-y-6 text-shadow-lg"
+            className="font-noto-serif font-bold text-sm md:text-xl lg:text-2xl text-white tracking-[0.15em] md:tracking-[0.35em] leading-loose md:leading-relaxed max-w-[1000px] mx-auto space-y-4 md:space-y-6 text-shadow-lg"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.5, ease: "easeOut", delay: 1.0 }}

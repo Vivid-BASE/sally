@@ -192,7 +192,7 @@ export default function HomeView({ news, profile }: HomeViewProps) {
           </div>
           {/* Text Right */}
           <div className="reveal-content order-2 relative z-10">
-            <h2 className="reveal-title font-cinzel text-5xl md:text-7xl tracking-[0.35em] mb-16 text-[var(--color-accent-main)] uppercase text-shadow-lg">Concept</h2>
+            <h2 className="reveal-title font-cinzel text-4xl md:text-7xl tracking-[0.35em] mb-16 text-[var(--color-accent-main)] uppercase text-shadow-lg">Concept</h2>
             <div className="reveal-text font-noto-serif font-bold text-base md:text-lg text-white leading-loose md:leading-[2.5] tracking-wide space-y-10 break-keep text-shadow-md">
               <p>1978年の創業以来、大和郡山の人々に愛され続けてきた Bar Sally。</p>
               <p>奈良の木材をふんだんに使用した、温かく重厚な空間。<br className="hidden md:block" />そこはまるで、古き良き時代から時が止まったかのような、大人のためのサンクチュアリ。</p>
@@ -207,7 +207,7 @@ export default function HomeView({ news, profile }: HomeViewProps) {
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-32 items-center text-shadow-sm">
           {/* Text Left */}
           <div className="reveal-content order-2 md:order-1">
-             <h2 className="reveal-title font-cinzel text-5xl md:text-7xl tracking-[0.25em] mb-12 text-shadow-lg text-[var(--color-accent-main)]">Menu</h2>
+             <h2 className="reveal-title font-cinzel text-4xl md:text-7xl tracking-[0.25em] mb-12 text-shadow-lg text-[var(--color-accent-main)]">Menu</h2>
              <div className="reveal-text font-shippori text-base md:text-2xl text-gray-200 leading-[2.5] tracking-[0.15em]">
                 <div className="space-y-4">
                   <p className="flex items-center gap-6">
@@ -220,7 +220,7 @@ export default function HomeView({ news, profile }: HomeViewProps) {
                   </p>
                 </div>
                 <div className="mt-20">
-                  <Link href="/menu" className="inline-block border border-[var(--color-accent-main)]/50 hover:border-[var(--color-accent-main)] px-16 py-6 font-cinzel text-sm tracking-[0.4em] text-[var(--color-accent-main)] hover:bg-[var(--color-accent-main)] hover:text-black transition-all duration-1000 uppercase glass-panel shadow-xl">Explore Full Menu</Link>
+                  <Link href="/menu" className="inline-block border border-[var(--color-accent-main)]/50 hover:border-[var(--color-accent-main)] px-12 md:px-16 py-5 md:py-6 font-cinzel text-sm tracking-[0.4em] text-[var(--color-accent-main)] hover:bg-[var(--color-accent-main)] hover:text-black transition-all duration-1000 uppercase glass-panel shadow-xl">Explore Full Menu</Link>
                 </div>
              </div>
           </div>
@@ -255,7 +255,7 @@ export default function HomeView({ news, profile }: HomeViewProps) {
              </div>
           </div>
           <div className="reveal-content relative z-10">
-            <h2 className="reveal-title font-cinzel text-5xl md:text-7xl tracking-[0.35em] mb-16 text-[var(--color-accent-main)] uppercase text-shadow-lg">Master</h2>
+            <h2 className="reveal-title font-cinzel text-4xl md:text-7xl tracking-[0.35em] mb-16 text-[var(--color-accent-main)] uppercase text-shadow-lg">Master</h2>
             <div className="reveal-text font-noto-serif font-bold space-y-10 text-shadow-md">
                <h3 className="text-4xl md:text-5xl text-white tracking-[0.1em] mb-6">{profile.name} {profile.englishName}</h3>
                <div className="text-base md:text-lg text-gray-300 leading-loose tracking-widest space-y-8">
@@ -268,12 +268,7 @@ export default function HomeView({ news, profile }: HomeViewProps) {
                  </div>
                </div>
                <div className="pt-12">
-                  <Link href="/master" className="group inline-flex items-center gap-8 font-cinzel text-sm tracking-[0.4em] uppercase text-[var(--color-accent-main)] overflow-hidden">
-                    <span className="relative pb-2">Master&apos;s Story</span>
-                    <svg width="24" height="24" className="w-6 h-6 transform group-hover:translate-x-4 transition-transform duration-1000" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </Link>
+                  <Link href="/master" className="inline-block border border-[var(--color-accent-main)]/50 hover:border-[var(--color-accent-main)] px-12 md:px-16 py-5 md:py-6 font-cinzel text-sm tracking-[0.4em] text-[var(--color-accent-main)] hover:bg-[var(--color-accent-main)] hover:text-black transition-all duration-1000 uppercase glass-panel shadow-xl">Master&apos;s Story</Link>
                </div>
             </div>
           </div>
@@ -283,19 +278,16 @@ export default function HomeView({ news, profile }: HomeViewProps) {
       {/* --- 4. Gallery Marquee (Restored) --- */}
       <section id="gallery" className="relative w-full py-40 bg-transparent overflow-hidden border-t border-white/5 shadow-[inset_0_0_100px_rgba(0,0,0,0.9)]">
         <div className="max-w-[1200px] mx-auto text-center mb-24 px-6">
-            <span className="block font-cinzel text-xs tracking-[0.7em] text-[var(--color-accent-main)] uppercase mb-8 opacity-60">Archive</span>
-            <h2 className="font-cinzel text-4xl md:text-5xl tracking-[0.35em] text-shadow-lg text-[var(--color-accent-main)] uppercase">Gallery</h2>
+            <h2 className="font-cinzel text-4xl md:text-7xl tracking-[0.35em] text-shadow-lg text-[var(--color-accent-main)] uppercase">Gallery</h2>
         </div>
         <Marquee images={galleryImages} speed={35} />
       </section>
 
       <section id="instagram" className="reveal-section relative w-full py-40 md:py-64 bg-transparent overflow-hidden border-t border-white/5">
-        <div className="max-w-[1200px] mx-auto text-center mb-24 px-6">
-          <span className="block font-cinzel text-xs tracking-[0.7em] text-[var(--color-accent-main)] uppercase mb-8 opacity-60">Social</span>
-          <h2 className="reveal-title font-cinzel text-4xl md:text-6xl tracking-[0.35em] text-shadow-lg flex items-center justify-center gap-8">
+        <div className="max-w-[1200px] mx-auto text-center mb-20 md:mb-24 px-6">
+          <h2 className="reveal-title font-cinzel text-4xl md:text-7xl tracking-[0.35em] text-shadow-lg flex items-center justify-center gap-8 text-[var(--color-accent-main)]">
             Instagram
           </h2>
-          <p className="mt-8 font-cinzel text-sm tracking-[0.4em] text-white/50 lowercase">@sally_master</p>
         </div>
 
         <InstagramFeed posts={instaPosts} />
@@ -305,12 +297,11 @@ export default function HomeView({ news, profile }: HomeViewProps) {
       <section id="access" className="reveal-section access-reveal relative w-full py-40 md:py-80 px-6 bg-transparent border-t border-white/5 shadow-[inset_0_50px_150px_rgba(0,0,0,1)]">
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-24 items-start">
            <div className="reveal-content md:sticky md:top-40">
-              <h2 className="reveal-title font-cinzel text-5xl md:text-7xl tracking-[0.25em] mb-24 text-[var(--color-accent-main)] text-shadow-lg">Access</h2>
+              <h2 className="reveal-title font-cinzel text-4xl md:text-7xl tracking-[0.25em] mb-20 md:mb-24 text-[var(--color-accent-main)] text-shadow-lg">Access</h2>
               <div className="reveal-text font-shippori space-y-10">
                 <div className="flex flex-col gap-4"><span className="text-white text-xs font-cinzel tracking-[0.5em] uppercase font-bold">Address</span><p className="text-xl md:text-2xl text-gray-200 tracking-[0.15em] leading-relaxed font-bold">〒639-1160<br/>奈良県大和郡山市北郡山町137-1</p></div>
                 <div className="flex flex-col gap-4 border-y border-white/5 py-8"><span className="text-white text-xs font-cinzel tracking-[0.5em] uppercase font-bold">Opening Hours</span><p className="text-xl md:text-2xl text-gray-200 tracking-[0.15em] font-bold">19:00 - Last (月曜定休)</p></div>
                 <div className="flex flex-col gap-4"><span className="text-white text-xs font-cinzel tracking-[0.5em] uppercase font-bold">Contact</span><p className="text-2xl md:text-3xl text-[var(--color-accent-main)] tracking-[0.1em] font-cinzel font-bold">0743-55-3001</p></div>
-                <div className="mt-20 pt-16"><a href="https://maps.app.goo.gl/rjYPFAzxPsBVsfSt7" target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-10 text-[var(--color-accent-main)] hover:text-white transition-all"><span className="font-cinzel tracking-[0.5em] text-sm uppercase">Open in Google Maps</span><div className="relative"><svg width="32" height="32" className="w-8 h-8 transform group-hover:translate-x-6 transition-transform duration-1000" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg></div></a></div>
               </div>
            </div>
            <div className="flex justify-center md:justify-end h-[450px] md:h-[600px] w-full">
