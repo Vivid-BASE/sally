@@ -36,12 +36,14 @@ export default function MasterView({ profile }: MasterViewProps) {
         </header>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start mb-24 fade-up">
-           <div className="relative aspect-[3/4] overflow-hidden rounded-sm grayscale hover:grayscale-0 transition-all duration-1000 shadow-2xl">
+           <div className="overflow-hidden rounded-sm grayscale hover:grayscale-0 transition-all duration-1000 shadow-2xl">
               <Image 
                 src={profile.image?.url || "/images/master2.png"}
                 alt={profile.name} 
-                fill 
-                className="object-cover"
+                width={profile.image?.width || 800}
+                height={profile.image?.height || 1000}
+                className="w-full h-auto object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
            </div>
            <div className="font-shippori text-gray-300 space-y-4 tracking-wider">
