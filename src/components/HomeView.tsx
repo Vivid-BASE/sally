@@ -320,8 +320,7 @@ export default function HomeView({ news, profile }: HomeViewProps) {
                   width="100%" 
                   height="100%" 
                   style={{ 
-                    border: 0,
-                    filter: "invert(90%) hue-rotate(180deg) brightness(0.9) contrast(1.2)"
+                    border: 0
                   }} 
                   allowFullScreen={true} 
                   loading="lazy" 
@@ -329,9 +328,8 @@ export default function HomeView({ news, profile }: HomeViewProps) {
                   className="w-full h-full"
                 />
                 {/* Visual frame */}
-                <div className="absolute inset-0 border border-white/10 pointer-events-none" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
-             </div>
+                 <div className="absolute inset-0 border border-white/10 pointer-events-none" />
+              </div>
            </div>
         </div>
       </section>
