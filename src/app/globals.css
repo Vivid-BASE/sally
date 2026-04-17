@@ -24,6 +24,7 @@
 
   html {
     scroll-behavior: initial; /* Lenis takes over */
+    overflow-x: hidden;
   }
 
   body {

@@ -37,16 +37,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja" className="scroll-smooth">
+    <html lang="ja" className="scroll-smooth overflow-x-hidden">
       <body className={`${cinzel.variable} ${notoSerif.variable} ${shippori.variable} font-shippori text-white antialiased`}>
         <AestheticBackground />
         <SmoothScroll>
-          <Header />
-            <main className="min-h-screen">
-              {children}
-            </main>
-          <Footer />
-          <ScrollToTop />
+          <div className="relative overflow-x-hidden w-full">
+            <Header />
+              <main className="min-h-screen">
+                {children}
+              </main>
+            <Footer />
+            <ScrollToTop />
+          </div>
         </SmoothScroll>
       </body>
     </html>

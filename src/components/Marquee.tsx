@@ -13,7 +13,7 @@ export default function Marquee({ images, speed = 40, reverse = false }: Marquee
   const displayImages = [...images, ...images];
 
   return (
-    <div className="relative w-full overflow-hidden py-10">
+    <div className="relative w-full max-w-full overflow-hidden py-10" style={{ contain: 'layout' }}>
       <div 
         className={`flex w-max gap-4 px-2 ${reverse ? 'animate-marquee-reverse' : 'animate-marquee'}`}
         style={{ animationDuration: `${speed}s` }}
