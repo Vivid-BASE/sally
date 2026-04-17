@@ -9,28 +9,6 @@ type MasterViewProps = {
   profile: ProfileContent;
 };
 
-// 「奈良鹿ないカレー」を自動リンク化するユーティリティ
-function renderBioWithLinks(text: string) {
-  const keyword = "奈良鹿ないカレー";
-  const linkUrl = "https://narakare.com"; // リンク先URL（必要に応じて変更）
-  const parts = text.split(keyword);
-
-  return parts.map((part, i) => (
-    <span key={i}>
-      {part}
-      {i < parts.length - 1 && (
-        <a
-          href={linkUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-[var(--color-accent-main)] underline underline-offset-4 hover:opacity-70 transition-opacity"
-        >
-          {keyword}
-        </a>
-      )}
-    </span>
-  ));
-}
 
 export default function MasterView({ profile }: MasterViewProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -72,13 +50,22 @@ export default function MasterView({ profile }: MasterViewProps) {
               </h2>
               <p className="text-sm font-cinzel text-[var(--color-accent-main)] uppercase tracking-[0.3em] mb-6">{profile.role}</p>
               
-              <div className="leading-[2] space-y-3">
-                {profile.bio.split('\n').map((line, i) => (
-                  <p key={i} className="text-gray-300">
-                    {renderBioWithLinks(line)}
-                  </p>
-                ))}
-              </div>
+              {/* microCMSのbioがHTML（リッチテキスト）の場合はそのままレンダリング。
+                  管理画面でリンクやbold等を自由に追加できます。
+                  プレーンテキストの場合は改行で段落分割されます。 */}
+              <div
+                className="leading-[2] space-y-3 prose prose-invert prose-sm max-w-none
+                  [&_a]:text-[var(--color-accent-main)] [&_a]:underline [&_a]:underline-offset-4
+                  [&_a:hover]:opacity-70 [&_a]:transition-opacity"
+                dangerouslySetInnerHTML={{
+                  __html: profile.bio.includes('<')
+                    ? profile.bio
+                    : profile.bio
+                        .split('\n')
+                        .map(line => `<p>${line}</p>`)
+                        .join('')
+                }}
+              />
            </div>
         </div>
       </div>

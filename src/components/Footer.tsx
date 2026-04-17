@@ -100,18 +100,21 @@ export default function Footer() {
         {/* Separator */}
         <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-gray-800 to-transparent mb-8"></div>
 
-        {/* Copyright & Stealth Link */}
-        <div className="flex flex-col items-center gap-2 text-xs font-cinzel text-gray-600 tracking-widest text-center">
+        {/* Copyright & Stealth Link — KI Pattern */}
+        <div className="text-center font-cinzel text-[0.72rem] tracking-[0.08em] text-[#888] mt-2">
           <span>&copy; {new Date().getFullYear()} Bar Sally. All Rights Reserved.</span>
-          <span className="hidden md:inline text-gray-700">|</span>
-          <a 
-            href="https://showtimeboxx.com/creative/" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="opacity-20 hover:opacity-70 hover:text-[var(--color-accent-main)] transition-all duration-500 md:mt-0 mt-1"
-          >
-            Designed by SHOWTIMEBOXX CREATIVE
-          </a>
+          <span className="hidden md:inline"> | </span>
+          <span className="block md:inline mt-2 md:mt-0">
+            Designed by{" "}
+            <a
+              href="https://showtimeboxx.com/creative/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#888] no-underline hover:opacity-70 transition-opacity duration-300"
+            >
+              SHOWTIMEBOXX CREATIVE
+            </a>
+          </span>
         </div>
       </div>
     </footer>
