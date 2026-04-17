@@ -24,6 +24,7 @@ type HomeViewProps = {
     delay: number;
   }[];
   profile: ProfileContent;
+  menuItems: any[]; // Using any to avoid complex type import if not needed, but better to use MenuContent
 };
 
 const InstagramIcon = ({ className = "", size = 24 }: { className?: string; size?: number }) => (
@@ -210,14 +211,26 @@ export default function HomeView({ news, profile }: HomeViewProps) {
              <h2 className="reveal-title font-cinzel text-4xl md:text-7xl tracking-[0.25em] mb-12 text-shadow-lg text-[var(--color-accent-main)]">Menu</h2>
              <div className="reveal-text font-shippori text-base md:text-2xl text-gray-200 leading-[2.5] tracking-[0.15em]">
                 <div className="space-y-4">
-                  <p className="flex items-center gap-6">
-                    <span className="text-white text-sm font-cinzel tracking-widest uppercase opacity-70">Night</span>
-                    <span>1,500円～</span>
-                  </p>
-                  <p className="flex flex-col gap-2 pt-8">
-                    <span className="text-white text-sm font-cinzel tracking-widest uppercase opacity-70 mb-2">Table Charge</span>
-                    <span className="text-lg md:text-xl">男性 1,000円 / 女性 500円</span>
-                  </p>
+                  {menuItems && menuItems.length > 0 ? (
+                    menuItems.slice(0, 5).map((item) => (
+                      <div key={item.id} className="flex items-center justify-between gap-6 border-b border-white/5 pb-4">
+                         <span className="text-white text-sm font-cinzel tracking-widest uppercase opacity-70">{item.category}</span>
+                         <span className="flex-1 text-base md:text-xl truncate ml-4 opacity-90">{item.name}</span>
+                         <span className="text-lg md:text-xl font-cinzel">{item.price}</span>
+                      </div>
+                    ))
+                  ) : (
+                    <>
+                      <p className="flex items-center gap-6">
+                        <span className="text-white text-sm font-cinzel tracking-widest uppercase opacity-70">Night</span>
+                        <span>1,500円～</span>
+                      </p>
+                      <p className="flex flex-col gap-2 pt-8">
+                        <span className="text-white text-sm font-cinzel tracking-widest uppercase opacity-70 mb-2">Table Charge</span>
+                        <span className="text-lg md:text-xl">男性 1,000円 / 女性 500円</span>
+                      </p>
+                    </>
+                  )}
                 </div>
                 <div className="mt-20">
                   <Link href="/menu" className="inline-block border border-[var(--color-accent-main)]/50 hover:border-[var(--color-accent-main)] px-12 md:px-16 py-5 md:py-6 font-cinzel text-sm tracking-[0.4em] text-[var(--color-accent-main)] hover:bg-[var(--color-accent-main)] hover:text-black transition-all duration-1000 uppercase glass-panel shadow-xl">Explore Full Menu</Link>

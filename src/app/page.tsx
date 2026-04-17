@@ -47,9 +47,22 @@ export default async function Home() {
     } else if (profileRes.name) {
       profile = profileRes;
     }
+
+    // Fetch Menu
+    let menuItems: MenuContent[] = [];
+    try {
+      const menuRes = await client.get({ endpoint: 'menu', queries: { limit: 10 } });
+      if (menuRes.contents) {
+        menuItems = menuRes.contents;
+      }
+    } catch (e) {
+      console.warn("microCMS menu fetch failed for home page.", e);
+    }
+
+    return <HomeView news={news} profile={profile} menuItems={menuItems} />;
   } catch (e) {
     console.warn("microCMS fetch failed during build, using mock data.", e);
   }
 
-  return <HomeView news={news} profile={profile} />;
+  return <HomeView news={news} profile={profile} menuItems={[]} />;
 }

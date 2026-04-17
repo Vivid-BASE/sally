@@ -16,7 +16,7 @@ export default async function MenuPage() {
       menuItems = res.contents;
     }
   } catch (e) {
-    console.warn("microCMS menu fetch failed during build.", e);
+    console.error("microCMS menu fetch failed. Endpoint: 'menu'. Error details:", e);
   }
 
   return <MenuView menuItems={menuItems} />;
