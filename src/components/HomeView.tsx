@@ -310,16 +310,19 @@ export default function HomeView({ news, profile }: HomeViewProps) {
                 <div className="flex flex-col gap-4"><span className="text-white text-xs font-cinzel tracking-[0.5em] uppercase font-bold">Address</span><p className="text-xl md:text-2xl text-gray-200 tracking-[0.15em] leading-relaxed font-bold">〒639-1160<br/>奈良県大和郡山市北郡山町137-1</p></div>
                 <div className="flex flex-col gap-4 border-y border-white/5 py-8"><span className="text-white text-xs font-cinzel tracking-[0.5em] uppercase font-bold">Opening Hours</span><p className="text-xl md:text-2xl text-gray-200 tracking-[0.15em] font-bold">19:00 - Last (月曜定休)</p></div>
                 <div className="flex flex-col gap-4"><span className="text-white text-xs font-cinzel tracking-[0.5em] uppercase font-bold">Contact</span><p className="text-2xl md:text-3xl text-[var(--color-accent-main)] tracking-[0.1em] font-cinzel font-bold">0743-55-3001</p></div>
-                <div className="mt-20 pt-16"><a href="https://maps.google.com/?q=Bar+Sally+%E5%A4%A7%E5%92%8C%E9%83%A1%E5%B1%B1" target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-10 text-[var(--color-accent-main)] hover:text-white transition-all"><span className="font-cinzel tracking-[0.5em] text-sm uppercase">Open in Google Maps</span><div className="relative"><svg width="32" height="32" className="w-8 h-8 transform group-hover:translate-x-6 transition-transform duration-1000" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg></div></a></div>
+                <div className="mt-20 pt-16"><a href="https://maps.app.goo.gl/rjYPFAzxPsBVsfSt7" target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-10 text-[var(--color-accent-main)] hover:text-white transition-all"><span className="font-cinzel tracking-[0.5em] text-sm uppercase">Open in Google Maps</span><div className="relative"><svg width="32" height="32" className="w-8 h-8 transform group-hover:translate-x-6 transition-transform duration-1000" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg></div></a></div>
               </div>
            </div>
            <div className="flex justify-center md:justify-end h-[450px] md:h-[600px] w-full">
              <div className="reveal-image relative w-full h-full overflow-hidden rounded-sm shadow-[0_0_100px_rgba(0,0,0,1)] border border-white/10">
                 <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3283.475!2d135.7788!3d34.6190!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6001375d315197ed%3A0x633d749437b019b8!2sBar%20Sally!5e0!3m2!1sja!2sjp!4v1713271200000!5m2!1sja!2sjp" 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3282.014854500827!2d135.78075917609695!3d34.654327785699!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60013af31bcf9485%3A0x67a24d5a52246f6d!2zQmFyIFNhbGx5IOODkOODvOOCteODquODvA!5e0!3m2!1sja!2sjp!4v1776388259306!5m2!1sja!2sjp" 
                   width="100%" 
                   height="100%" 
-                  style={{ border: 0 }} 
+                  style={{ 
+                    border: 0,
+                    filter: "invert(90%) hue-rotate(180deg) brightness(0.9) contrast(1.2)"
+                  }} 
                   allowFullScreen={true} 
                   loading="lazy" 
                   referrerPolicy="no-referrer-when-downgrade"

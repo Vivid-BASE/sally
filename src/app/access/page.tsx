@@ -52,7 +52,7 @@ export default function AccessPage() {
               
               <div className="pt-12">
                  <a 
-                   href="https://maps.google.com/?q=Bar+Sally+大和郡山" 
+                   href="https://maps.app.goo.gl/rjYPFAzxPsBVsfSt7" 
                    target="_blank" 
                    rel="noopener noreferrer"
                    className="inline-block border border-[var(--color-accent-main)] px-12 py-5 font-cinzel text-sm tracking-[0.3em] text-[var(--color-accent-main)] hover:bg-[var(--color-accent-main)] hover:text-black transition-all duration-500 uppercase shadow-[0_0_20px_rgba(212,175,55,0.2)]"
