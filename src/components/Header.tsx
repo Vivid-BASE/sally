@@ -12,6 +12,7 @@ const navLinks = [
   { href: '/#menu', label: 'Menu' },
   { href: '/#master', label: 'Master' },
   { href: '/#gallery', label: 'Gallery' },
+  { href: '/#instagram', label: 'Instagram' },
   { href: '/#access', label: 'Access' },
 ];
 

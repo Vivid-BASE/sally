@@ -17,6 +17,15 @@ const FacebookIcon = ({ className = "", size = 24 }: { className?: string; size?
   </svg>
 );
 
+const navLinks = [
+  { href: '/#concept', label: 'Concept' },
+  { href: '/#menu', label: 'Menu' },
+  { href: '/#master', label: 'Master' },
+  { href: '/#gallery', label: 'Gallery' },
+  { href: '/#instagram', label: 'Instagram' },
+  { href: '/#access', label: 'Access' },
+];
+
 export default function Footer() {
   return (
     <footer className="relative bg-[#080808] border-t border-[var(--color-accent-main)]/20 pt-16 pb-8 overflow-hidden">
@@ -25,7 +34,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
           
           {/* Brand Info */}
-          <div className="flex flex-col items-center md:items-start text-center md:text-left">
+          <div className="flex flex-col items-center text-center">
             <Link href="/" className="mb-6 block">
                <div className="relative w-[200px] h-[55px]">
                   <Image 
@@ -43,23 +52,21 @@ export default function Footer() {
           </div>
 
           {/* Quick Links */}
-          <div className="flex flex-col items-center md:items-start text-center md:text-left">
+          <div className="flex flex-col items-center text-center">
             <h4 className="font-cinzel tracking-[0.2em] text-[var(--color-accent-main)] mb-6 text-sm">Navigation</h4>
             <ul className="space-y-4">
-              <li>
-                <Link href="/menu" className="font-shippori text-sm tracking-widest text-gray-400 hover:text-[var(--color-accent-main)] transition-colors">メニュー・料金</Link>
-              </li>
-              <li>
-                <Link href="/master" className="font-shippori text-sm tracking-widest text-gray-400 hover:text-[var(--color-accent-main)] transition-colors">マスター紹介</Link>
-              </li>
-              <li>
-                <Link href="/archives" className="font-shippori text-sm tracking-widest text-gray-400 hover:text-[var(--color-accent-main)] transition-colors">活動実績・ギャラリー</Link>
-              </li>
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="font-cinzel text-xs tracking-[0.3em] uppercase text-gray-400 hover:text-[var(--color-accent-main)] transition-colors">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* Access & Social */}
-          <div className="flex flex-col items-center md:items-start text-center md:text-left">
+          <div className="flex flex-col items-center text-center">
             <h4 className="font-cinzel tracking-[0.2em] text-[var(--color-accent-main)] mb-6 text-sm">Access & Social</h4>
             <address className="not-italic font-shippori text-sm text-gray-400 leading-relaxed tracking-wider mb-6">
               〒639-1160<br />
@@ -67,7 +74,7 @@ export default function Footer() {
               0743-55-3001<br />
               19:00 - Last (月曜定休)
             </address>
-            <div className="flex gap-4">
+            <div className="flex gap-4 justify-center">
               <a 
                 href="https://www.instagram.com/sally_master/" 
                 target="_blank" 
@@ -94,16 +101,16 @@ export default function Footer() {
         <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-gray-800 to-transparent mb-8"></div>
 
         {/* Copyright & Stealth Link */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-shippori text-gray-600 tracking-widest">
-          <p>&copy; {new Date().getFullYear()} Bar Sally. All Rights Reserved.</p>
-          
+        <div className="flex flex-col items-center gap-2 text-xs font-cinzel text-gray-600 tracking-widest text-center">
+          <span>&copy; {new Date().getFullYear()} Bar Sally. All Rights Reserved.</span>
+          <span className="hidden md:inline text-gray-700">|</span>
           <a 
-            href="https://showtimeboxx.com" 
+            href="https://showtimeboxx.com/creative/" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="opacity-20 hover:opacity-100 hover:text-[var(--color-accent-main)] transition-all duration-500"
+            className="opacity-20 hover:opacity-70 hover:text-[var(--color-accent-main)] transition-all duration-500 md:mt-0 mt-1"
           >
-            Produced by SHOWTIMEBOXX CREATIVE
+            Designed by SHOWTIMEBOXX CREATIVE
           </a>
         </div>
       </div>
