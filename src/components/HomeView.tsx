@@ -220,16 +220,7 @@ export default function HomeView({ news, profile }: HomeViewProps) {
                       </div>
                     ))
                   ) : (
-                    <>
-                      <p className="flex items-center gap-6">
-                        <span className="text-white text-sm font-cinzel tracking-widest uppercase opacity-70">Night</span>
-                        <span>1,500円～</span>
-                      </p>
-                      <p className="flex flex-col gap-2 pt-8">
-                        <span className="text-white text-sm font-cinzel tracking-widest uppercase opacity-70 mb-2">Table Charge</span>
-                        <span className="text-lg md:text-xl">男性 1,000円 / 女性 500円</span>
-                      </p>
-                    </>
+                    <p className="text-gray-500 font-shippori text-sm tracking-widest animate-pulse">Coming soon...</p>
                   )}
                 </div>
                 <div className="mt-20">
