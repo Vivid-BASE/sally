@@ -37,20 +37,6 @@ export default function MenuView({ menuItems }: MenuViewProps) {
            <div className="w-20 h-[1px] bg-[var(--color-accent-main)] mx-auto opacity-50" />
         </header>
 
-        <section className="mb-24 fade-up">
-           <div className="relative aspect-[21/9] w-full mb-24 overflow-hidden rounded-sm">
-              <Image 
-                src="/images/curry/curry.jpg" 
-                alt="Signature Menu" 
-                fill 
-                className="object-cover grayscale hover:grayscale-0 transition-all duration-1000"
-                priority
-              />
-              <div className="absolute inset-0 bg-black/40" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                 <h2 className="font-cinzel text-2xl md:text-4xl tracking-[0.3em] text-white uppercase drop-shadow-2xl">Selected Collections</h2>
-              </div>
-           </div>
 
            <div className="space-y-32">
               {categories.map((cat, idx) => (
@@ -90,7 +76,6 @@ export default function MenuView({ menuItems }: MenuViewProps) {
                 </div>
               ))}
            </div>
-        </section>
 
         <footer className="text-center text-gray-500 font-shippori text-xs tracking-widest fade-up pt-12 border-t border-white/5 mt-32">
            <p>※ 表示価格は税込価格です。別途チャージ料金を頂戴しております。</p>
