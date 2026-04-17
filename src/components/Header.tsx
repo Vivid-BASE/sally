@@ -55,7 +55,16 @@ export default function Header() {
       >
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12 flex justify-between items-center">
           
-          <Link href="/" className="relative z-50 flex items-center group">
+          <Link 
+            href="/" 
+            className="relative z-50 flex items-center group"
+            onClick={(e) => {
+              if (pathname === '/') {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            }}
+          >
             {/* Logo Image */}
             <div className="relative w-[180px] h-[50px] transition-transform duration-500 group-hover:scale-105">
               <Image 

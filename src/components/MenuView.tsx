@@ -62,17 +62,29 @@ export default function MenuView({ menuItems }: MenuViewProps) {
                   
                   <div className="grid grid-cols-1 gap-12">
                     {menuItems.filter(item => item.category === cat).map((item) => (
-                      <div key={item.id} className="flex flex-col md:flex-row md:items-end justify-between border-b border-white/5 pb-8 group">
-                         <div className="flex-1">
-                            <h3 className="font-shippori text-xl md:text-2xl text-white group-hover:text-[var(--color-accent-main)] transition-colors duration-500">{item.name}</h3>
-                            {item.description && (
-                              <p className="font-shippori text-sm text-gray-500 mt-3 leading-relaxed tracking-wider max-w-2xl">{item.description}</p>
-                            )}
-                         </div>
-                         <div className="mt-4 md:mt-0 font-cinzel text-xl md:text-2xl text-white text-right">
-                            {item.price}
-                         </div>
-                      </div>
+                        <div key={item.id} className="flex flex-col md:flex-row md:items-start justify-between border-b border-white/5 pb-10 group">
+                           <div className="flex-1">
+                              <h3 className="font-shippori text-xl md:text-2xl text-white group-hover:text-[var(--color-accent-main)] transition-colors duration-500 mb-4">{item.name}</h3>
+                              {item.description && (
+                                <div 
+                                  className="font-shippori text-sm text-gray-500 leading-[2] tracking-wider max-w-2xl
+                                    [&_a]:text-[var(--color-accent-main)] [&_a]:underline [&_a]:underline-offset-4
+                                    [&_a:hover]:opacity-70 [&_a]:transition-opacity"
+                                  dangerouslySetInnerHTML={{
+                                    __html: item.description.includes('<')
+                                      ? item.description
+                                      : item.description
+                                          .split('\n')
+                                          .map(line => `<p>${line}</p>`)
+                                          .join('')
+                                  }}
+                                />
+                              )}
+                           </div>
+                           <div className="mt-6 md:mt-2 font-cinzel text-xl md:text-2xl text-white text-right md:min-w-[120px]">
+                              {item.price}
+                           </div>
+                        </div>
                     ))}
                   </div>
                 </div>

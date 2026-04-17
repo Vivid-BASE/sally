@@ -249,7 +249,7 @@ export default function HomeView({ news, profile }: HomeViewProps) {
           <div className="flex justify-center md:justify-start">
              <div className="reveal-image relative w-full max-w-[500px] aspect-square overflow-hidden rounded-sm group shadow-[0_0_80px_rgba(0,0,0,0.8)] border border-white/10">
                 <div className="reveal-image-inner relative w-full h-full scale-110">
-                   <Image src={profile.image?.url || "/images/master2.png"} alt={profile.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 500px" />
+                   <Image src="/images/1703_sally_sub-thumb-155xauto-13893.jpg" alt={profile.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 500px" />
                 </div>
                 <div className="absolute inset-0 border border-[var(--color-accent-main)]/10 group-hover:border-[var(--color-accent-main)]/30 transition-colors duration-1000 pointer-events-none" />
              </div>
