@@ -49,7 +49,7 @@ const galleryImages = [
   "/images/99299332_3540811972615499_7490206605246464000_n.jpg",
 ];
 
-export default function HomeView({ news, profile }: HomeViewProps) {
+export default function HomeView({ news, profile, menuItems }: HomeViewProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [instaPosts, setInstaPosts] = useState<InstagramPost[]>([]);
 
