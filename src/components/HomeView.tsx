@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ProfileContent } from "@/lib/microcms";
 import Hero from "@/components/Hero";
 import Marquee from "@/components/Marquee";
 import AestheticBackground from "./AestheticBackground";
@@ -23,8 +22,6 @@ type HomeViewProps = {
     title: string;
     delay: number;
   }[];
-  profile: ProfileContent;
-  menuItems: any[]; // Using any to avoid complex type import if not needed, but better to use MenuContent
 };
 
 const InstagramIcon = ({ className = "", size = 24 }: { className?: string; size?: number }) => (
@@ -49,7 +46,7 @@ const galleryImages = [
   "/images/99299332_3540811972615499_7490206605246464000_n.jpg",
 ];
 
-export default function HomeView({ news, profile, menuItems }: HomeViewProps) {
+export default function HomeView({ news }: HomeViewProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [instaPosts, setInstaPosts] = useState<InstagramPost[]>([]);
 
@@ -73,7 +70,6 @@ export default function HomeView({ news, profile, menuItems }: HomeViewProps) {
         const text = section.querySelector(".reveal-text");
         const isReverse = section.classList.contains("reverse");
 
-        // 1. Cinematic Shutter Reveal (Images) - Unified Direction & Extreme Expo
         if (imageOuter) {
           gsap.fromTo(imageOuter, 
             { 
@@ -98,7 +94,6 @@ export default function HomeView({ news, profile, menuItems }: HomeViewProps) {
           );
         }
 
-        // 2. INNER PARALLAX REVEAL (Independent Image Movement)
         if (imageInner) {
           gsap.to(imageInner, {
             y: -40,
@@ -112,7 +107,6 @@ export default function HomeView({ news, profile, menuItems }: HomeViewProps) {
           });
         }
 
-        // 3. Staggered Content Reveal
         if (content) {
           const tl = gsap.timeline({
             scrollTrigger: {
@@ -147,7 +141,6 @@ export default function HomeView({ news, profile, menuItems }: HomeViewProps) {
         }
       });
 
-      // Unified Reveal for Access & News (Cards)
       gsap.from(".news-card", {
         opacity: 0,
         y: 40,
@@ -182,7 +175,6 @@ export default function HomeView({ news, profile, menuItems }: HomeViewProps) {
       {/* --- 1. Concept Section --- */}
       <section id="concept" className="reveal-section reverse relative w-full py-40 md:py-72 px-6 overflow-hidden border-b border-white/5 bg-transparent">
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-32 items-center">
-          {/* Image Left */}
           <div className="order-1 flex justify-center md:justify-start">
             <div className="reveal-image relative w-full max-w-[500px] aspect-square overflow-hidden rounded-sm group shadow-[0_0_80px_rgba(0,0,0,0.8)] border border-white/10">
                <div className="reveal-image-inner relative w-full h-full scale-110">
@@ -191,7 +183,6 @@ export default function HomeView({ news, profile, menuItems }: HomeViewProps) {
                <div className="absolute inset-0 border border-[var(--color-accent-main)]/10 group-hover:border-[var(--color-accent-main)]/30 transition-colors duration-1000 pointer-events-none" />
             </div>
           </div>
-          {/* Text Right */}
           <div className="reveal-content order-2 relative z-10">
             <h2 className="reveal-title font-cinzel text-4xl md:text-7xl tracking-[0.35em] mb-16 text-[var(--color-accent-main)] uppercase text-shadow-lg">Concept</h2>
             <div className="reveal-text font-noto-serif font-bold text-base md:text-lg text-white leading-loose md:leading-[2.5] tracking-wide space-y-10 break-keep text-shadow-md">
@@ -206,29 +197,24 @@ export default function HomeView({ news, profile, menuItems }: HomeViewProps) {
       {/* --- 2. Menu Section --- */}
       <section id="menu" className="reveal-section reverse relative w-full py-40 md:py-72 px-6 overflow-hidden bg-transparent border-b border-white/5">
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-32 items-center text-shadow-sm">
-          {/* Text Left */}
           <div className="reveal-content order-2 md:order-1">
              <h2 className="reveal-title font-cinzel text-4xl md:text-7xl tracking-[0.25em] mb-12 text-shadow-lg text-[var(--color-accent-main)]">Menu</h2>
              <div className="reveal-text font-shippori text-base md:text-2xl text-gray-200 leading-[2.5] tracking-[0.15em]">
                 <div className="space-y-4">
-                  {menuItems && menuItems.length > 0 ? (
-                    menuItems.slice(0, 5).map((item) => (
-                      <div key={item.id} className="flex items-center justify-between gap-6 border-b border-white/5 pb-4">
-                         <span className="text-white text-sm font-cinzel tracking-widest uppercase opacity-70">{item.category}</span>
-                         <span className="flex-1 text-base md:text-xl truncate ml-4 opacity-90">{item.name}</span>
-                         <span className="text-lg md:text-xl font-cinzel">{item.price}</span>
-                      </div>
-                    ))
-                  ) : (
-                    <p className="text-gray-500 font-shippori text-sm tracking-widest animate-pulse">Coming soon...</p>
-                  )}
+                  <p className="flex items-center gap-6">
+                    <span className="text-white text-sm font-cinzel tracking-widest uppercase opacity-70">Night</span>
+                    <span>1,500円～</span>
+                  </p>
+                  <p className="flex flex-col gap-2 pt-8">
+                    <span className="text-white text-sm font-cinzel tracking-widest uppercase opacity-70 mb-2">Table Charge</span>
+                    <span className="text-lg md:text-xl">男性 1,000円 / 女性 500円</span>
+                  </p>
                 </div>
                 <div className="mt-20">
                   <Link href="/menu" className="inline-block border border-[var(--color-accent-main)]/50 hover:border-[var(--color-accent-main)] px-12 md:px-16 py-5 md:py-6 font-cinzel text-sm tracking-[0.4em] text-[var(--color-accent-main)] hover:bg-[var(--color-accent-main)] hover:text-black transition-all duration-1000 uppercase glass-panel shadow-xl">Explore Full Menu</Link>
                 </div>
              </div>
           </div>
-          {/* Image Right */}
           <div className="order-1 md:order-2 flex justify-center md:justify-end">
             <div className="reveal-image relative aspect-square w-full max-w-[500px] overflow-hidden rounded-sm group shadow-[0_0_100px_rgba(0,0,0,1)] border border-white/10">
                <div className="reveal-image-inner relative w-full h-full">
@@ -253,7 +239,7 @@ export default function HomeView({ news, profile, menuItems }: HomeViewProps) {
           <div className="flex justify-center md:justify-start">
              <div className="reveal-image relative w-full max-w-[500px] aspect-square overflow-hidden rounded-sm group shadow-[0_0_80px_rgba(0,0,0,0.8)] border border-white/10">
                 <div className="reveal-image-inner relative w-full h-full scale-110">
-                   <Image src="/images/images.jpeg" alt={profile.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 500px" />
+                   <Image src="/images/images.jpeg" alt="Master" fill className="object-cover" sizes="(max-width: 768px) 100vw, 500px" />
                 </div>
                 <div className="absolute inset-0 border border-[var(--color-accent-main)]/10 group-hover:border-[var(--color-accent-main)]/30 transition-colors duration-1000 pointer-events-none" />
              </div>
@@ -261,10 +247,10 @@ export default function HomeView({ news, profile, menuItems }: HomeViewProps) {
           <div className="reveal-content relative z-10">
             <h2 className="reveal-title font-cinzel text-4xl md:text-7xl tracking-[0.35em] mb-16 text-[var(--color-accent-main)] uppercase text-shadow-lg">Master</h2>
             <div className="reveal-text font-noto-serif font-bold space-y-10 text-shadow-md">
-               <h3 className="text-4xl md:text-5xl text-white tracking-[0.1em] mb-6">{profile.name} {profile.englishName}</h3>
+               <h3 className="text-4xl md:text-5xl text-white tracking-[0.1em] mb-6">新田 豊 <span className="text-[var(--color-accent-main)]">Yutaka Nitta</span></h3>
                <div className="text-base md:text-lg text-gray-300 leading-loose tracking-widest space-y-8">
                  <p className="border-l-4 border-[var(--color-accent-main)] pl-8 py-1">
-                   {profile.role}
+                   2nd Generation Master
                  </p>
                  <div className="pl-8 opacity-90 font-medium space-y-2">
                     <p>奈良繋ぎ人.ブランドプロデューサー</p>
@@ -279,7 +265,7 @@ export default function HomeView({ news, profile, menuItems }: HomeViewProps) {
         </div>
       </section>
 
-      {/* --- 4. Gallery Marquee (Restored) --- */}
+      {/* --- 4. Gallery Marquee --- */}
       <section id="gallery" className="relative w-full py-40 bg-transparent overflow-hidden border-t border-white/5 shadow-[inset_0_0_100px_rgba(0,0,0,0.9)]">
         <div className="max-w-[1200px] mx-auto text-center mb-24 px-6">
             <h2 className="font-cinzel text-4xl md:text-7xl tracking-[0.35em] text-shadow-lg text-[var(--color-accent-main)] uppercase">Gallery</h2>
@@ -293,11 +279,10 @@ export default function HomeView({ news, profile, menuItems }: HomeViewProps) {
             Instagram
           </h2>
         </div>
-
         <InstagramFeed posts={instaPosts} />
       </section>
 
-      {/* --- 6. Access Section (Heavy Unified Reveal) --- */}
+      {/* --- 6. Access Section --- */}
       <section id="access" className="reveal-section access-reveal relative w-full py-40 md:py-80 px-6 bg-transparent border-t border-white/5 shadow-[inset_0_50px_150px_rgba(0,0,0,1)]">
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-24 items-start">
            <div className="reveal-content md:sticky md:top-40">
@@ -314,15 +299,12 @@ export default function HomeView({ news, profile, menuItems }: HomeViewProps) {
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3282.014854500827!2d135.78075917609695!3d34.654327785699!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60013af31bcf9485%3A0x67a24d5a52246f6d!2zQmFyIFNhbGx5IOODkOODvOOCteODquODvA!5e0!3m2!1sja!2sjp!4v1776388259306!5m2!1sja!2sjp" 
                   width="100%" 
                   height="100%" 
-                  style={{ 
-                    border: 0
-                  }} 
+                  style={{ border: 0 }} 
                   allowFullScreen={true} 
                   loading="lazy" 
                   referrerPolicy="no-referrer-when-downgrade"
                   className="w-full h-full"
                 />
-                {/* Visual frame */}
                  <div className="absolute inset-0 border border-white/10 pointer-events-none" />
               </div>
            </div>
