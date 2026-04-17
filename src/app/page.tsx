@@ -1,4 +1,4 @@
-import { client, NewsContent, ProfileContent } from "@/lib/microcms";
+import { client, NewsContent, ProfileContent, MenuContent } from "@/lib/microcms";
 import HomeView from "@/components/HomeView";
 
 export default async function Home() {
