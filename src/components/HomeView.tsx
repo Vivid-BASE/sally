@@ -24,14 +24,6 @@ type HomeViewProps = {
   }[];
 };
 
-const InstagramIcon = ({ className = "", size = 24 }: { className?: string; size?: number }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
-    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
-  </svg>
-);
-
 const galleryImages = [
   "/images/photo_image3_l.jpg",
   "/images/top/photo_image4_l.jpg",
@@ -70,6 +62,7 @@ export default function HomeView({ news }: HomeViewProps) {
         const text = section.querySelector(".reveal-text");
         const isReverse = section.classList.contains("reverse");
 
+        // Reveal animations for common elements
         if (imageOuter) {
           gsap.fromTo(imageOuter, 
             { 
@@ -126,18 +119,44 @@ export default function HomeView({ news }: HomeViewProps) {
           if (text) {
             const children = Array.from(text.children);
             tl.fromTo(children, 
-              { opacity: 0, y: 20, filter: "blur(4px)" },
+              { opacity: 0, y: 30, filter: "blur(4px)" },
               { 
                 opacity: 1, 
                 y: 0, 
                 filter: "blur(0px)",
                 duration: 1.2, 
-                stagger: 0.12, 
+                stagger: 0.15, 
                 ease: "power3.out" 
               },
               "-=1.2"
             );
           }
+        }
+
+        // --- NEW: CINEMATIC LAYERED SCROLL (Background Pinning) ---
+        const imageContainer = section.querySelector(".reveal-image-container");
+        if (imageContainer && window.innerWidth > 768) {
+          ScrollTrigger.create({
+            trigger: section,
+            start: "top top",
+            end: "bottom top",
+            pin: imageContainer,
+            pinSpacing: false,
+            scrub: true
+          });
+
+          // Subtle Parallax zoom for pinned image
+          gsap.to(imageInner, {
+            scale: 1.2,
+            opacity: 0.8,
+            ease: "none",
+            scrollTrigger: {
+              trigger: section,
+              start: "top top",
+              end: "bottom top",
+              scrub: true
+            }
+          });
         }
       });
 
@@ -173,14 +192,16 @@ export default function HomeView({ news }: HomeViewProps) {
       <Hero />
 
       {/* --- 1. Concept Section --- */}
-      <section id="concept" className="reveal-section reverse relative w-full py-40 md:py-72 px-6 overflow-hidden border-b border-white/5 bg-transparent">
+      <section id="concept" className="reveal-section reverse relative w-full py-40 md:py-80 px-6 overflow-hidden border-b border-white/5 bg-transparent">
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-32 items-center">
           <div className="order-1 flex justify-center md:justify-start">
-            <div className="reveal-image relative w-full max-w-[500px] aspect-square overflow-hidden rounded-sm group shadow-[0_0_80px_rgba(0,0,0,0.8)] border border-white/10">
-               <div className="reveal-image-inner relative w-full h-full scale-110">
-                  <Image src="/images/bar/CONCEPT.jpg" alt="Bar Sally Concept" fill className="object-cover" sizes="(max-width: 768px) 100vw, 500px" />
-               </div>
-               <div className="absolute inset-0 border border-[var(--color-accent-main)]/10 group-hover:border-[var(--color-accent-main)]/30 transition-colors duration-1000 pointer-events-none" />
+            <div className="reveal-image-container w-full max-w-[500px]">
+              <div className="reveal-image relative aspect-square overflow-hidden rounded-sm group shadow-[0_0_80px_rgba(0,0,0,0.8)] border border-white/10">
+                 <div className="reveal-image-inner relative w-full h-full scale-110">
+                    <Image src="/images/bar/CONCEPT.jpg" alt="Bar Sally Concept" fill className="object-cover" sizes="(max-width: 768px) 100vw, 500px" />
+                 </div>
+                 <div className="absolute inset-0 border border-[var(--color-accent-main)]/10 group-hover:border-[var(--color-accent-main)]/30 transition-colors duration-1000 pointer-events-none" />
+              </div>
             </div>
           </div>
           <div className="reveal-content order-2 relative z-10">
@@ -195,7 +216,7 @@ export default function HomeView({ news }: HomeViewProps) {
       </section>
 
       {/* --- 2. Menu Section --- */}
-      <section id="menu" className="reveal-section reverse relative w-full py-40 md:py-72 px-6 overflow-hidden bg-transparent border-b border-white/5">
+      <section id="menu" className="reveal-section reverse relative w-full py-40 md:py-80 px-6 overflow-hidden bg-transparent border-b border-white/5">
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-32 items-center text-shadow-sm">
           <div className="reveal-content order-2 md:order-1">
              <h2 className="reveal-title font-cinzel text-4xl md:text-7xl tracking-[0.25em] mb-12 text-shadow-lg text-[var(--color-accent-main)]">Menu</h2>
@@ -216,32 +237,36 @@ export default function HomeView({ news }: HomeViewProps) {
              </div>
           </div>
           <div className="order-1 md:order-2 flex justify-center md:justify-end">
-            <div className="reveal-image relative aspect-square w-full max-w-[500px] overflow-hidden rounded-sm group shadow-[0_0_100px_rgba(0,0,0,1)] border border-white/10">
-               <div className="reveal-image-inner relative w-full h-full">
-                  <Image 
-                    src="/images/bar/menu.jpg" 
-                    alt="Bar Sally Menu" 
-                    fill 
-                    className="object-cover" 
-                    sizes="(max-width: 768px) 100vw, 500px"
-                    priority
-                  />
-               </div>
-               <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-1000" />
+            <div className="reveal-image-container w-full max-w-[500px]">
+              <div className="reveal-image relative aspect-square overflow-hidden rounded-sm group shadow-[0_0_100px_rgba(0,0,0,1)] border border-white/10">
+                 <div className="reveal-image-inner relative w-full h-full">
+                    <Image 
+                      src="/images/bar/menu.jpg" 
+                      alt="Bar Sally Menu" 
+                      fill 
+                      className="object-cover" 
+                      sizes="(max-width: 768px) 100vw, 500px"
+                      priority
+                    />
+                 </div>
+                 <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-1000" />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* --- 3. Master Section --- */}
-      <section id="master" className="reveal-section reverse relative w-full py-40 md:py-72 px-6 bg-black/10 backdrop-blur-md border-y border-white/5">
+      <section id="master" className="reveal-section reverse relative w-full py-40 md:py-80 px-6 bg-black/10 backdrop-blur-md border-y border-white/5">
         <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 md:gap-32 items-center">
           <div className="flex justify-center md:justify-start">
-             <div className="reveal-image relative w-full max-w-[500px] aspect-square overflow-hidden rounded-sm group shadow-[0_0_80px_rgba(0,0,0,0.8)] border border-white/10">
-                <div className="reveal-image-inner relative w-full h-full scale-110">
-                   <Image src="/images/images.jpeg" alt="Master" fill className="object-cover" sizes="(max-width: 768px) 100vw, 500px" />
-                </div>
-                <div className="absolute inset-0 border border-[var(--color-accent-main)]/10 group-hover:border-[var(--color-accent-main)]/30 transition-colors duration-1000 pointer-events-none" />
+             <div className="reveal-image-container w-full max-w-[500px]">
+               <div className="reveal-image relative w-full aspect-square overflow-hidden rounded-sm group shadow-[0_0_80px_rgba(0,0,0,0.8)] border border-white/10">
+                  <div className="reveal-image-inner relative w-full h-full scale-110">
+                     <Image src="/images/images.jpeg" alt="Master" fill className="object-cover" sizes="(max-width: 768px) 100vw, 500px" />
+                  </div>
+                  <div className="absolute inset-0 border border-[var(--color-accent-main)]/10 group-hover:border-[var(--color-accent-main)]/30 transition-colors duration-1000 pointer-events-none" />
+               </div>
              </div>
           </div>
           <div className="reveal-content relative z-10">
@@ -258,7 +283,7 @@ export default function HomeView({ news }: HomeViewProps) {
                  </div>
                </div>
                <div className="pt-12">
-                  <Link href="/master" className="inline-block border border-[var(--color-accent-main)]/50 hover:border-[var(--color-accent-main)] px-12 md:px-16 py-5 md:py-6 font-cinzel text-sm tracking-[0.4em] text-[var(--color-accent-main)] hover:bg-[var(--color-accent-main)] hover:text-black transition-all duration-1000 uppercase glass-panel shadow-xl">Master&apos;s Story</Link>
+                  <Link href="/master" className="inline-block border border-[var(--color-accent-main)]/50 hover:border-[var(--color-accent-main)] px-12 md:px-16 py-5 md:py-6 font-cinzel text-sm tracking-[0.4em] text-[var(--color-accent-main)] hover:bg-[var(--color-accent-main)] hover:text-black transition-all duration-1000 uppercase glass-panel shadow-xl">Master's Story</Link>
                </div>
             </div>
           </div>
